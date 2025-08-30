@@ -1,0 +1,39 @@
+# GitHub will create pull requests for package updates for these ecosystems
+# https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "lucasnunes"
+    assignees:
+      - "lucasnunes"
+    commit-message:
+      prefix: "📦"
+      prefix-development: "🔧"
+      include: "scope"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "lucasnunes"
+    assignees:
+      - "lucasnunes"
+    commit-message:
+      prefix: "🤖"
+      include: "scope"
