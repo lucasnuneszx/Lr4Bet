@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show de Prêmios - Raspadinha Digital</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-trophy"></i>
+                    <h1>Show de Prêmios</h1>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link">Início</a></li>
+                    <li><a href="#raspadinhas" class="nav-link">Raspadinhas</a></li>
+                    <li><a href="#premios" class="nav-link">Prêmios</a></li>
+                    <li><a href="#promotions" class="nav-link">Promoções</a></li>
+                    <li><a href="#support" class="nav-link">Suporte</a></li>
+                </ul>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" id="theme-toggle" title="Alternar Tema">
+                        <i class="fas fa-moon" id="theme-icon"></i>
+                    </button>
+                    <button class="btn btn-outline" id="login-btn">Entrar</button>
+                    <button class="btn btn-primary" id="register-btn">Cadastrar</button>
+                    <div class="user-menu" id="user-menu" style="display: none;">
+                        <div class="user-info">
+                            <span class="username" id="username">Usuário</span>
+                            <span class="balance" id="user-balance">R$ 0,00</span>
+                        </div>
+                        <div class="user-dropdown">
+                            <a href="#profile"><i class="fas fa-user"></i> Perfil</a>
+                            <a href="#history"><i class="fas fa-history"></i> Histórico</a>
+                            <a href="#winnings"><i class="fas fa-gift"></i> Prêmios</a>
+                            <a href="#logout" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Raspadinha Digital Show de Prêmios</h1>
+                    <p>Raspe e ganhe prêmios incríveis! Milhares de prêmios esperando por você.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-large" id="hero-register-btn">Começar Agora</button>
+                        <button class="btn btn-outline btn-large" id="hero-login-btn">Já Tenho Conta</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="floating-card">
+                        <div class="scratch-preview">
+                            <div class="scratch-card">
+                                <div class="scratch-surface">
+                                    <i class="fas fa-hand-pointer"></i>
+                                    <span>Raspe Aqui!</span>
+                                </div>
+                                <div class="prize-indicator">
+                                    <span class="prize-amount">R$ 50</span>
+                                    <span class="prize-label">Prêmio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Raspadinhas Section -->
+        <section id="raspadinhas" class="scratch-section">
+            <div class="container">
+                <h2>Nossas Raspadinhas</h2>
+                <div class="scratch-grid" id="scratch-grid">
+                    <!-- Raspadinhas serão carregadas aqui -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Prêmios Section -->
+        <section id="premios" class="prizes-section">
+            <div class="container">
+                <h2>Prêmios Disponíveis</h2>
+                <div class="prizes-grid">
+                    <div class="prize-card">
+                        <div class="prize-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3>Dinheiro</h3>
+                        <p>Ganhe de R$ 1 a R$ 10.000 em dinheiro real!</p>
+                        <div class="prize-range">R$ 1 - R$ 10.000</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Produtos</h3>
+                        <p>Smartphones, notebooks, fones de ouvido e muito mais!</p>
+                        <div class="prize-range">Valor: R$ 100 - R$ 5.000</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <h3>Vale-Presente</h3>
+                        <p>Vales para as melhores lojas e restaurantes!</p>
+                        <div class="prize-range">R$ 50 - R$ 1.000</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Jogos</h3>
+                        <p>Consoles, jogos digitais e acessórios gaming!</p>
+                        <div class="prize-range">R$ 200 - R$ 3.000</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotions -->
+        <section id="promotions" class="promotions-section">
+            <div class="container">
+                <h2>Promoções Especiais</h2>
+                <div class="promotions-grid">
+                    <div class="promo-card">
+                        <div class="promo-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Bônus de Boas-vindas</h3>
+                        <p>Ganhe 3 raspadinhas grátis no seu primeiro cadastro!</p>
+                        <button class="btn btn-primary">Ver Detalhes</button>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <h3>Pacote de Raspadinhas</h3>
+                        <p>Compre 10 raspadinhas e ganhe 2 de bônus!</p>
+                        <button class="btn btn-primary">Ver Detalhes</button>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Programa de Fidelidade</h3>
+                        <p>Acumule pontos e troque por raspadinhas exclusivas!</p>
+                        <button class="btn btn-primary">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support -->
+        <section id="support" class="support-section">
+            <div class="container">
+                <h2>Suporte 24/7</h2>
+                <div class="support-content">
+                    <div class="support-info">
+                        <h3>Precisa de Ajuda?</h3>
+                        <p>Nossa equipe está disponível 24 horas por dia, 7 dias por semana para ajudar você.</p>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <i class="fas fa-comments"></i>
+                                <span>Chat ao Vivo</span>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fas fa-envelope"></i>
+                                <span>suporte@showdepremios.com</span>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fas fa-phone"></i>
+                                <span>0800 123 4567</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="support-form">
+                        <h3>Envie sua Mensagem</h3>
+                        <form id="support-form">
+                            <input type="text" placeholder="Nome" required>
+                            <input type="email" placeholder="Email" required>
+                            <select required>
+                                <option value="">Selecione o Assunto</option>
+                                <option value="account">Conta</option>
+                                <option value="scratch">Raspadinhas</option>
+                                <option value="prizes">Prêmios</option>
+                                <option value="technical">Problemas Técnicos</option>
+                                <option value="other">Outros</option>
+                            </select>
+                            <textarea placeholder="Sua mensagem" rows="4" required></textarea>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Show de Prêmios</h3>
+                    <p>A melhor plataforma de raspadinha digital do Brasil. Diversão, prêmios e muita sorte garantidas.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Raspadinhas</h4>
+                    <ul>
+                        <li><a href="#">Clássicas</a></li>
+                        <li><a href="#">Temáticas</a></li>
+                        <li><a href="#">Premium</a></li>
+                        <li><a href="#">Especiais</a></li>
+                        <li><a href="#">Natalinas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Jogo Responsável</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Pagamentos</h4>
+                    <ul>
+                        <li><a href="#">PIX</a></li>
+                        <li><a href="#">Cartão de Crédito</a></li>
+                        <li><a href="#">Boleto Bancário</a></li>
+                        <li><a href="#">Transferência</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Show de Prêmios. Todos os direitos reservados.</p>
+                <p>Jogue com responsabilidade. Raspadinhas são permitidas apenas para maiores de 18 anos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Entrar na Conta</h3>
+                <button class="modal-close" id="login-modal-close">&times;</button>
+            </div>
+            <form id="login-form" class="auth-form">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h4>Bem-vindo de volta!</h4>
+                    <p>Entre na sua conta para continuar jogando</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-email">
+                        <i class="fas fa-envelope"></i>
+                        Email ou Usuário
+                    </label>
+                    <input type="text" id="login-email" name="email" placeholder="Digite seu email ou usuário" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">
+                        <i class="fas fa-lock"></i>
+                        Senha
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="login-password" name="password" placeholder="Digite sua senha" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('login-password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span>Lembrar de mim</span>
+                    </label>
+                    <a href="#" class="forgot-password">Esqueci minha senha</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Entrar na Conta
+                </button>
+                
+                <div class="form-footer">
+                    <p>Não tem uma conta? <a href="#" id="show-register">Cadastre-se</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Criar Conta</h3>
+                <button class="modal-close" id="register-modal-close">&times;</button>
+            </div>
+            <form id="register-form" class="auth-form">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h4>Crie sua conta e comece a ganhar!</h4>
+                    <p>Cadastre-se e receba <strong>R$ 50,00 + 3 raspadinhas grátis</strong></p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="register-first-name">
+                            <i class="fas fa-user"></i>
+                            Nome
+                        </label>
+                        <input type="text" id="register-first-name" name="first_name" placeholder="Digite seu nome" required>
+                        <div class="field-hint">Nome completo sem abreviações</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-last-name">
+                            <i class="fas fa-user"></i>
+                            Sobrenome
+                        </label>
+                        <input type="text" id="register-last-name" name="last_name" placeholder="Digite seu sobrenome" required>
+                        <div class="field-hint">Sobrenome completo</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-username">
+                        <i class="fas fa-at"></i>
+                        Nome de Usuário
+                    </label>
+                    <input type="text" id="register-username" name="username" placeholder="Escolha um nome único" required>
+                    <div class="field-hint">Será usado para login e identificação</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-email">
+                        <i class="fas fa-envelope"></i>
+                        Email
+                    </label>
+                    <input type="email" id="register-email" name="email" placeholder="seu@email.com" required>
+                    <div class="field-hint">Email válido para confirmação</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="register-password">
+                            <i class="fas fa-lock"></i>
+                            Senha
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="register-password" name="password" placeholder="Mínimo 6 caracteres" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('register-password')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                            <span class="strength-text" id="strength-text">Força da senha</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm-password">
+                            <i class="fas fa-lock"></i>
+                            Confirmar Senha
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="register-confirm-password" name="confirm_password" placeholder="Confirme sua senha" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('register-confirm-password')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="field-hint">Digite a mesma senha novamente</div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="register-phone">
+                            <i class="fas fa-phone"></i>
+                            Telefone
+                        </label>
+                        <input type="tel" id="register-phone" name="phone" placeholder="(11) 99999-9999">
+                        <div class="field-hint">WhatsApp para contato</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-birth-date">
+                            <i class="fas fa-calendar"></i>
+                            Data de Nascimento
+                        </label>
+                        <input type="date" id="register-birth-date" name="birth_date" required>
+                        <div class="field-hint">Deve ter pelo menos 18 anos</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-cpf">
+                        <i class="fas fa-id-card"></i>
+                        CPF
+                    </label>
+                    <input type="text" id="register-cpf" name="cpf" placeholder="000.000.000-00" required>
+                    <div class="field-hint">CPF válido para verificação</div>
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" required>
+                        <span>Li e aceito os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a></span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="newsletter">
+                        <span>Quero receber ofertas exclusivas e novidades por email</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="marketing">
+                        <span>Aceito receber comunicações de marketing</span>
+                    </label>
+                </div>
+                
+                <div class="form-benefits">
+                    <h5><i class="fas fa-gift"></i> Benefícios do Cadastro</h5>
+                    <ul>
+                        <li><i class="fas fa-check"></i> R$ 50,00 de bônus de boas-vindas</li>
+                        <li><i class="fas fa-check"></i> 3 raspadinhas grátis para experimentar</li>
+                        <li><i class="fas fa-check"></i> Acesso a promoções exclusivas</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário 24/7</li>
+                    </ul>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-rocket"></i>
+                    Criar Conta e Começar a Ganhar!
+                </button>
+                
+                <div class="form-footer">
+                    <p>Já tem uma conta? <a href="#" id="show-login">Entrar</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Raspadinha Modal -->
+    <div class="modal" id="scratch-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>Raspadinha Digital</h3>
+                <button class="modal-close" id="scratch-modal-close">&times;</button>
+            </div>
+            <div class="scratch-content">
+                <div class="scratch-card-container">
+                    <div class="scratch-card" id="scratch-card">
+                        <div class="scratch-surface" id="scratch-surface">
+                            <div class="scratch-pattern"></div>
+                            <div class="scratch-instruction">
+                                <i class="fas fa-hand-pointer"></i>
+                                <span>Raspe aqui para revelar seu prêmio!</span>
+                            </div>
+                        </div>
+                        <div class="scratch-result" id="scratch-result" style="display: none;">
+                            <div class="prize-display">
+                                <div class="prize-header">
+                                    <i class="fas fa-trophy prize-icon"></i>
+                                    <h2 class="prize-text" id="prize-text">Parabéns!</h2>
+                                </div>
+                                <div class="prize-content">
+                                    <p class="prize-description" id="prize-description">Você ganhou um prêmio incrível!</p>
+                                    <div class="prize-value-display" id="prize-value-display" style="display: none;">
+                                        <!-- Valor do prêmio será inserido aqui -->
+                                    </div>
+                                </div>
+                                <div class="prize-actions">
+                                    <button class="btn btn-primary btn-large" id="claim-prize-btn">
+                                        <i class="fas fa-gift"></i>
+                                        Resgatar Prêmio
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scratch-info">
+                    <h4>Como Jogar</h4>
+                    <ol>
+                        <li>Clique em "Comprar Raspadinha"</li>
+                        <li>Use o mouse para raspar a superfície</li>
+                        <li>Revele seu prêmio</li>
+                        <li>Resgate seu prêmio</li>
+                    </ol>
+                    <div class="scratch-actions">
+                        <button class="btn btn-primary" id="buy-scratch-btn">Comprar Raspadinha</button>
+                        <button class="btn btn-outline" id="new-scratch-btn" style="display: none;">Nova Raspadinha</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/scratch.js"></script>
+    <script src="js/admin-setup.js"></script>
+    <script src="js/test-admin.js"></script>
+</body>
+</html>

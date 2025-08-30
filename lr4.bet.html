@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lr4.bet - Cassino Online e Apostas Esportivas | O Melhor do Brasil</title>
+    <meta name="description" content="Lr4.bet - O melhor cassino online e apostas esportivas do Brasil. Jogos de slots, roletas, crash games e muito mais. Cadastre-se e ganhe bônus exclusivos!">
+    <meta name="keywords" content="Lr4.bet, cassino online, apostas esportivas, slots, roletas, crash games, Brasil, apostas online">
+    <meta name="author" content="Lr4.bet">
+    <meta property="og:title" content="Lr4.bet - Cassino Online e Apostas Esportivas">
+    <meta property="og:description" content="O melhor cassino online e apostas esportivas do Brasil. Jogos exclusivos e bônus incríveis!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lr4.bet">
+    <link rel="canonical" href="https://lr4.bet">
+    <link rel="stylesheet" href="lr4-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>Lr4.bet <span class="clover-header" title="Trevo da Sorte">♣</span></h1>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="#esportes" class="nav-link">Esportes <span class="clover-nav" title="Trevo da Sorte">♣</span></a></li>
+                                    <li><a href="#cassino" class="nav-link">Cassino <span class="clover-nav" title="Trevo da Sorte">♣</span></a></li>
+                <li><a href="#ao-vivo" class="nav-link">Ao vivo <span class="clover-nav" title="Trevo da Sorte">♣</span></a></li>
+                <li><a href="#conta" class="nav-link">Conta <span class="clover-nav" title="Trevo da Sorte">♣</span></a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <div class="user-balance-section" id="userBalanceSection" style="display: none;">
+                        <button class="btn btn-deposit" id="btnDeposit">
+                            <i class="fas fa-plus-circle"></i>
+                            Depósito
+                        </button>
+                        <div class="balance-display">
+                            <span class="balance-label">Saldo:</span>
+                            <span class="balance-amount" id="userBalance">R$ 0,00</span>
+                            <button class="btn-refresh-balance" id="btnRefreshBalance" title="Atualizar Saldo">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn btn-account" id="btnAccount" style="display: none;">Minha Conta</button>
+                    <button class="btn btn-login">Entrar</button>
+                    <button class="btn btn-register">Cadastre-se</button>
+                </div>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Carousel -->
+        <section class="hero-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active" data-slide="0">
+                    <div class="placeholder-slide">
+                        <span class="dollar-emoji">💰</span>
+                    </div>
+                    <div class="carousel-content">
+                        <h2>Bem-vindo ao Lr4.bet</h2>
+                        <p>O melhor cassino e apostas esportivas do Brasil</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" data-slide="1">
+                    <div class="placeholder-slide">
+                        <span class="dollar-emoji">💰</span>
+                    </div>
+                    <div class="carousel-content">
+                        <h2>RASPE E GANHE PRÊMIOS</h2>
+                        <p>A sorte está do seu lado: participe com poucos cliques e receba direto via PIX</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" data-slide="2">
+                    <div class="placeholder-slide">
+                        <span class="dollar-emoji">💰</span>
+                    </div>
+                    <div class="carousel-content">
+                        <h2>RASPE E GANHE PRÊMIOS</h2>
+                        <p>A sorte está do seu lado: participe com poucos cliques e receba direto via PIX</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" data-slide="3">
+                    <div class="placeholder-slide">
+                        <span class="dollar-emoji">💰</span>
+                    </div>
+                    <div class="carousel-content">
+                        <h2>Apostas Esportivas</h2>
+                        <p>As melhores odds do mercado</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" data-slide="4">
+                    <div class="placeholder-slide">
+                        <span class="dollar-emoji">💰</span>
+                    </div>
+                    <div class="carousel-content">
+                        <h2>Slots Exclusivos</h2>
+                        <p>Milhares de jogos para você se divertir</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-slide" data-slide="5">
+                    <div class="placeholder-slide">
+                        <span class="dollar-emoji">💰</span>
+                    </div>
+                    <div class="carousel-content">
+                        <h2>RASPE E GANHE PRÊMIOS</h2>
+                        <p>A sorte está do seu lado: participe com poucos cliques e receba direto via PIX</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn carousel-prev" id="carousel-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn carousel-next" id="carousel-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="carousel-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+                <span class="indicator" data-slide="3"></span>
+                <span class="indicator" data-slide="4"></span>
+                <span class="indicator" data-slide="5"></span>
+            </div>
+        </section>
+
+        <!-- Games Sections -->
+        <div class="games-container">
+            <!-- Recomendados Lr4 -->
+            <section class="games-section recommended">
+                <div class="section-header">
+                    <h2>Recomendados Lr4</h2>
+                    <a href="#" class="ver-todos">Ver todos</a>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game">
+                                <span class="dollar-emoji-game">💰</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Penalty Lr4</h3>
+                            <p class="provider">Evoplay</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game">
+                                <span class="dollar-emoji-game">💰</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Tiger</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game">
+                                <span class="dollar-emoji-game">💰</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Aviator</h3>
+                            <p class="provider">Spribe</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game">
+                                <span class="dollar-emoji-game">💰</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Plinko+</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>JetX</h3>
+                            <p class="provider">Smartsoft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game">
+                                <span class="dollar-emoji-game">💰</span>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Bingo Trevo da Sorte</h3>
+                            <p class="provider">Caleta</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Jogos da PG -->
+            <section class="games-section pg-games">
+                <div class="section-header">
+                    <h2>Jogos da PG</h2>
+                    <a href="#" class="ver-todos">Ver todos</a>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Tiger</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Dragon</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Ox</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Mouse</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Rabbit</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Snake</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Crash Games -->
+            <section class="games-section crash-games">
+                <div class="section-header">
+                    <h2>Crash Games</h2>
+                    <a href="#" class="ver-todos">Ver todos</a>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Aviator</h3>
+                            <p class="provider">Aviãozinho</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>JetX</h3>
+                            <p class="provider">Smartsoft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Spaceman</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Aviatrix</h3>
+                            <p class="provider">Aviatrix</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Big Bass Crash</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Balloon</h3>
+                            <p class="provider">Smartsoft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slots da Sorte Lr4 -->
+            <section class="games-section slots-sorte">
+                <div class="section-header">
+                    <h2>Slots da Sorte Lr4</h2>
+                    <a href="#" class="ver-todos">Ver todos</a>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fenix Sortuda</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Macaco Sortudo</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Cachorro Sortudo</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Touro Sortudo</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Tigre Sortudo</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Ratinho Sortudo</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jogos de Roleta -->
+            <section class="games-section roleta-games">
+                <div class="section-header">
+                    <h2>Jogos de Roleta</h2>
+                    <a href="#" class="ver-todos">Ver todos</a>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Roleta Brasileira</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Roleta Brasileira</h3>
+                            <p class="provider">Playtech</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Mega Fire Blaze Lucky Ball Brasileiro</h3>
+                            <p class="provider">Playtech</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Mega Roleta</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Roleta Relâmpago</h3>
+                            <p class="provider">Evolution</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Roleta ao Vivo</h3>
+                            <p class="provider">Evolution</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jogos em Alta -->
+            <section class="games-section jogos-alta">
+                <div class="section-header">
+                    <h2>Jogos em Alta</h2>
+                    <a href="#" class="ver-todos">Ver todos</a>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fenix Sortuda</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Fortune Tiger</h3>
+                            <p class="provider">PG Soft</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Mines</h3>
+                            <p class="provider">Spribe</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Tigre Sortudo</h3>
+                            <p class="provider">Pragmatic Play</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Panda Luck</h3>
+                            <p class="provider">BGaming</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-image">
+                            <div class="placeholder-game"><span class="dollar-emoji-game">💰</span></div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Aztec Clusters</h3>
+                            <p class="provider">BGaming</p>
+                            <button class="btn-play">Jogue</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Caixas Lr4 -->
+            <section class="games-section case-games">
+                <div class="section-header">
+                    <h2>Caixas Lr4 <span class="clover-nav" title="Trevo da Sorte">♣</span></h2>
+                    <p>Abra caixas e ganhe prêmios incríveis</p>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card case-card">
+                        <div class="case-image">
+                            <div class="case-preview">
+                                <span class="case-icon">🎁</span>
+                                <div class="case-prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 15" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="MacBook Pro" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="JBL Boombox" class="prize-preview">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Caixa Premium Lr4</h3>
+                            <p class="case-price">R$ 50,00</p>
+                            <p class="case-description">Chance de ganhar iPhone 15, MacBook Pro, JBL e muito mais!</p>
+                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal()">
+                                <span class="clover-spin">♣</span>
+                                Abrir Caixa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Lr4.bet</h3>
+                <p>O melhor cassino e apostas esportivas do Brasil</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Jogos</h4>
+                <ul>
+                    <li><a href="#">Slots</a></li>
+                    <li><a href="#">Cassino ao Vivo</a></li>
+                    <li><a href="#">Crash Games</a></li>
+                    <li><a href="#">Roletas</a></li>
+                    <li><a href="#">Blackjack</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                                    <h4>Esportes <span class="clover-footer" title="Trevo da Sorte">♣</span></h4>
+                <ul>
+                    <li><a href="#">Futebol</a></li>
+                    <li><a href="#">Basquete</a></li>
+                    <li><a href="#">Tênis</a></li>
+                    <li><a href="#">E-Sports</a></li>
+                    <li><a href="#">Apostas ao Vivo</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Central de Ajuda</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Jogo Responsável</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Lr4.bet <span class="clover-3d" title="Trevo da Sorte">♣</span> Todos os direitos reservados.</p>
+            <p>Jogue com responsabilidade. Apostas são permitidas apenas para maiores de 18 anos.</p>
+            <div class="powered-by">
+                <p>Powered by <span class="developer-name">Lucas Nunes</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Entrar</h2>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail ou Usuário</label>
+                    <input type="text" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn-submit">Entrar</button>
+            </form>
+            <p class="auth-switch">
+                Não tem conta? <a href="#" id="showRegister">Cadastre-se</a>
+            </p>
+            
+
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cadastre-se</h2>
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">Nome Completo</label>
+                    <input type="text" id="registerName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">E-mail</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerCPF">CPF *</label>
+                    <input type="text" id="registerCPF" name="cpf" required maxlength="14" placeholder="000.000.000-00">
+                    <span class="error-message" id="cpfError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerBirth">Data de Nascimento</label>
+                    <input type="date" id="registerBirth" name="birth" required>
+                    <span class="error-message" id="ageError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Senha</label>
+                    <input type="password" id="registerPassword" name="password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Senha</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">Aceito os <a href="#" class="terms-link">Termos de Uso</a></label>
+                </div>
+                <button type="submit" class="btn-submit">Cadastrar</button>
+            </form>
+            <p class="auth-switch">
+                Já tem conta? <a href="#" id="showLogin">Entrar</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal de Contas -->
+    <div id="accountsModal" class="modal">
+        <div class="modal-content accounts-modal">
+            <div class="modal-header">
+                <h2>Minha Conta</h2>
+                <span class="close">&times;</span>
+            </div>
+            
+            <div class="account-tabs">
+                <button class="tab-btn active" data-tab="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </button>
+                <button class="tab-btn" data-tab="security">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Segurança</span>
+                </button>
+                <button class="tab-btn" data-tab="transactions">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transações</span>
+                </button>
+                <button class="tab-btn" data-tab="preferences">
+                    <i class="fas fa-cog"></i>
+                    <span>Preferências</span>
+                </button>
+                <button class="tab-btn admin-only" data-tab="admin" style="display: none;">
+                    <i class="fas fa-crown"></i>
+                    <span>Admin Master</span>
+                </button>
+                <button class="tab-btn" data-tab="affiliate">
+                    <i class="fas fa-users"></i>
+                    <span>Afiliados</span>
+                </button>
+                <button class="tab-btn" data-tab="financial">
+                    <i class="fas fa-university"></i>
+                    <span>Financeiro</span>
+                </button>
+                <button class="tab-btn" data-tab="cases" id="casesTabBtn" style="display: none;">
+                    <i class="fas fa-box-open"></i>
+                    <span>Caixas</span>
+                </button>
+            </div>
+            
+            <!-- Tab Perfil -->
+            <div class="tab-content active" id="profile">
+                <div class="profile-section">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Avatar" id="profileAvatar">
+                            <div class="photo-upload-container">
+                                <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                                <button class="change-avatar-btn" id="btnChangePhoto">
+                                    <i class="fas fa-camera"></i>
+                                    Alterar Foto
+                                </button>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profileName" class="profile-name">Admin Master</h3>
+                            <p id="profileEmail" class="profile-email">admin@lr4.bet</p>
+                            <span class="verification-badge admin">
+                                <i class="fas fa-crown"></i>
+                                Admin Master
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profileFirstName" class="form-label">Nome</label>
+                                <input type="text" id="profileFirstName" name="profileFirstName" value="Admin" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileLastName" class="form-label">Sobrenome</label>
+                                <input type="text" id="profileLastName" name="profileLastName" value="Master" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profilePhone" class="form-label">Telefone</label>
+                                <input type="tel" id="profilePhone" name="profilePhone" value="(11) 99999-9999" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileBirth" class="form-label">Data de Nascimento</label>
+                                <input type="date" id="profileBirth" name="profileBirth" value="1990-01-01" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="profileAddress" class="form-label">Endereço</label>
+                            <input type="text" id="profileAddress" name="profileAddress" value="Rua Exemplo, 123" class="form-input">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profileCity" class="form-label">Cidade</label>
+                                <input type="text" id="profileCity" name="profileCity" value="São Paulo" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileState" class="form-label">Estado</label>
+                                <select id="profileState" name="profileState" class="form-input">
+                                    <option value="SP" selected>São Paulo</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileZip" class="form-label">CEP</label>
+                                <input type="text" id="profileZip" name="profileZip" value="01234-567" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-save">
+                            <i class="fas fa-save"></i>
+                            Salvar Alterações
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Tab Segurança -->
+            <div class="tab-content" id="security">
+                <div class="security-section">
+                    <h3>Alterar Senha</h3>
+                    <form class="password-form">
+                        <div class="form-group">
+                            <label for="currentPassword">Senha Atual</label>
+                            <input type="password" id="currentPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Nova Senha</label>
+                            <input type="password" id="newPassword" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmNewPassword">Confirmar Nova Senha</label>
+                            <input type="password" id="confirmNewPassword" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn-save">Alterar Senha</button>
+                    </form>
+                    
+                    <div class="security-options">
+                        <h3>Opções de Segurança</h3>
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h4>Autenticação de Dois Fatores</h4>
+                                <p>Adicione uma camada extra de segurança</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="twoFactorAuth">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h4>Notificações de Login</h4>
+                                <p>Receba alertas de novos logins</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="loginNotifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Transações -->
+            <div class="tab-content" id="transactions">
+                <div class="transactions-section">
+                    <h3>Histórico de Transações</h3>
+                    <div class="transaction-filters">
+                        <select id="transactionType">
+                            <option value="all">Todas as Transações</option>
+                            <option value="deposit">Depósitos</option>
+                            <option value="withdrawal">Saques</option>
+                            <option value="bet">Apostas</option>
+                            <option value="win">Ganhos</option>
+                        </select>
+                        <input type="date" id="transactionDate">
+                    </div>
+                    
+                    <div class="transactions-list">
+                        <div class="transaction-item">
+                            <div class="transaction-icon deposit">💰</div>
+                            <div class="transaction-details">
+                                <h4>Depósito</h4>
+                                <p>Cartão de Crédito</p>
+                                <span class="transaction-date">Hoje, 14:30</span>
+                            </div>
+                            <div class="transaction-amount positive">+R$ 100,00</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div class="transaction-icon bet">🎯</div>
+                            <div class="transaction-details">
+                                <h4>Aposta</h4>
+                                <p>Penalty Lr4</p>
+                                <span class="transaction-date">Ontem, 16:45</span>
+                            </div>
+                            <div class="transaction-amount negative">-R$ 25,00</div>
+                        </div>
+                        
+                        <div class="transaction-item">
+                            <div class="transaction-icon win">🏆</div>
+                            <div class="transaction-details">
+                                <h4>Ganho</h4>
+                                <p>Penalty Lr4</p>
+                                <span class="transaction-date">Ontem, 16:50</span>
+                            </div>
+                            <div class="transaction-amount positive">+R$ 75,00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Preferências -->
+            <div class="tab-content" id="preferences">
+                <div class="preferences-section">
+                    <h3>Preferências de Notificação</h3>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <h4>Promoções e Ofertas</h4>
+                            <p>Receba notificações sobre promoções especiais</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="promoNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <h4>Novos Jogos</h4>
+                            <p>Seja notificado sobre novos jogos disponíveis</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="newGamesNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <h4>Atualizações da Conta</h4>
+                            <p>Receba informações sobre mudanças na sua conta</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="accountUpdates" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <h3>Preferências de Jogo</h3>
+                    <div class="form-group">
+                        <label for="defaultBetAmount">Valor Padrão de Aposta</label>
+                        <select id="defaultBetAmount">
+                            <option value="5">R$ 5,00</option>
+                            <option value="10" selected>R$ 10,00</option>
+                            <option value="25">R$ 25,00</option>
+                            <option value="50">R$ 50,00</option>
+                            <option value="100">R$ 100,00</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" class="btn-save">Salvar Preferências</button>
+                </div>
+            </div>
+            
+            <!-- Tab Admin Master -->
+            <div class="tab-content" id="admin">
+                <div class="admin-section">
+                    <div class="admin-warning">
+                        <h3>⚠️ Área Administrativa</h3>
+                        <p>Esta área é restrita apenas para administradores master do sistema.</p>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <h4>Ações Administrativas</h4>
+                        
+                        <div class="admin-action-item">
+                            <div class="action-info">
+                                <h5>Dashboard Administrativo</h5>
+                                <p>Acesse o painel completo de administração</p>
+                            </div>
+                            <button class="btn-admin-action" id="openDashboardBtn">Abrir Dashboard</button>
+                        </div>
+                        
+                        <div class="admin-action-item">
+                            <div class="action-info">
+                                <h5>Relatórios do Sistema</h5>
+                                <p>Visualize estatísticas e relatórios</p>
+                            </div>
+                            <button class="btn-admin-action" id="viewReportsBtn">Ver Relatórios</button>
+                        </div>
+                        
+                        <div class="admin-action-item">
+                            <div class="action-info">
+                                <h5>Configurações Avançadas</h5>
+                                <p>Configure parâmetros do sistema</p>
+                            </div>
+                            <button class="btn-admin-action" id="advancedSettingsBtn">Configurações</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Afiliados -->
+            <div class="tab-content" id="affiliate">
+                <div class="affiliate-section">
+                    <div class="affiliate-header">
+                        <i class="fas fa-users"></i>
+                        <h3>Programa de Afiliados</h3>
+                        <p>Ganhe dinheiro indicando amigos para a plataforma!</p>
+                    </div>
+                    
+                    <div class="affiliate-stats">
+                        <div class="affiliate-stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>Bônus Atual</h4>
+                                <span class="stat-value" id="currentBonus">R$ 20,00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="affiliate-stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>Indicações</h4>
+                                <span class="stat-value" id="totalReferrals">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="affiliate-stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>Total Ganho</h4>
+                                <span class="stat-value" id="totalEarned">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="affiliate-link-section">
+                        <h4>Seu Link Único</h4>
+                        <div class="link-container">
+                            <input type="text" id="affiliateLink" value="https://lr4.bet/ref/ADMIN001" readonly class="affiliate-link-input">
+                            <button class="btn-copy-link" id="btnCopyLink">
+                                <i class="fas fa-copy"></i>
+                                Copiar
+                            </button>
+                        </div>
+                        <p class="link-info">Compartilhe este link e ganhe R$ 15,00 por cada pessoa que se cadastrar e fizer um depósito mínimo de R$ 20,00</p>
+                    </div>
+                    
+                    <div class="bonus-progression">
+                        <h4>Progressão de Bônus</h4>
+                        <div class="bonus-levels" id="bonusLevels">
+                            <!-- Níveis serão gerados dinamicamente via JavaScript -->
+                        </div>
+                        <div class="bonus-navigation">
+                            <button class="btn-nav-bonus" id="btnPrevLevels">
+                                <i class="fas fa-chevron-left"></i>
+                                Anterior
+                            </button>
+                            <span class="level-counter" id="levelCounter">Níveis 1-10 de 100</span>
+                            <button class="btn-nav-bonus" id="btnNextLevels">
+                                Próximo
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="referral-history">
+                        <h4>Histórico de Indicações</h4>
+                        <div class="referral-list" id="referralList">
+                            <div class="no-referrals">
+                                <i class="fas fa-user-plus"></i>
+                                <p>Nenhuma indicação ainda</p>
+                                <span>Compartilhe seu link para começar a ganhar!</span>
+                            </div>
+                        </div>
+                        
+                        <div class="referral-info">
+                            <div class="info-card">
+                                <i class="fas fa-info-circle"></i>
+                                <div class="info-content">
+                                    <h5>Como Liberar o Bônus</h5>
+                                    <p>A pessoa convidada <strong>DEVE fazer um depósito mínimo de R$ 20,00</strong> para que o bônus seja liberado e você possa resgatar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="affiliate-actions">
+                        <button class="btn-claim-bonus" id="btnClaimBonus" disabled>
+                            <i class="fas fa-lock"></i>
+                            Bônus Bloqueado
+                        </button>
+                        <button class="btn-affiliate-help">
+                            <i class="fas fa-question-circle"></i>
+                            Como Funciona?
+                        </button>
+                    </div>
+                    
+                    <div class="bonus-status-info">
+                        <div class="status-card pending">
+                            <i class="fas fa-clock"></i>
+                            <div class="status-content">
+                                <h5>Bônus Pendente</h5>
+                                <p>Seu bônus será liberado após a confirmação do depósito de R$ 20,00 da pessoa convidada.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Caixas -->
+            <div class="tab-content" id="cases">
+                <div class="cases-section">
+                    <div class="cases-header">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Controle de Caixas</h3>
+                        <p>Gerencie probabilidades e monitore estatísticas das caixas</p>
+                    </div>
+                    
+                    <div class="cases-controls">
+                        <div class="probability-controls">
+                            <h4>Probabilidades dos Prêmios</h4>
+                            <div class="probability-grid">
+                                <div class="probability-item">
+                                    <label>iPhone 15 (Lendário)</label>
+                                    <input type="number" id="prob-iphone15" step="0.1" min="0" max="100" value="0.5">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>iPhone 13 (Épico)</label>
+                                    <input type="number" id="prob-iphone13" step="0.1" min="0" max="100" value="0.8">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>MacBook Pro (Lendário)</label>
+                                    <input type="number" id="prob-macbook" step="0.1" min="0" max="100" value="0.3">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>Acer Nitro (Épico)</label>
+                                    <input type="number" id="prob-acer" step="0.1" min="0" max="100" value="1.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>JBL Boombox (Raro)</label>
+                                    <input type="number" id="prob-jbl" step="0.1" min="0" max="100" value="2.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 500 (Raro)</label>
+                                    <input type="number" id="prob-money500" step="0.1" min="0" max="100" value="3.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 50 (Incomum)</label>
+                                    <input type="number" id="prob-money50" step="0.1" min="0" max="100" value="8.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 20 (Comum)</label>
+                                    <input type="number" id="prob-money20" step="0.1" min="0" max="100" value="15.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 15 (Comum)</label>
+                                    <input type="number" id="prob-money15" step="0.1" min="0" max="100" value="20.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                            </div>
+                            
+                            <button class="btn-save" onclick="saveCaseProbabilities()">
+                                <i class="fas fa-save"></i>
+                                Salvar Probabilidades
+                            </button>
+                        </div>
+                        
+                        <div class="case-stats">
+                            <h4>Estatísticas das Caixas</h4>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-label">Total de Caixas Abertas</span>
+                                    <span class="stat-value" id="totalCases">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Valor Total Distribuído</span>
+                                    <span class="stat-value" id="totalValue">R$ 0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Prêmios Lendários</span>
+                                    <span class="stat-value" id="legendaryPrizes">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Prêmios Épicos</span>
+                                    <span class="stat-value" id="epicPrizes">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Prêmios Raros</span>
+                                    <span class="stat-value" id="rarePrizes">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Prêmios Incomuns</span>
+                                    <span class="stat-value" id="uncommonPrizes">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Prêmios Comuns</span>
+                                    <span class="stat-value" id="commonPrizes">0</span>
+                                </div>
+                            </div>
+                            
+                            <button class="btn-save" onclick="refreshCaseStats()">
+                                <i class="fas fa-sync-alt"></i>
+                                Atualizar Estatísticas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Financeiro -->
+            <div class="tab-content" id="financial">
+                <div class="financial-section">
+                    <div class="financial-header">
+                        <i class="fas fa-university"></i>
+                        <h3>Informações Financeiras</h3>
+                        <p>Configure suas informações bancárias para depósitos e saques</p>
+                    </div>
+                    
+                    <div class="financial-forms">
+                        <div class="form-section">
+                            <h4>Dados Bancários</h4>
+                            <form class="bank-form" id="bankForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="bankName" class="form-label">Banco</label>
+                                        <select id="bankName" name="bankName" class="form-input" required>
+                                            <option value="">Selecione o banco</option>
+                                            <option value="001">Banco do Brasil</option>
+                                            <option value="033">Santander</option>
+                                            <option value="104">Caixa Econômica Federal</option>
+                                            <option value="237">Bradesco</option>
+                                            <option value="341">Itaú</option>
+                                            <option value="745">Citibank</option>
+                                            <option value="756">Sicoob</option>
+                                            <option value="001">Banco do Brasil</option>
+                                            <option value="033">Santander</option>
+                                            <option value="104">Caixa Econômica Federal</option>
+                                            <option value="237">Bradesco</option>
+                                            <option value="341">Itaú</option>
+                                            <option value="745">Citibank</option>
+                                            <option value="756">Sicoob</option>
+                                            <option value="077">Inter</option>
+                                            <option value="260">Nubank</option>
+                                            <option value="336">C6 Bank</option>
+                                            <option value="422">Safra</option>
+                                            <option value="655">Banco Votorantim</option>
+                                            <option value="070">BRB</option>
+                                            <option value="212">Banco Original</option>
+                                            <option value="623">Banco Pan</option>
+                                            <option value="633">Banco Rendimento</option>
+                                            <option value="652">Itaú Unibanco</option>
+                                            <option value="246">Banco ABC Brasil</option>
+                                            <option value="025">Banco Alfa</option>
+                                            <option value="641">Banco Alvorada</option>
+                                            <option value="029">Banco Banerj</option>
+                                            <option value="038">Banco Banestes</option>
+                                            <option value="000">Banco Bankpar</option>
+                                            <option value="740">Banco Barclays</option>
+                                            <option value="107">Banco BBM</option>
+                                            <option value="031">Banco Beg</option>
+                                            <option value="096">Banco BM&F</option>
+                                            <option value="318">Banco BMG</option>
+                                            <option value="752">Banco BNP Paribas</option>
+                                            <option value="248">Banco Boavista</option>
+                                            <option value="036">Banco Bradesco BBI</option>
+                                            <option value="204">Banco Bradesco Cartões</option>
+                                            <option value="225">Banco Brascan</option>
+                                            <option value="044">Banco BVA</option>
+                                            <option value="263">Banco Cacique</option>
+                                            <option value="473">Banco Caixa Geral Brasil</option>
+                                            <option value="040">Banco Cargill</option>
+                                            <option value="233">Banco Cifra</option>
+                                            <option value="745">Banco Citibank</option>
+                                            <option value="M03">Banco da Amazônia</option>
+                                            <option value="M07">Banco do Nordeste</option>
+                                            <option value="M06">Banco do Estado do Pará</option>
+                                            <option value="M21">Banco do Estado do Rio Grande do Sul</option>
+                                            <option value="M18">Banco do Estado de Minas Gerais</option>
+                                            <option value="M16">Banco do Estado do Espírito Santo</option>
+                                            <option value="M20">Banco do Estado de Mato Grosso</option>
+                                            <option value="M13">Banco do Estado de Goiás</option>
+                                            <option value="M12">Banco do Estado de Sergipe</option>
+                                            <option value="M14">Banco do Estado de Santa Catarina</option>
+                                            <option value="M05">Banco do Estado de São Paulo</option>
+                                            <option value="M11">Banco do Estado de Rondônia</option>
+                                            <option value="M08">Banco do Estado de Pernambuco</option>
+                                            <option value="M04">Banco do Estado de Alagoas</option>
+                                            <option value="M02">Banco do Estado da Bahia</option>
+                                            <option value="M15">Banco do Estado do Paraná</option>
+                                            <option value="M19">Banco do Estado do Rio de Janeiro</option>
+                                            <option value="M22">Banco do Estado do Ceará</option>
+                                            <option value="M23">Banco do Estado de Mato Grosso do Sul</option>
+                                            <option value="M24">Banco do Estado de Tocantins</option>
+                                            <option value="M25">Banco do Estado de Roraima</option>
+                                            <option value="M26">Banco do Estado do Acre</option>
+                                            <option value="M27">Banco do Estado do Amapá</option>
+                                            <option value="M28">Banco do Estado do Piauí</option>
+                                            <option value="M29">Banco do Estado do Maranhão</option>
+                                            <option value="M30">Banco do Estado do Rio Grande do Norte</option>
+                                            <option value="M31">Banco do Estado da Paraíba</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bankAgency" class="form-label">Agência</label>
+                                        <input type="text" id="bankAgency" name="bankAgency" class="form-input" placeholder="0000" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="bankAccount" class="form-label">Conta</label>
+                                        <input type="text" id="bankAccount" name="bankAccount" class="form-input" placeholder="00000-0" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bankCPF" class="form-label">CPF do Titular</label>
+                                        <input type="text" id="bankCPF" name="bankCPF" class="form-input" placeholder="000.000.000-00" maxlength="14" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="accountHolderName" class="form-label">Nome do Titular</label>
+                                    <input type="text" id="accountHolderName" name="accountHolderName" class="form-input" placeholder="Nome completo do titular da conta" required>
+                                </div>
+                                
+                                <button type="submit" class="btn-save">
+                                    <i class="fas fa-save"></i>
+                                    Salvar Dados Bancários
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h4>Chave PIX</h4>
+                            <form class="pix-form" id="pixForm">
+                                <div class="form-group">
+                                    <label for="pixType" class="form-label">Tipo de Chave PIX</label>
+                                    <select id="pixType" name="pixType" class="form-input" required>
+                                        <option value="">Selecione o tipo</option>
+                                        <option value="cpf">CPF</option>
+                                        <option value="cnpj">CNPJ</option>
+                                        <option value="email">E-mail</option>
+                                        <option value="phone">Telefone</option>
+                                        <option value="random">Chave Aleatória</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="pixKey" class="form-label">Chave PIX</label>
+                                    <input type="text" id="pixKey" name="pixKey" class="form-input" placeholder="Digite sua chave PIX" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="pixCPF" class="form-label">CPF do Titular PIX</label>
+                                    <input type="text" id="pixCPF" name="pixCPF" class="form-input" placeholder="000.000.000-00" maxlength="14" required>
+                                </div>
+                                
+                                <button type="submit" class="btn-save">
+                                    <i class="fas fa-save"></i>
+                                    Salvar Chave PIX
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="financial-info">
+                        <div class="info-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="info-content">
+                                <h5>Segurança das Informações</h5>
+                                <p>Todas as suas informações bancárias são criptografadas e armazenadas com segurança máxima. Utilizamos padrões bancários internacionais para proteger seus dados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Botão de Logout -->
+            <div class="account-footer">
+                <button class="btn-logout" id="btnLogout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sair da Conta
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Depósito -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><i class="fas fa-plus-circle"></i> Fazer Depósito</h2>
+            
+            <form id="depositForm" class="auth-form">
+                <div class="form-group">
+                    <label for="depositAmount">Valor do Depósito</label>
+                    <div class="amount-input-group">
+                        <span class="currency-symbol">R$</span>
+                        <input type="number" id="depositAmount" name="amount" required min="10" step="0.01" placeholder="0,00">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="depositMethod">Método de Pagamento</label>
+                    <select id="depositMethod" name="method" required>
+                        <option value="">Selecione o método</option>
+                        <option value="pix">PIX</option>
+                        <option value="credit-card">Cartão de Crédito</option>
+                        <option value="debit-card">Cartão de Débito</option>
+                        <option value="bank-transfer">Transferência Bancária</option>
+                    </select>
+                </div>
+                
+                <!-- Campos de Cartão (aparecem apenas quando cartão é selecionado) -->
+                <div id="cardFields" class="card-fields" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardNumber" class="form-label">Número do Cartão</label>
+                            <input type="text" id="cardNumber" name="cardNumber" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardHolder" class="form-label">Nome no Cartão</label>
+                            <input type="text" id="cardHolder" name="cardHolder" class="form-input" placeholder="Nome como está no cartão">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry" class="form-label">Validade</label>
+                            <input type="text" id="cardExpiry" name="cardExpiry" class="form-input" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCVV" class="form-label">CVV</label>
+                            <input type="text" id="cardCVV" name="cardCVV" class="form-input" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardInstallments" class="form-label">Parcelas (apenas crédito)</label>
+                        <select id="cardInstallments" name="cardInstallments" class="form-input">
+                            <option value="1">1x sem juros</option>
+                            <option value="2">2x sem juros</option>
+                            <option value="3">3x sem juros</option>
+                            <option value="4">4x sem juros</option>
+                            <option value="5">5x sem juros</option>
+                            <option value="6">6x sem juros</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="depositEmail">E-mail para Confirmação</label>
+                    <input type="email" id="depositEmail" name="email" required>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-check"></i>
+                    Confirmar Depósito
+                </button>
+            </form>
+            
+            <div class="deposit-info">
+                <h3>Informações Importantes:</h3>
+                <ul>
+                    <li><i class="fas fa-clock"></i> Depósitos são processados em até 24 horas</li>
+                    <li><i class="fas fa-shield-alt"></i> Todas as transações são seguras e criptografadas</li>
+                    <li><i class="fas fa-info-circle"></i> Valor mínimo: R$ 10,00</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Código de Segurança Admin -->
+    <div id="adminCodeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🔐 Código de Segurança</h2>
+            <p>Digite o código de segurança para acessar o Dashboard Administrativo:</p>
+            
+            <form id="adminCodeForm" class="auth-form">
+                <div class="form-group">
+                    <label for="adminSecurityCode">Código de Segurança</label>
+                    <input type="password" id="adminSecurityCode" name="securityCode" required maxlength="4" placeholder="0000">
+                    <span class="error-message" id="adminCodeError"></span>
+                </div>
+                <button type="submit" class="btn-submit">Acessar Dashboard</button>
+            </form>
+            
+            <div class="security-note">
+                <p><small>⚠️ Este código é restrito apenas para administradores master autorizados.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Verificação de Email -->
+    <div id="emailVerificationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Verificação de Email</h2>
+            <div class="verification-info">
+                <p>Enviamos um código de verificação de 6 dígitos para:</p>
+                <p class="user-email" id="verificationEmail"></p>
+            </div>
+            
+            <form id="verificationForm" class="auth-form">
+                <div class="form-group">
+                    <label for="verificationCode">Código de Verificação</label>
+                    <input type="text" id="verificationCode" name="code" required maxlength="6" placeholder="000000">
+                    <span class="error-message" id="verificationError"></span>
+                </div>
+                
+                <button type="submit" class="btn-submit">Verificar Email</button>
+            </form>
+            
+            <div class="verification-actions">
+                <p>Não recebeu o código?</p>
+                <button type="button" class="btn-resend" id="resendCodeBtn">Reenviar Código</button>
+            </div>
+            
+            <div class="verification-timer">
+                <p>Código expira em: <span id="countdown">15:00</span></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal de Sucesso -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success">
+            <h2>Sucesso!</h2>
+            <p id="successMessage"></p>
+            <button class="btn-submit" onclick="closeSuccessModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Abertura de Caixa -->
+    <div id="caseConfirmModal" class="modal case-confirm-modal">
+        <div class="modal-content case-confirm-content">
+            <div class="modal-header">
+                <h3>Caixa Premium Lr4 <span class="clover-nav" title="Trevo da Sorte">♣</span></h3>
+                <span class="close" onclick="closeCaseConfirmModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="case-confirm-container">
+                    <div class="case-image-large">
+                        <div class="case-preview-large">
+                            <span class="case-icon-large">🎁</span>
+                        </div>
+                    </div>
+                    
+                    <div class="case-confirm-info">
+                        <h4>Tem certeza de que deseja abrir esta caixa?</h4>
+                        <p class="case-warning">
+                            <i class="fas fa-info-circle"></i>
+                            A abertura da caixa é permanente.
+                        </p>
+                        <p class="case-price-large">Preço: R$ 50,00</p>
+                        
+                        <div class="case-preview-items">
+                            <h5>Prêmios Possíveis:</h5>
+                            <div class="preview-carousel">
+                                <div class="preview-item" data-prize="iphone15">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="iPhone 15">
+                                    <span class="preview-name">iPhone 15</span>
+                                    <span class="preview-value">R$ 5.999</span>
+                                </div>
+                                <div class="preview-item" data-prize="iphone13">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="iPhone 13">
+                                    <span class="preview-name">iPhone 13</span>
+                                    <span class="preview-value">R$ 4.499</span>
+                                </div>
+                                <div class="preview-item" data-prize="macbook">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="MacBook Pro">
+                                    <span class="preview-name">MacBook Pro</span>
+                                    <span class="preview-value">R$ 18.999</span>
+                                </div>
+                                <div class="preview-item" data-prize="acer">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="Acer Nitro">
+                                    <span class="preview-name">Acer Nitro</span>
+                                    <span class="preview-value">R$ 6.499</span>
+                                </div>
+                                <div class="preview-item" data-prize="jbl">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="JBL Boombox">
+                                    <span class="preview-name">JBL Boombox</span>
+                                    <span class="preview-value">R$ 2.499</span>
+                                </div>
+                                <div class="preview-item" data-prize="money500">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="R$ 500">
+                                    <span class="preview-name">R$ 500</span>
+                                    <span class="preview-value">R$ 500</span>
+                                </div>
+                                <div class="preview-item" data-prize="money50">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="R$ 50">
+                                    <span class="preview-name">R$ 50</span>
+                                    <span class="preview-value">R$ 50</span>
+                                </div>
+                                <div class="preview-item" data-prize="money20">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="R$ 20">
+                                    <span class="preview-name">R$ 20</span>
+                                    <span class="preview-value">R$ 20</span>
+                                </div>
+                                <div class="preview-item" data-prize="money15">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=80&fit=crop&crop=center" alt="R$ 15">
+                                    <span class="preview-name">R$ 15</span>
+                                    <span class="preview-value">R$ 15</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-confirm-actions">
+                    <button class="btn-play case-open-btn" onclick="confirmOpenCase()">
+                        <i class="fas fa-key"></i>
+                        Abrir Caixa Premium Lr4
+                    </button>
+                    <button class="btn-close" onclick="closeCaseConfirmModal()">
+                        FECHAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Abertura de Caixas (Roleta) -->
+    <div id="caseModal" class="modal case-modal">
+        <div class="modal-content case-modal-content">
+            <div class="modal-header">
+                <h3>Caixa Premium Lr4 <span class="clover-nav" title="Trevo da Sorte">♣</span></h3>
+                <span class="close" onclick="closeCaseModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="case-opening-container">
+                    <div class="case-display">
+                        <div class="case-prize-wheel">
+                            <div class="prize-item" data-prize="iphone15">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="iPhone 15">
+                                <span class="prize-name">iPhone 15</span>
+                                <span class="prize-value">R$ 5.999</span>
+                            </div>
+                            <div class="prize-item" data-prize="iphone13">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="iPhone 13">
+                                <span class="prize-name">iPhone 13</span>
+                                <span class="prize-value">R$ 4.499</span>
+                            </div>
+                            <div class="prize-item" data-prize="macbook">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="MacBook Pro">
+                                <span class="prize-name">MacBook Pro</span>
+                                <span class="prize-value">R$ 18.999</span>
+                            </div>
+                            <div class="prize-item" data-prize="acer">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="Acer Nitro">
+                                <span class="prize-name">Acer Nitro</span>
+                                <span class="prize-value">R$ 6.499</span>
+                            </div>
+                            <div class="prize-item" data-prize="jbl">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="JBL Boombox">
+                                <span class="prize-name">JBL Boombox</span>
+                                <span class="prize-value">R$ 2.499</span>
+                            </div>
+                            <div class="prize-item" data-prize="money500">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="R$ 500">
+                                <span class="prize-name">R$ 500</span>
+                                <span class="prize-value">R$ 500</span>
+                            </div>
+                            <div class="prize-item" data-prize="money50">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="R$ 50">
+                                <span class="prize-name">R$ 50</span>
+                                <span class="prize-value">R$ 50</span>
+                            </div>
+                            <div class="prize-item" data-prize="money20">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="R$ 20">
+                                <span class="prize-name">R$ 20</span>
+                                <span class="prize-value">R$ 20</span>
+                            </div>
+                            <div class="prize-item" data-prize="money15">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="R$ 15">
+                                <span class="prize-name">R$ 15</span>
+                                <span class="prize-value">R$ 15</span>
+                            </div>
+                        </div>
+                        
+                        <div class="case-spin-button-container">
+                            <button class="btn-play case-spin-btn-large" onclick="spinCase()" id="spinCaseBtn">
+                                <span class="clover-spin-large">♣</span>
+                                <span class="spin-text">Girar Caixa</span>
+                            </button>
+                            <p class="case-price-display">Preço: R$ 50,00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="case-info">
+                        <h4>Prêmios Disponíveis:</h4>
+                        <div class="prize-list">
+                            <div class="prize-category">
+                                <h5>🎁 Prêmios Premium</h5>
+                                <ul>
+                                    <li>iPhone 15 - R$ 5.999</li>
+                                    <li>iPhone 13 - R$ 4.499</li>
+                                    <li>MacBook Pro - R$ 18.999</li>
+                                    <li>Acer Nitro - R$ 6.499</li>
+                                    <li>JBL Boombox - R$ 2.499</li>
+                                </ul>
+                            </div>
+                            <div class="prize-category">
+                                <h5>💰 Prêmios em Dinheiro</h5>
+                                <ul>
+                                    <li>R$ 500</li>
+                                    <li>R$ 50</li>
+                                    <li>R$ 20</li>
+                                    <li>R$ 15</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Resultado da Caixa -->
+    <div id="caseResultModal" class="modal case-result-modal">
+        <div class="modal-content case-result-content">
+            <div class="modal-header">
+                <h3>🎉 Parabéns! Você Ganhou!</h3>
+                <span class="close" onclick="closeCaseResultModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="case-result-container">
+                    <div class="won-prize-display">
+                        <div class="prize-glow">
+                            <img id="wonPrizeImage" src="" alt="Prêmio Ganho">
+                        </div>
+                        <h4 id="wonPrizeName"></h4>
+                        <p id="wonPrizeValue" class="prize-value-large"></p>
+                        <div class="prize-rarity" id="wonPrizeRarity"></div>
+                    </div>
+                    
+                    <div class="prize-actions">
+                        <h5>O que você deseja fazer?</h5>
+                        <div class="action-buttons">
+                            <button class="btn-play btn-redeem" onclick="redeemPrize()">
+                                <i class="fas fa-gift"></i>
+                                Resgatar Prêmio
+                            </button>
+                            <button class="btn-play btn-sell" onclick="sellPrize()">
+                                <i class="fas fa-dollar-sign"></i>
+                                Vender por Dinheiro
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="email-config.js"></script>
+    <script src="email-verification.js"></script>
+    <script src="test-verification.js"></script>
+    <script src="admin-system.js"></script>
+    <script src="lr4-script.js"></script>
+</body>
+</html>
