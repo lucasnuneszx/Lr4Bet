@@ -1546,24 +1546,24 @@ function initCaseSystem() {
 let caseProbabilities = {
     premium: {
         // Prêmios de alto valor (R$ 50+)
-        iphone15: 0.3,      // 0.3% - R$ 5.999
-        macbook: 0.2,       // 0.2% - R$ 18.999
-        iphone13: 0.5,      // 0.5% - R$ 4.499
-        acer: 0.8,          // 0.8% - R$ 6.499
-        jbl: 1.5,           // 1.5% - R$ 2.499
-        airpods: 2.0,       // 2.0% - R$ 1.299
-        money500: 3.0,      // 3.0% - R$ 500
-        money100: 8.0,      // 8.0% - R$ 100
-        money50: 15.0,      // 15.0% - R$ 50
-        money25: 20.0       // 20.0% - R$ 25
+        iphone15: 0.2,      // 0.2% - R$ 5.999
+        macbook: 0.1,       // 0.1% - R$ 18.999
+        iphone13: 0.3,      // 0.3% - R$ 4.499
+        acer: 0.5,          // 0.5% - R$ 6.499
+        jbl: 1.0,           // 1.0% - R$ 2.499
+        airpods: 1.5,       // 1.5% - R$ 1.299
+        money500: 2.0,      // 2.0% - R$ 500
+        money100: 5.0,      // 5.0% - R$ 100
+        money50: 12.0,      // 12.0% - R$ 50
+        money25: 18.0       // 18.0% - R$ 25
     },
     medium: {
         // Prêmios de médio valor (R$ 20+)
-        iphone13: 0.5,      // 0.5% - R$ 4.499
-        acer: 1.0,          // 1.0% - R$ 6.499
-        jbl: 1.5,           // 1.5% - R$ 2.499
-        airpods: 2.5,       // 2.5% - R$ 1.299
-        xiaomi: 3.0,        // 3.0% - R$ 899
+        iphone13: 0.3,      // 0.3% - R$ 4.499
+        acer: 0.5,          // 0.5% - R$ 6.499
+        jbl: 1.0,           // 1.0% - R$ 2.499
+        airpods: 1.5,       // 1.5% - R$ 1.299
+        xiaomi: 2.0,        // 2.0% - R$ 899
         speaker: 4.0,       // 4.0% - R$ 299
         money200: 5.0,      // 5.0% - R$ 200
         money100: 10.0,     // 10.0% - R$ 100
@@ -1572,24 +1572,24 @@ let caseProbabilities = {
     },
     basic: {
         // Prêmios de baixo valor (R$ 10+)
-        airpods: 1.0,       // 1.0% - R$ 1.299
-        xiaomi: 2.0,        // 2.0% - R$ 899
-        speaker: 3.0,       // 3.0% - R$ 299
-        fone: 4.0,          // 4.0% - R$ 199
-        money100: 8.0,      // 8.0% - R$ 100
-        money50: 12.0,      // 12.0% - R$ 50
-        money25: 18.0,      // 18.0% - R$ 25
-        money15: 25.0       // 25.0% - R$ 15
+        airpods: 0.5,       // 0.5% - R$ 1.299
+        xiaomi: 1.0,        // 1.0% - R$ 899
+        speaker: 2.0,       // 2.0% - R$ 299
+        fone: 3.0,          // 3.0% - R$ 199
+        money100: 5.0,      // 5.0% - R$ 100
+        money50: 10.0,      // 10.0% - R$ 50
+        money25: 15.0,      // 15.0% - R$ 25
+        money15: 20.0       // 20.0% - R$ 15
     },
     simple: {
         // Prêmios de valor mínimo (R$ 5+)
-        speaker: 2.0,       // 2.0% - R$ 299
-        fone: 3.0,          // 3.0% - R$ 199
-        carregador: 5.0,    // 5.0% - R$ 99
-        money50: 10.0,      // 10.0% - R$ 50
-        money25: 15.0,      // 15.0% - R$ 25
-        money15: 20.0,      // 20.0% - R$ 15
-        money10: 25.0       // 25.0% - R$ 10
+        speaker: 1.0,       // 1.0% - R$ 299
+        fone: 2.0,          // 2.0% - R$ 199
+        carregador: 3.0,    // 3.0% - R$ 99
+        money50: 8.0,       // 8.0% - R$ 50
+        money25: 12.0,      // 12.0% - R$ 25
+        money15: 18.0,      // 18.0% - R$ 15
+        money10: 22.0       // 22.0% - R$ 10
     }
 };
 
