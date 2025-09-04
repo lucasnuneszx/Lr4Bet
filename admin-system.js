@@ -83,6 +83,13 @@ class AdminSystem {
                                 <span class="control-desc">Adicionar e configurar jogos</span>
                             </div>
                         </button>
+                        <button class="btn-admin-control" onclick="adminSystem.manageCases()">
+                            <span class="control-icon">📦</span>
+                            <div class="control-content">
+                                <span class="control-title">Gerenciar Caixas</span>
+                                <span class="control-desc">Configurar probabilidades e prêmios</span>
+                            </div>
+                        </button>
                         <button class="btn-admin-control" onclick="adminSystem.managePromotions()">
                             <span class="control-icon">🎁</span>
                             <div class="control-content">
@@ -624,9 +631,444 @@ class AdminSystem {
         alert('🎮 Sistema de Gerenciamento de Jogos\n\nFuncionalidade em desenvolvimento...');
     }
 
+    // Gerenciar caixas
+    manageCases() {
+        this.createCaseManagementPanel();
+    }
+
+    // Criar painel de gerenciamento de caixas
+    createCaseManagementPanel() {
+        // Remover painel existente se houver
+        const existingPanel = document.getElementById('caseManagementPanel');
+        if (existingPanel) {
+            existingPanel.remove();
+        }
+
+        const panel = document.createElement('div');
+        panel.id = 'caseManagementPanel';
+        panel.className = 'admin-panel';
+        panel.innerHTML = `
+            <div class="admin-panel-content">
+                <div class="admin-panel-header">
+                    <h2>📦 Gerenciamento de Caixas</h2>
+                    <button class="btn-admin-close" onclick="adminSystem.closeCaseManagementPanel()">
+                        <span>✕</span>
+                    </button>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>🎯 Configuração de Probabilidades</h3>
+                    <div class="case-controls">
+                        <div class="case-type-section">
+                            <h4>💎 Caixa Premium (R$ 50,00)</h4>
+                            <div class="probability-controls">
+                                <div class="prob-item">
+                                    <label>iPhone 15 (R$ 5.999):</label>
+                                    <input type="number" id="prob-premium-iphone15" min="0" max="100" step="0.1" value="0.2">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>MacBook Pro (R$ 18.999):</label>
+                                    <input type="number" id="prob-premium-macbook" min="0" max="100" step="0.1" value="0.1">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>iPhone 13 (R$ 4.499):</label>
+                                    <input type="number" id="prob-premium-iphone13" min="0" max="100" step="0.1" value="0.3">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Acer Nitro (R$ 6.499):</label>
+                                    <input type="number" id="prob-premium-acer" min="0" max="100" step="0.1" value="0.5">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>JBL Boombox (R$ 2.499):</label>
+                                    <input type="number" id="prob-premium-jbl" min="0" max="100" step="0.1" value="1.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>AirPods Pro (R$ 1.299):</label>
+                                    <input type="number" id="prob-premium-airpods" min="0" max="100" step="0.1" value="1.5">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 500:</label>
+                                    <input type="number" id="prob-premium-money500" min="0" max="100" step="0.1" value="2.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 100:</label>
+                                    <input type="number" id="prob-premium-money100" min="0" max="100" step="0.1" value="5.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 50:</label>
+                                    <input type="number" id="prob-premium-money50" min="0" max="100" step="0.1" value="12.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 25:</label>
+                                    <input type="number" id="prob-premium-money25" min="0" max="100" step="0.1" value="18.0">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-type-section">
+                            <h4>🎁 Caixa Média (R$ 20,00)</h4>
+                            <div class="probability-controls">
+                                <div class="prob-item">
+                                    <label>iPhone 13 (R$ 4.499):</label>
+                                    <input type="number" id="prob-medium-iphone13" min="0" max="100" step="0.1" value="0.3">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Acer Nitro (R$ 6.499):</label>
+                                    <input type="number" id="prob-medium-acer" min="0" max="100" step="0.1" value="0.5">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>JBL Boombox (R$ 2.499):</label>
+                                    <input type="number" id="prob-medium-jbl" min="0" max="100" step="0.1" value="1.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>AirPods Pro (R$ 1.299):</label>
+                                    <input type="number" id="prob-medium-airpods" min="0" max="100" step="0.1" value="1.5">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Xiaomi Redmi (R$ 899):</label>
+                                    <input type="number" id="prob-medium-xiaomi" min="0" max="100" step="0.1" value="2.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Caixinha JBL (R$ 299):</label>
+                                    <input type="number" id="prob-medium-speaker" min="0" max="100" step="0.1" value="4.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 200:</label>
+                                    <input type="number" id="prob-medium-money200" min="0" max="100" step="0.1" value="5.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 100:</label>
+                                    <input type="number" id="prob-medium-money100" min="0" max="100" step="0.1" value="10.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 50:</label>
+                                    <input type="number" id="prob-medium-money50" min="0" max="100" step="0.1" value="15.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 25:</label>
+                                    <input type="number" id="prob-medium-money25" min="0" max="100" step="0.1" value="20.0">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-type-section">
+                            <h4>🎯 Caixa Básica (R$ 10,00)</h4>
+                            <div class="probability-controls">
+                                <div class="prob-item">
+                                    <label>AirPods Pro (R$ 1.299):</label>
+                                    <input type="number" id="prob-basic-airpods" min="0" max="100" step="0.1" value="0.5">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Xiaomi Redmi (R$ 899):</label>
+                                    <input type="number" id="prob-basic-xiaomi" min="0" max="100" step="0.1" value="1.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Caixinha JBL (R$ 299):</label>
+                                    <input type="number" id="prob-basic-speaker" min="0" max="100" step="0.1" value="2.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Fone Bluetooth (R$ 199):</label>
+                                    <input type="number" id="prob-basic-fone" min="0" max="100" step="0.1" value="3.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 100:</label>
+                                    <input type="number" id="prob-basic-money100" min="0" max="100" step="0.1" value="5.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 50:</label>
+                                    <input type="number" id="prob-basic-money50" min="0" max="100" step="0.1" value="10.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 25:</label>
+                                    <input type="number" id="prob-basic-money25" min="0" max="100" step="0.1" value="15.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 15:</label>
+                                    <input type="number" id="prob-basic-money15" min="0" max="100" step="0.1" value="20.0">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="case-type-section">
+                            <h4>🎪 Caixa Simples (R$ 5,00)</h4>
+                            <div class="probability-controls">
+                                <div class="prob-item">
+                                    <label>Caixinha JBL (R$ 299):</label>
+                                    <input type="number" id="prob-simple-speaker" min="0" max="100" step="0.1" value="1.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Fone Bluetooth (R$ 199):</label>
+                                    <input type="number" id="prob-simple-fone" min="0" max="100" step="0.1" value="2.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>Carregador Wireless (R$ 99):</label>
+                                    <input type="number" id="prob-simple-carregador" min="0" max="100" step="0.1" value="3.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 50:</label>
+                                    <input type="number" id="prob-simple-money50" min="0" max="100" step="0.1" value="8.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 25:</label>
+                                    <input type="number" id="prob-simple-money25" min="0" max="100" step="0.1" value="12.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 15:</label>
+                                    <input type="number" id="prob-simple-money15" min="0" max="100" step="0.1" value="18.0">
+                                    <span>%</span>
+                                </div>
+                                <div class="prob-item">
+                                    <label>R$ 10:</label>
+                                    <input type="number" id="prob-simple-money10" min="0" max="100" step="0.1" value="22.0">
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button class="btn-admin-save" onclick="adminSystem.saveCaseProbabilities()">
+                            <span>💾</span>
+                            <span>Salvar Configurações</span>
+                        </button>
+                        <button class="btn-admin-reset" onclick="adminSystem.resetCaseProbabilities()">
+                            <span>🔄</span>
+                            <span>Resetar para Padrão</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(panel);
+        
+        // Adicionar estilos
+        this.addCaseManagementStyles();
+        
+        // Carregar probabilidades atuais
+        this.loadCaseProbabilitiesToUI();
+    }
+
+    // Adicionar estilos do painel de gerenciamento de caixas
+    addCaseManagementStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            .case-controls {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .case-type-section {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                border-radius: 12px;
+                padding: 1.5rem;
+                backdrop-filter: blur(10px);
+            }
+            
+            .case-type-section h4 {
+                color: #ffffff;
+                margin: 0 0 1.5rem 0;
+                font-size: 1.2rem;
+                font-weight: 600;
+                text-align: center;
+                padding-bottom: 0.5rem;
+                border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            }
+            
+            .probability-controls {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .prob-item {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem;
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .prob-item label {
+                color: #ffffff;
+                font-size: 0.9rem;
+                font-weight: 500;
+                min-width: 150px;
+                flex-shrink: 0;
+            }
+            
+            .prob-item input {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(59, 130, 246, 0.3);
+                border-radius: 6px;
+                color: #ffffff;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+                width: 80px;
+                text-align: center;
+            }
+            
+            .prob-item input:focus {
+                outline: none;
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            }
+            
+            .prob-item span {
+                color: #ffffff;
+                font-size: 0.9rem;
+                font-weight: 500;
+                min-width: 20px;
+            }
+            
+            .admin-actions {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                margin-top: 2rem;
+            }
+            
+            .btn-admin-save, .btn-admin-reset {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.8rem 1.5rem;
+                border: none;
+                border-radius: 8px;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .btn-admin-save {
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: #ffffff;
+            }
+            
+            .btn-admin-save:hover {
+                background: linear-gradient(135deg, #059669, #047857);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            }
+            
+            .btn-admin-reset {
+                background: linear-gradient(135deg, #f59e0b, #d97706);
+                color: #ffffff;
+            }
+            
+            .btn-admin-reset:hover {
+                background: linear-gradient(135deg, #d97706, #b45309);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
     // Gerenciar promoções
     managePromotions() {
         alert('🎁 Sistema de Gerenciamento de Promoções\n\nFuncionalidade em desenvolvimento...');
+    }
+
+    // Fechar painel de gerenciamento de caixas
+    closeCaseManagementPanel() {
+        const panel = document.getElementById('caseManagementPanel');
+        if (panel) {
+            panel.remove();
+        }
+    }
+
+    // Carregar probabilidades na interface
+    loadCaseProbabilitiesToUI() {
+        if (typeof caseProbabilities === 'undefined') return;
+        
+        const caseTypes = ['premium', 'medium', 'basic', 'simple'];
+        
+        caseTypes.forEach(caseType => {
+            const prizes = Object.keys(caseProbabilities[caseType]);
+            
+            prizes.forEach(prize => {
+                const input = document.getElementById(`prob-${caseType}-${prize}`);
+                if (input && caseProbabilities[caseType][prize] !== undefined) {
+                    input.value = caseProbabilities[caseType][prize];
+                }
+            });
+        });
+    }
+
+    // Salvar probabilidades das caixas
+    saveCaseProbabilities() {
+        if (typeof caseProbabilities === 'undefined') return;
+        
+        const caseTypes = ['premium', 'medium', 'basic', 'simple'];
+        
+        caseTypes.forEach(caseType => {
+            const prizes = Object.keys(caseProbabilities[caseType]);
+            
+            prizes.forEach(prize => {
+                const input = document.getElementById(`prob-${caseType}-${prize}`);
+                if (input) {
+                    const newValue = parseFloat(input.value);
+                    if (!isNaN(newValue) && newValue >= 0) {
+                        caseProbabilities[caseType][prize] = newValue;
+                    }
+                }
+            });
+        });
+        
+        // Salvar no localStorage
+        if (typeof saveCaseProbabilities === 'function') {
+            saveCaseProbabilities();
+        }
+        
+        alert('✅ Configurações de probabilidades salvas com sucesso!');
+    }
+
+    // Resetar probabilidades para padrão
+    resetCaseProbabilities() {
+        if (confirm('⚠️ Tem certeza que deseja resetar todas as probabilidades para os valores padrão?')) {
+            // Recarregar a página para resetar
+            location.reload();
+        }
     }
 
     // Configurações do sistema
