@@ -1665,6 +1665,10 @@ function openCaseConfirmModal(caseType = 'premium') {
         
         if (modalTitle) modalTitle.textContent = caseInfo.name;
         if (modalPrice) modalPrice.textContent = `Preço: ${caseInfo.price}`;
+        
+        // Atualizar também o preço no modal de confirmação
+        const modalPriceLarge = document.getElementById('modalCasePrice');
+        if (modalPriceLarge) modalPriceLarge.textContent = `Preço: ${caseInfo.price}`;
         if (modalDescription) modalDescription.textContent = caseInfo.description;
         
         // Verificar se o usuário tem saldo suficiente
@@ -1729,6 +1733,13 @@ function openCaseModal() {
     if (modal) {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
+        
+        // Atualizar preço no modal de giro
+        const caseInfo = getCaseInfo(currentCaseType);
+        const spinPrice = document.getElementById('spinCasePrice');
+        if (spinPrice) {
+            spinPrice.textContent = `Preço: ${caseInfo.price}`;
+        }
         
         // Resetar estado da roleta
         resetCaseWheel();
