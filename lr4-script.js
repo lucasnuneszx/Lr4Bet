@@ -1545,37 +1545,51 @@ function initCaseSystem() {
 // Configurações de probabilidades das caixas por tipo
 let caseProbabilities = {
     premium: {
-        iphone15: 0.5,      // 0.5%
-        iphone13: 0.8,      // 0.8%
-        macbook: 0.3,       // 0.3%
-        acer: 1.0,          // 1.0%
-        jbl: 2.0,           // 2.0%
-        money500: 3.0,      // 3.0%
-        money50: 8.0,       // 8.0%
-        money20: 15.0,      // 15.0%
-        money15: 20.0       // 20.0%
+        // Prêmios de alto valor (R$ 50+)
+        iphone15: 0.3,      // 0.3% - R$ 5.999
+        macbook: 0.2,       // 0.2% - R$ 18.999
+        iphone13: 0.5,      // 0.5% - R$ 4.499
+        acer: 0.8,          // 0.8% - R$ 6.499
+        jbl: 1.5,           // 1.5% - R$ 2.499
+        airpods: 2.0,       // 2.0% - R$ 1.299
+        money500: 3.0,      // 3.0% - R$ 500
+        money100: 8.0,      // 8.0% - R$ 100
+        money50: 15.0,      // 15.0% - R$ 50
+        money25: 20.0       // 20.0% - R$ 25
     },
     medium: {
-        iphone13: 1.0,      // 1.0%
-        acer: 2.0,          // 2.0%
-        money500: 5.0,      // 5.0%
-        money100: 8.0,      // 8.0%
-        money50: 12.0,      // 12.0%
-        money20: 20.0,      // 20.0%
-        money10: 25.0       // 25.0%
+        // Prêmios de médio valor (R$ 20+)
+        iphone13: 0.5,      // 0.5% - R$ 4.499
+        acer: 1.0,          // 1.0% - R$ 6.499
+        jbl: 1.5,           // 1.5% - R$ 2.499
+        airpods: 2.5,       // 2.5% - R$ 1.299
+        xiaomi: 3.0,        // 3.0% - R$ 899
+        speaker: 4.0,       // 4.0% - R$ 299
+        money200: 5.0,      // 5.0% - R$ 200
+        money100: 10.0,     // 10.0% - R$ 100
+        money50: 15.0,      // 15.0% - R$ 50
+        money25: 20.0       // 20.0% - R$ 25
     },
     basic: {
-        money100: 3.0,      // 3.0%
-        money50: 8.0,       // 8.0%
-        money20: 15.0,      // 15.0%
-        money10: 25.0,      // 25.0%
-        money5: 30.0        // 30.0%
+        // Prêmios de baixo valor (R$ 10+)
+        airpods: 1.0,       // 1.0% - R$ 1.299
+        xiaomi: 2.0,        // 2.0% - R$ 899
+        speaker: 3.0,       // 3.0% - R$ 299
+        fone: 4.0,          // 4.0% - R$ 199
+        money100: 8.0,      // 8.0% - R$ 100
+        money50: 12.0,      // 12.0% - R$ 50
+        money25: 18.0,      // 18.0% - R$ 25
+        money15: 25.0       // 25.0% - R$ 15
     },
     simple: {
-        money50: 5.0,       // 5.0%
-        money20: 15.0,      // 15.0%
-        money10: 25.0,      // 25.0%
-        money5: 35.0        // 35.0%
+        // Prêmios de valor mínimo (R$ 5+)
+        speaker: 2.0,       // 2.0% - R$ 299
+        fone: 3.0,          // 3.0% - R$ 199
+        carregador: 5.0,    // 5.0% - R$ 99
+        money50: 10.0,      // 10.0% - R$ 50
+        money25: 15.0,      // 15.0% - R$ 25
+        money15: 20.0,      // 20.0% - R$ 15
+        money10: 25.0       // 25.0% - R$ 10
     }
 };
 
@@ -1588,25 +1602,25 @@ function getCaseInfo(caseType) {
         premium: {
             name: 'Caixa Premium Lr4',
             price: 'R$ 50,00',
-            description: 'Chance de ganhar iPhone 15, MacBook Pro, JBL e muito mais!',
+            description: 'Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!',
             icon: '💎'
         },
         medium: {
             name: 'Caixa Média Lr4',
             price: 'R$ 20,00',
-            description: 'Chance de ganhar iPhone 13, Acer Nitro, R$ 500 e muito mais!',
+            description: 'Chance de ganhar iPhone 13, Xiaomi, AirPods e muito mais!',
             icon: '🎁'
         },
         basic: {
             name: 'Caixa Básica Lr4',
             price: 'R$ 10,00',
-            description: 'Chance de ganhar R$ 100, R$ 50, R$ 20 e muito mais!',
+            description: 'Chance de ganhar AirPods, Xiaomi, Caixinha JBL e muito mais!',
             icon: '🎯'
         },
         simple: {
             name: 'Caixa Simples Lr4',
             price: 'R$ 5,00',
-            description: 'Chance de ganhar R$ 50, R$ 20, R$ 10 e muito mais!',
+            description: 'Chance de ganhar Caixinha JBL, Fone Bluetooth, Carregador e muito mais!',
             icon: '🎪'
         }
     };
@@ -1744,6 +1758,7 @@ function resetCaseWheel() {
 function spinCase() {
     const spinBtn = document.getElementById('spinCaseBtn');
     const wheel = document.querySelector('.case-prize-wheel');
+    const prizeItems = document.querySelectorAll('.prize-item');
     
     if (!spinBtn || !wheel) return;
     
@@ -1761,6 +1776,26 @@ function spinCase() {
     // Determinar prêmio baseado nas probabilidades
     const prize = determinePrize();
     
+    // Efeito de embaralhamento dos itens
+    let shuffleCount = 0;
+    const shuffleInterval = setInterval(() => {
+        prizeItems.forEach((item, index) => {
+            // Aplicar transformações aleatórias para embaralhar
+            const randomX = (Math.random() - 0.5) * 30;
+            const randomY = (Math.random() - 0.5) * 30;
+            const randomRotate = (Math.random() - 0.5) * 30;
+            const randomScale = 0.7 + Math.random() * 0.6;
+            
+            item.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg) scale(${randomScale})`;
+            item.style.zIndex = Math.floor(Math.random() * 10) + 1;
+        });
+        
+        shuffleCount++;
+        if (shuffleCount >= 30) {
+            clearInterval(shuffleInterval);
+        }
+    }, 80);
+    
     // Criar efeito de giro realista
     let rotations = 0;
     const totalRotations = 20; // 20 rotações completas
@@ -1775,6 +1810,12 @@ function spinCase() {
         
         if (rotations >= totalRotations * 360) {
             clearInterval(spinAnimation);
+            
+            // Resetar posições dos itens
+            prizeItems.forEach((item, index) => {
+                item.style.transform = '';
+                item.style.zIndex = '';
+            });
             
             // Parar animações
             spinBtn.classList.remove('spinning');
@@ -1917,18 +1958,26 @@ function sellPrize() {
 
 function getPrizeData(prize) {
     const prizes = {
-        // Prêmios Premium
+        // Prêmios Premium (Alto Valor)
         iphone15: { name: 'iPhone 15', value: 'R$ 5.999', rarity: 'legendary' },
-        iphone13: { name: 'iPhone 13', value: 'R$ 4.499', rarity: 'epic' },
         macbook: { name: 'MacBook Pro', value: 'R$ 18.999', rarity: 'legendary' },
+        iphone13: { name: 'iPhone 13', value: 'R$ 4.499', rarity: 'epic' },
         acer: { name: 'Acer Nitro', value: 'R$ 6.499', rarity: 'epic' },
         jbl: { name: 'JBL Boombox', value: 'R$ 2.499', rarity: 'rare' },
+        airpods: { name: 'AirPods Pro', value: 'R$ 1.299', rarity: 'rare' },
+        
+        // Prêmios Médio Valor
+        xiaomi: { name: 'Xiaomi Redmi', value: 'R$ 899', rarity: 'uncommon' },
+        speaker: { name: 'Caixinha JBL', value: 'R$ 299', rarity: 'uncommon' },
+        fone: { name: 'Fone Bluetooth', value: 'R$ 199', rarity: 'common' },
+        carregador: { name: 'Carregador Wireless', value: 'R$ 99', rarity: 'common' },
         
         // Prêmios em Dinheiro
         money500: { name: 'R$ 500', value: 'R$ 500', rarity: 'rare' },
+        money200: { name: 'R$ 200', value: 'R$ 200', rarity: 'uncommon' },
         money100: { name: 'R$ 100', value: 'R$ 100', rarity: 'uncommon' },
-        money50: { name: 'R$ 50', value: 'R$ 50', rarity: 'uncommon' },
-        money20: { name: 'R$ 20', value: 'R$ 20', rarity: 'common' },
+        money50: { name: 'R$ 50', value: 'R$ 50', rarity: 'common' },
+        money25: { name: 'R$ 25', value: 'R$ 25', rarity: 'common' },
         money15: { name: 'R$ 15', value: 'R$ 15', rarity: 'common' },
         money10: { name: 'R$ 10', value: 'R$ 10', rarity: 'common' },
         money5: { name: 'R$ 5', value: 'R$ 5', rarity: 'common' }
