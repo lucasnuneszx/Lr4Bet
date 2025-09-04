@@ -930,19 +930,24 @@ function openDepositModal() {
 
 // Função para processar depósito
 function processDeposit(formData) {
-    const amount = formData.get('amount');
+    const amount = parseFloat(formData.get('amount'));
     const method = formData.get('method');
     const email = formData.get('email');
     
     // Simular processamento de depósito
     console.log('Processando depósito:', { amount, method, email });
     
+    // Adicionar valor ao saldo
+    const currentBalance = parseFloat(localStorage.getItem('userBalance') || '1000.00');
+    const newBalance = currentBalance + amount;
+    localStorage.setItem('userBalance', newBalance.toFixed(2));
+    
     // Aqui você pode integrar com sua API de pagamento
     
     // Simular sucesso
     return {
         success: true,
-        message: `Depósito de R$ ${amount} processado com sucesso!`,
+        message: `Depósito de R$ ${amount.toFixed(2).replace('.', ',')} processado com sucesso! Saldo atualizado.`,
         transactionId: 'TXN' + Date.now()
     };
 }
@@ -1648,6 +1653,24 @@ function openCaseConfirmModal(caseType = 'premium') {
         if (modalPrice) modalPrice.textContent = `Preço: ${caseInfo.price}`;
         if (modalDescription) modalDescription.textContent = caseInfo.description;
         
+        // Verificar se o usuário tem saldo suficiente
+        const casePrice = parseFloat(caseInfo.price.replace('R$ ', '').replace(',', '.'));
+        const currentBalance = parseFloat(localStorage.getItem('userBalance') || '1000.00');
+        
+        // Atualizar botão de confirmação baseado no saldo
+        const confirmBtn = modal.querySelector('.btn-confirm');
+        if (confirmBtn) {
+            if (currentBalance < casePrice) {
+                confirmBtn.disabled = true;
+                confirmBtn.textContent = 'Saldo Insuficiente';
+                confirmBtn.style.opacity = '0.5';
+            } else {
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = 'Confirmar Compra';
+                confirmBtn.style.opacity = '1';
+            }
+        }
+        
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -1662,6 +1685,24 @@ function closeCaseConfirmModal() {
 }
 
 function confirmOpenCase() {
+    // Verificar se o usuário tem saldo suficiente
+    const caseInfo = getCaseInfo(currentCaseType);
+    const casePrice = parseFloat(caseInfo.price.replace('R$ ', '').replace(',', '.'));
+    const currentBalance = parseFloat(localStorage.getItem('userBalance') || '1000.00');
+    
+    if (currentBalance < casePrice) {
+        showSuccessModal('❌ Saldo insuficiente! Faça um depósito para continuar.');
+        setTimeout(() => closeModal('successModal'), 3000);
+        return;
+    }
+    
+    // Debitar o saldo
+    const newBalance = currentBalance - casePrice;
+    localStorage.setItem('userBalance', newBalance.toFixed(2));
+    
+    // Atualizar saldo na interface
+    updateUserBalance();
+    
     // Fechar modal de confirmação
     closeCaseConfirmModal();
     
@@ -1819,8 +1860,19 @@ function redeemPrize() {
     const prizeName = document.getElementById('wonPrizeName').textContent;
     const prizeValue = document.getElementById('wonPrizeValue').textContent;
     
+    // Calcular valor do prêmio
+    const value = parseFloat(prizeValue.replace('R$ ', '').replace('.', '').replace(',', '.'));
+    
+    // Creditar o saldo (prêmio resgatado)
+    const currentBalance = parseFloat(localStorage.getItem('userBalance') || '1000.00');
+    const newBalance = currentBalance + value;
+    localStorage.setItem('userBalance', newBalance.toFixed(2));
+    
+    // Atualizar saldo na interface
+    updateUserBalance();
+    
     // Mostrar mensagem de sucesso
-    showSuccessModal(`🎁 Prêmio ${prizeName} resgatado com sucesso! Entraremos em contato para entrega.`);
+    showSuccessModal(`🎁 Prêmio ${prizeName} resgatado com sucesso! Valor de R$ ${value.toLocaleString('pt-BR')} creditado na sua conta.`);
     
     // Fechar modal de resultado
     closeCaseResultModal();
@@ -1837,9 +1889,17 @@ function sellPrize() {
     const prizeName = document.getElementById('wonPrizeName').textContent;
     const prizeValue = document.getElementById('wonPrizeValue').textContent;
     
-    // Simular venda do prêmio
+    // Calcular valor da venda
     const value = parseFloat(prizeValue.replace('R$ ', '').replace('.', '').replace(',', '.'));
     const sellValue = value * 0.8; // Vender por 80% do valor
+    
+    // Creditar o saldo
+    const currentBalance = parseFloat(localStorage.getItem('userBalance') || '1000.00');
+    const newBalance = currentBalance + sellValue;
+    localStorage.setItem('userBalance', newBalance.toFixed(2));
+    
+    // Atualizar saldo na interface
+    updateUserBalance();
     
     // Mostrar mensagem de sucesso
     showSuccessModal(`💰 Prêmio ${prizeName} vendido por R$ ${sellValue.toLocaleString('pt-BR')}! Valor creditado na sua conta.`);
