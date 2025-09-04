@@ -610,10 +610,11 @@
                     <p>Abra caixas e ganhe prêmios incríveis</p>
                 </div>
                 <div class="games-grid">
-                    <div class="game-card case-card">
+                    <!-- Caixa Premium R$ 50 -->
+                    <div class="game-card case-card premium">
                         <div class="case-image">
                             <div class="case-preview">
-                                <span class="case-icon">🎁</span>
+                                <span class="case-icon">💎</span>
                                 <div class="case-prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 15" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="MacBook Pro" class="prize-preview">
@@ -625,7 +626,76 @@
                             <h3>Caixa Premium Lr4</h3>
                             <p class="case-price">R$ 50,00</p>
                             <p class="case-description">Chance de ganhar iPhone 15, MacBook Pro, JBL e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal()">
+                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('premium')">
+                                <span class="clover-spin">♣</span>
+                                Abrir Caixa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Caixa Média R$ 20 -->
+                    <div class="game-card case-card medium">
+                        <div class="case-image">
+                            <div class="case-preview">
+                                <span class="case-icon">🎁</span>
+                                <div class="case-prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 13" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Acer Nitro" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 500" class="prize-preview">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Caixa Média Lr4</h3>
+                            <p class="case-price">R$ 20,00</p>
+                            <p class="case-description">Chance de ganhar iPhone 13, Acer Nitro, R$ 500 e muito mais!</p>
+                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('medium')">
+                                <span class="clover-spin">♣</span>
+                                Abrir Caixa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Caixa Básica R$ 10 -->
+                    <div class="game-card case-card basic">
+                        <div class="case-image">
+                            <div class="case-preview">
+                                <span class="case-icon">🎯</span>
+                                <div class="case-prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 100" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 50" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 20" class="prize-preview">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Caixa Básica Lr4</h3>
+                            <p class="case-price">R$ 10,00</p>
+                            <p class="case-description">Chance de ganhar R$ 100, R$ 50, R$ 20 e muito mais!</p>
+                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('basic')">
+                                <span class="clover-spin">♣</span>
+                                Abrir Caixa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Caixa Simples R$ 5 -->
+                    <div class="game-card case-card simple">
+                        <div class="case-image">
+                            <div class="case-preview">
+                                <span class="case-icon">🎪</span>
+                                <div class="case-prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 50" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 20" class="prize-preview">
+                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 10" class="prize-preview">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Caixa Simples Lr4</h3>
+                            <p class="case-price">R$ 5,00</p>
+                            <p class="case-description">Chance de ganhar R$ 50, R$ 20, R$ 10 e muito mais!</p>
+                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('simple')">
                                 <span class="clover-spin">♣</span>
                                 Abrir Caixa
                             </button>
@@ -1197,59 +1267,163 @@
                     </div>
                     
                     <div class="cases-controls">
-                        <div class="probability-controls">
-                            <h4>Probabilidades dos Prêmios</h4>
+                        <!-- Caixa Premium R$ 50 -->
+                        <div class="case-type-controls">
+                            <h4>💎 Caixa Premium (R$ 50)</h4>
                             <div class="probability-grid">
                                 <div class="probability-item">
                                     <label>iPhone 15 (Lendário)</label>
-                                    <input type="number" id="prob-iphone15" step="0.1" min="0" max="100" value="0.5">
+                                    <input type="number" id="prob-premium-iphone15" step="0.1" min="0" max="100" value="0.5">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>iPhone 13 (Épico)</label>
-                                    <input type="number" id="prob-iphone13" step="0.1" min="0" max="100" value="0.8">
+                                    <input type="number" id="prob-premium-iphone13" step="0.1" min="0" max="100" value="0.8">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>MacBook Pro (Lendário)</label>
-                                    <input type="number" id="prob-macbook" step="0.1" min="0" max="100" value="0.3">
+                                    <input type="number" id="prob-premium-macbook" step="0.1" min="0" max="100" value="0.3">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>Acer Nitro (Épico)</label>
-                                    <input type="number" id="prob-acer" step="0.1" min="0" max="100" value="1.0">
+                                    <input type="number" id="prob-premium-acer" step="0.1" min="0" max="100" value="1.0">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>JBL Boombox (Raro)</label>
-                                    <input type="number" id="prob-jbl" step="0.1" min="0" max="100" value="2.0">
+                                    <input type="number" id="prob-premium-jbl" step="0.1" min="0" max="100" value="2.0">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>R$ 500 (Raro)</label>
-                                    <input type="number" id="prob-money500" step="0.1" min="0" max="100" value="3.0">
+                                    <input type="number" id="prob-premium-money500" step="0.1" min="0" max="100" value="3.0">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>R$ 50 (Incomum)</label>
-                                    <input type="number" id="prob-money50" step="0.1" min="0" max="100" value="8.0">
+                                    <input type="number" id="prob-premium-money50" step="0.1" min="0" max="100" value="8.0">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>R$ 20 (Comum)</label>
-                                    <input type="number" id="prob-money20" step="0.1" min="0" max="100" value="15.0">
+                                    <input type="number" id="prob-premium-money20" step="0.1" min="0" max="100" value="15.0">
                                     <span class="probability-unit">%</span>
                                 </div>
                                 <div class="probability-item">
                                     <label>R$ 15 (Comum)</label>
-                                    <input type="number" id="prob-money15" step="0.1" min="0" max="100" value="20.0">
+                                    <input type="number" id="prob-premium-money15" step="0.1" min="0" max="100" value="20.0">
                                     <span class="probability-unit">%</span>
                                 </div>
                             </div>
-                            
+                        </div>
+                        
+                        <!-- Caixa Média R$ 20 -->
+                        <div class="case-type-controls">
+                            <h4>🎁 Caixa Média (R$ 20)</h4>
+                            <div class="probability-grid">
+                                <div class="probability-item">
+                                    <label>iPhone 13 (Épico)</label>
+                                    <input type="number" id="prob-medium-iphone13" step="0.1" min="0" max="100" value="1.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>Acer Nitro (Épico)</label>
+                                    <input type="number" id="prob-medium-acer" step="0.1" min="0" max="100" value="2.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 500 (Raro)</label>
+                                    <input type="number" id="prob-medium-money500" step="0.1" min="0" max="100" value="5.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 100 (Incomum)</label>
+                                    <input type="number" id="prob-medium-money100" step="0.1" min="0" max="100" value="8.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 50 (Incomum)</label>
+                                    <input type="number" id="prob-medium-money50" step="0.1" min="0" max="100" value="12.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 20 (Comum)</label>
+                                    <input type="number" id="prob-medium-money20" step="0.1" min="0" max="100" value="20.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 10 (Comum)</label>
+                                    <input type="number" id="prob-medium-money10" step="0.1" min="0" max="100" value="25.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Caixa Básica R$ 10 -->
+                        <div class="case-type-controls">
+                            <h4>🎯 Caixa Básica (R$ 10)</h4>
+                            <div class="probability-grid">
+                                <div class="probability-item">
+                                    <label>R$ 100 (Incomum)</label>
+                                    <input type="number" id="prob-basic-money100" step="0.1" min="0" max="100" value="3.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 50 (Incomum)</label>
+                                    <input type="number" id="prob-basic-money50" step="0.1" min="0" max="100" value="8.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 20 (Comum)</label>
+                                    <input type="number" id="prob-basic-money20" step="0.1" min="0" max="100" value="15.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 10 (Comum)</label>
+                                    <input type="number" id="prob-basic-money10" step="0.1" min="0" max="100" value="25.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 5 (Comum)</label>
+                                    <input type="number" id="prob-basic-money5" step="0.1" min="0" max="100" value="30.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Caixa Simples R$ 5 -->
+                        <div class="case-type-controls">
+                            <h4>🎪 Caixa Simples (R$ 5)</h4>
+                            <div class="probability-grid">
+                                <div class="probability-item">
+                                    <label>R$ 50 (Incomum)</label>
+                                    <input type="number" id="prob-simple-money50" step="0.1" min="0" max="100" value="5.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 20 (Comum)</label>
+                                    <input type="number" id="prob-simple-money20" step="0.1" min="0" max="100" value="15.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 10 (Comum)</label>
+                                    <input type="number" id="prob-simple-money10" step="0.1" min="0" max="100" value="25.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                                <div class="probability-item">
+                                    <label>R$ 5 (Comum)</label>
+                                    <input type="number" id="prob-simple-money5" step="0.1" min="0" max="100" value="35.0">
+                                    <span class="probability-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cases-actions">
                             <button class="btn-save" onclick="saveCaseProbabilities()">
                                 <i class="fas fa-save"></i>
-                                Salvar Probabilidades
+                                Salvar Todas as Probabilidades
                             </button>
                         </div>
                         

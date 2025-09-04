@@ -1556,6 +1556,8 @@ body {
     box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
     position: relative;
     overflow: hidden;
+    transition: transform 0.05s ease-out;
+    transform-origin: center center;
 }
 
 .case-prize-wheel::before {
@@ -1837,6 +1839,146 @@ body {
     transition: transform 0.05s ease-out;
 }
 
+/* ===== TIPOS DE CAIXAS ===== */
+.case-card.premium {
+    border: 3px solid #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.case-card.premium .case-icon {
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.case-card.medium {
+    border: 3px solid #ff6b35;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+}
+
+.case-card.medium .case-icon {
+    color: #ff6b35;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+}
+
+.case-card.basic {
+    border: 3px solid #3b82f6;
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+.case-card.basic .case-icon {
+    color: #3b82f6;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+}
+
+.case-card.simple {
+    border: 3px solid #22c55e;
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+}
+
+.case-card.simple .case-icon {
+    color: #22c55e;
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
+}
+
+/* ===== MELHORIAS DE FLUIDEZ ===== */
+.prize-item {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.spinning .prize-item {
+    animation: prizeFloat 2s ease-in-out infinite alternate;
+}
+
+@keyframes prizeFloat {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.case-prize-wheel.spinning {
+    animation: wheelShake 0.1s ease-in-out infinite alternate;
+}
+
+@keyframes wheelShake {
+    0% { transform: rotate(0deg) translateX(0px); }
+    100% { transform: rotate(0deg) translateX(2px); }
+}
+
+/* ===== CONTROLES DE TIPOS DE CAIXAS ===== */
+.case-type-controls {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(15, 15, 15, 0.95) 100%);
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.case-type-controls h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.case-type-controls .probability-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.case-type-controls .probability-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.case-type-controls .probability-item label {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.case-type-controls .probability-item input {
+    width: 80px;
+    padding: 0.3rem 0.5rem;
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.case-type-controls .probability-item input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.case-type-controls .probability-unit {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.cases-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
     .case-opening-container {
@@ -1855,6 +1997,25 @@ body {
     
     .clover-spin-large {
         font-size: 1.5rem;
+    }
+    
+    .case-type-controls .probability-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .case-type-controls .probability-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.3rem;
+    }
+    
+    .case-type-controls .probability-item input {
+        width: 100%;
+    }
+    
+    .cases-actions {
+        flex-direction: column;
+        align-items: center;
     }
 }
 

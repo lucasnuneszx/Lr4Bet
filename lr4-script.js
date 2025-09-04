@@ -1537,18 +1537,77 @@ function initCaseSystem() {
     initCaseSounds();
 }
 
-// Configurações de probabilidades das caixas
+// Configurações de probabilidades das caixas por tipo
 let caseProbabilities = {
-    iphone15: 0.5,      // 0.5%
-    ipone13: 0.8,       // 0.8%
-    macbook: 0.3,       // 0.3%
-    acer: 1.0,          // 1.0%
-    jbl: 2.0,           // 2.0%
-    money500: 3.0,      // 3.0%
-    money50: 8.0,       // 8.0%
-    money20: 15.0,      // 15.0%
-    money15: 20.0       // 20.0%
+    premium: {
+        iphone15: 0.5,      // 0.5%
+        iphone13: 0.8,      // 0.8%
+        macbook: 0.3,       // 0.3%
+        acer: 1.0,          // 1.0%
+        jbl: 2.0,           // 2.0%
+        money500: 3.0,      // 3.0%
+        money50: 8.0,       // 8.0%
+        money20: 15.0,      // 15.0%
+        money15: 20.0       // 20.0%
+    },
+    medium: {
+        iphone13: 1.0,      // 1.0%
+        acer: 2.0,          // 2.0%
+        money500: 5.0,      // 5.0%
+        money100: 8.0,      // 8.0%
+        money50: 12.0,      // 12.0%
+        money20: 20.0,      // 20.0%
+        money10: 25.0       // 25.0%
+    },
+    basic: {
+        money100: 3.0,      // 3.0%
+        money50: 8.0,       // 8.0%
+        money20: 15.0,      // 15.0%
+        money10: 25.0,      // 25.0%
+        money5: 30.0        // 30.0%
+    },
+    simple: {
+        money50: 5.0,       // 5.0%
+        money20: 15.0,      // 15.0%
+        money10: 25.0,      // 25.0%
+        money5: 35.0        // 35.0%
+    }
 };
+
+// Tipo de caixa atual
+let currentCaseType = 'premium';
+
+// Função para obter informações das caixas
+function getCaseInfo(caseType) {
+    const cases = {
+        premium: {
+            name: 'Caixa Premium Lr4',
+            price: 'R$ 50,00',
+            description: 'Chance de ganhar iPhone 15, MacBook Pro, JBL e muito mais!',
+            icon: '💎'
+        },
+        medium: {
+            name: 'Caixa Média Lr4',
+            price: 'R$ 20,00',
+            description: 'Chance de ganhar iPhone 13, Acer Nitro, R$ 500 e muito mais!',
+            icon: '🎁'
+        },
+        basic: {
+            name: 'Caixa Básica Lr4',
+            price: 'R$ 10,00',
+            description: 'Chance de ganhar R$ 100, R$ 50, R$ 20 e muito mais!',
+            icon: '🎯'
+        },
+        simple: {
+            name: 'Caixa Simples Lr4',
+            price: 'R$ 5,00',
+            description: 'Chance de ganhar R$ 50, R$ 20, R$ 10 e muito mais!',
+            icon: '🎪'
+        }
+    };
+    
+    return cases[caseType] || cases.premium;
+}
 
 // Sistema de som para caixas
 let caseSounds = {
@@ -1575,9 +1634,20 @@ function saveCaseProbabilities() {
     localStorage.setItem('caseProbabilities', JSON.stringify(caseProbabilities));
 }
 
-function openCaseConfirmModal() {
+function openCaseConfirmModal(caseType = 'premium') {
+    currentCaseType = caseType;
     const modal = document.getElementById('caseConfirmModal');
     if (modal) {
+        // Atualizar informações da caixa no modal
+        const caseInfo = getCaseInfo(caseType);
+        const modalTitle = modal.querySelector('.modal-title');
+        const modalPrice = modal.querySelector('.case-price-display');
+        const modalDescription = modal.querySelector('.case-description-display');
+        
+        if (modalTitle) modalTitle.textContent = caseInfo.name;
+        if (modalPrice) modalPrice.textContent = `Preço: ${caseInfo.price}`;
+        if (modalDescription) modalDescription.textContent = caseInfo.description;
+        
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -1685,15 +1755,25 @@ function determinePrize() {
     const random = Math.random() * 100;
     let cumulative = 0;
     
-    for (const [prize, probability] of Object.entries(caseProbabilities)) {
+    // Usar probabilidades do tipo de caixa atual
+    const currentProbabilities = caseProbabilities[currentCaseType];
+    
+    for (const [prize, probability] of Object.entries(currentProbabilities)) {
         cumulative += probability;
         if (random <= cumulative) {
             return prize;
         }
     }
     
-    // Fallback para prêmio menor
-    return 'money15';
+    // Fallback para prêmio menor baseado no tipo
+    const fallbacks = {
+        premium: 'money15',
+        medium: 'money10',
+        basic: 'money5',
+        simple: 'money5'
+    };
+    
+    return fallbacks[currentCaseType] || 'money15';
 }
 
 function showCaseResult(prize) {
@@ -1777,15 +1857,21 @@ function sellPrize() {
 
 function getPrizeData(prize) {
     const prizes = {
+        // Prêmios Premium
         iphone15: { name: 'iPhone 15', value: 'R$ 5.999', rarity: 'legendary' },
         iphone13: { name: 'iPhone 13', value: 'R$ 4.499', rarity: 'epic' },
         macbook: { name: 'MacBook Pro', value: 'R$ 18.999', rarity: 'legendary' },
         acer: { name: 'Acer Nitro', value: 'R$ 6.499', rarity: 'epic' },
         jbl: { name: 'JBL Boombox', value: 'R$ 2.499', rarity: 'rare' },
+        
+        // Prêmios em Dinheiro
         money500: { name: 'R$ 500', value: 'R$ 500', rarity: 'rare' },
+        money100: { name: 'R$ 100', value: 'R$ 100', rarity: 'uncommon' },
         money50: { name: 'R$ 50', value: 'R$ 50', rarity: 'uncommon' },
         money20: { name: 'R$ 20', value: 'R$ 20', rarity: 'common' },
-        money15: { name: 'R$ 15', value: 'R$ 15', rarity: 'common' }
+        money15: { name: 'R$ 15', value: 'R$ 15', rarity: 'common' },
+        money10: { name: 'R$ 10', value: 'R$ 10', rarity: 'common' },
+        money5: { name: 'R$ 5', value: 'R$ 5', rarity: 'common' }
     };
     
     return prizes[prize] || prizes.money15;
@@ -1807,9 +1893,9 @@ function saveCaseHistory(prize) {
 }
 
 // Função para admin controlar probabilidades
-function updateCaseProbability(prize, newProbability) {
-    if (caseProbabilities.hasOwnProperty(prize)) {
-        caseProbabilities[prize] = parseFloat(newProbability);
+function updateCaseProbability(caseType, prize, newProbability) {
+    if (caseProbabilities[caseType] && caseProbabilities[caseType].hasOwnProperty(prize)) {
+        caseProbabilities[caseType][prize] = parseFloat(newProbability);
         saveCaseProbabilities();
         return true;
     }
@@ -1878,13 +1964,17 @@ function refreshCaseStats() {
 
 // Função para carregar probabilidades na interface
 function loadCaseProbabilitiesToUI() {
-    const prizes = ['iphone15', 'iphone13', 'macbook', 'acer', 'jbl', 'money500', 'money50', 'money20', 'money15'];
+    const caseTypes = ['premium', 'medium', 'basic', 'simple'];
     
-    prizes.forEach(prize => {
-        const input = document.getElementById(`prob-${prize}`);
-        if (input && caseProbabilities[prize] !== undefined) {
-            input.value = caseProbabilities[prize];
-        }
+    caseTypes.forEach(caseType => {
+        const prizes = Object.keys(caseProbabilities[caseType]);
+        
+        prizes.forEach(prize => {
+            const input = document.getElementById(`prob-${caseType}-${prize}`);
+            if (input && caseProbabilities[caseType][prize] !== undefined) {
+                input.value = caseProbabilities[caseType][prize];
+            }
+        });
     });
 }
 
