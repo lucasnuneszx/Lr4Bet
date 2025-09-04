@@ -1989,6 +1989,145 @@ body {
     50% { opacity: 0.6; transform: scale(1.1); }
 }
 
+/* ===== ESTILOS DAS RASPADINHAS ===== */
+.scratch-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.scratch-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.scratch-image {
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+.scratch-preview {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    background-size: 400% 400%;
+    animation: scratchGradient 3s ease infinite;
+}
+
+@keyframes scratchGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.scratch-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    animation: scratchPulse 2s ease-in-out infinite;
+}
+
+@keyframes scratchPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.scratch-prize-preview {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0.8;
+}
+
+.scratch-prize-preview img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.scratch-prize-preview img:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.scratch-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    margin: 0.5rem 0;
+}
+
+.scratch-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.scratch-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.scratch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.scratch-btn:active {
+    transform: translateY(0);
+}
+
+.scratch-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.scratch-btn:hover::before {
+    left: 100%;
+}
+
+/* Cores específicas para cada tipo de raspadinha */
+.scratch-card.premium .scratch-preview {
+    background: linear-gradient(45deg, #ffd700, #ffed4e, #ff6b6b, #4ecdc4);
+}
+
+.scratch-card.medium .scratch-preview {
+    background: linear-gradient(45deg, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+}
+
+.scratch-card.basic .scratch-preview {
+    background: linear-gradient(45deg, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+}
+
+.scratch-card.simple .scratch-preview {
+    background: linear-gradient(45deg, #feca57, #ff9ff3, #54a0ff, #5f27cd);
+}
+
 /* ===== CONTROLES DE TIPOS DE CAIXAS ===== */
 .case-type-controls {
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(15, 15, 15, 0.95) 100%);
