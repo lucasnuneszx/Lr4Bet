@@ -1615,6 +1615,44 @@
         </div>
     </div>
 
+    <!-- Modal de Confirmação da Raspadinha -->
+    <div id="scratchConfirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeScratchConfirmModal()">&times;</span>
+            <h2 class="modal-title">Raspadinha Premium Lr4</h2>
+            <div class="scratch-confirm-content">
+                <div class="scratch-preview-large">
+                    <div class="scratch-icon-large">💎</div>
+                    <p class="scratch-price-display">Preço: R$ 50,00</p>
+                    <p class="scratch-description-display">Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!</p>
+                </div>
+                <div class="confirm-actions">
+                    <button class="btn-confirm" onclick="confirmScratchPurchase()">
+                        <span class="clover-spin">♣</span>
+                        <span>Confirmar Compra</span>
+                    </button>
+                    <button class="btn-cancel" onclick="closeScratchConfirmModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal da Raspadinha -->
+    <div id="scratchModal" class="modal">
+        <div class="modal-content scratch-modal">
+            <span class="close" onclick="closeScratchModal()">&times;</span>
+            <div class="scratch-modal-content">
+                <div class="scratch-header">
+                    <h2>🎯 Raspadinha Lr4</h2>
+                    <p>Raspe para revelar seu prêmio!</p>
+                </div>
+                <div id="scratchArea" class="scratch-area">
+                    <!-- Interface da raspadinha será criada aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="email-config.js"></script>
     <script src="email-verification.js"></script>

@@ -1533,6 +1533,427 @@ function initProfileSystem() {
     initPhoneFormatting();
 }
 
+// ===== SISTEMA DE RASPADINHAS =====
+
+// Variáveis globais para raspadinhas
+let currentScratchType = 'premium';
+let scratchPrize = null;
+let isScratching = false;
+let scratchProgress = 0;
+
+// Configurações de probabilidades das raspadinhas (mesmas das caixas)
+let scratchProbabilities = {
+    premium: {
+        iphone15: 0.2,      // 0.2% - R$ 5.999
+        macbook: 0.1,       // 0.1% - R$ 18.999
+        iphone13: 0.3,      // 0.3% - R$ 4.499
+        acer: 0.5,          // 0.5% - R$ 6.499
+        jbl: 1.0,           // 1.0% - R$ 2.499
+        airpods: 1.5,       // 1.5% - R$ 1.299
+        money500: 2.0,      // 2.0% - R$ 500
+        money100: 5.0,      // 5.0% - R$ 100
+        money50: 12.0,      // 12.0% - R$ 50
+        money25: 18.0       // 18.0% - R$ 25
+    },
+    medium: {
+        iphone13: 0.3,      // 0.3% - R$ 4.499
+        acer: 0.5,          // 0.5% - R$ 6.499
+        jbl: 1.0,           // 1.0% - R$ 2.499
+        airpods: 1.5,       // 1.5% - R$ 1.299
+        xiaomi: 2.0,        // 2.0% - R$ 899
+        speaker: 4.0,       // 4.0% - R$ 299
+        money200: 5.0,      // 5.0% - R$ 200
+        money100: 10.0,     // 10.0% - R$ 100
+        money50: 15.0,      // 15.0% - R$ 50
+        money25: 20.0       // 20.0% - R$ 25
+    },
+    basic: {
+        airpods: 0.5,       // 0.5% - R$ 1.299
+        xiaomi: 1.0,        // 1.0% - R$ 899
+        speaker: 2.0,       // 2.0% - R$ 299
+        fone: 3.0,          // 3.0% - R$ 199
+        money100: 5.0,      // 5.0% - R$ 100
+        money50: 10.0,      // 10.0% - R$ 50
+        money25: 15.0,      // 15.0% - R$ 25
+        money15: 20.0       // 20.0% - R$ 15
+    },
+    simple: {
+        speaker: 1.0,       // 1.0% - R$ 299
+        fone: 2.0,          // 2.0% - R$ 199
+        carregador: 3.0,    // 3.0% - R$ 99
+        money50: 8.0,       // 8.0% - R$ 50
+        money25: 12.0,      // 12.0% - R$ 25
+        money15: 18.0,      // 18.0% - R$ 15
+        money10: 22.0       // 22.0% - R$ 10
+    }
+};
+
+// Função para obter informações das raspadinhas
+function getScratchInfo(scratchType) {
+    const scratches = {
+        premium: {
+            name: 'Raspadinha Premium Lr4',
+            price: 'R$ 50,00',
+            description: 'Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!',
+            icon: '💎'
+        },
+        medium: {
+            name: 'Raspadinha Média Lr4',
+            price: 'R$ 20,00',
+            description: 'Chance de ganhar iPhone 13, Xiaomi, AirPods e muito mais!',
+            icon: '🎁'
+        },
+        basic: {
+            name: 'Raspadinha Básica Lr4',
+            price: 'R$ 10,00',
+            description: 'Chance de ganhar AirPods, Xiaomi, Caixinha JBL e muito mais!',
+            icon: '🎯'
+        },
+        simple: {
+            name: 'Raspadinha Simples Lr4',
+            price: 'R$ 5,00',
+            description: 'Chance de ganhar Caixinha JBL, Fone Bluetooth, Carregador e muito mais!',
+            icon: '🎪'
+        }
+    };
+    
+    return scratches[scratchType] || scratches.premium;
+}
+
+// Função para abrir modal de confirmação da raspadinha
+function openScratchConfirmModal(scratchType) {
+    currentScratchType = scratchType;
+    const modal = document.getElementById('scratchConfirmModal');
+    if (modal) {
+        // Atualizar informações da raspadinha no modal
+        const scratchInfo = getScratchInfo(scratchType);
+        const modalTitle = modal.querySelector('.modal-title');
+        const modalPrice = modal.querySelector('.scratch-price-display');
+        const modalDescription = modal.querySelector('.scratch-description-display');
+        
+        if (modalTitle) modalTitle.textContent = scratchInfo.name;
+        if (modalPrice) modalPrice.textContent = `Preço: ${scratchInfo.price}`;
+        if (modalDescription) modalDescription.textContent = scratchInfo.description;
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Função para fechar modal de confirmação da raspadinha
+function closeScratchConfirmModal() {
+    const modal = document.getElementById('scratchConfirmModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Função para confirmar compra da raspadinha
+function confirmScratchPurchase() {
+    const scratchInfo = getScratchInfo(currentScratchType);
+    const price = parseFloat(scratchInfo.price.replace('R$ ', '').replace(',', '.'));
+    
+    // Verificar saldo
+    const currentBalance = parseFloat(localStorage.getItem('userBalance') || '0');
+    if (currentBalance < price) {
+        alert('💰 Saldo insuficiente! Faça um depósito para continuar.');
+        return;
+    }
+    
+    // Debitar saldo
+    const newBalance = currentBalance - price;
+    localStorage.setItem('userBalance', newBalance.toString());
+    updateBalanceDisplay();
+    
+    // Fechar modal de confirmação
+    closeScratchConfirmModal();
+    
+    // Abrir modal da raspadinha
+    openScratchModal();
+}
+
+// Função para abrir modal da raspadinha
+function openScratchModal() {
+    const modal = document.getElementById('scratchModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Determinar prêmio
+        scratchPrize = determineScratchPrize();
+        
+        // Criar interface da raspadinha
+        createScratchInterface();
+        
+        // Resetar progresso
+        scratchProgress = 0;
+        isScratching = false;
+    }
+}
+
+// Função para determinar prêmio da raspadinha
+function determineScratchPrize() {
+    const random = Math.random() * 100;
+    let cumulative = 0;
+    
+    const currentProbabilities = scratchProbabilities[currentScratchType];
+    
+    for (const [prize, probability] of Object.entries(currentProbabilities)) {
+        cumulative += probability;
+        if (random <= cumulative) {
+            return prize;
+        }
+    }
+    
+    // Fallback para prêmio menor baseado no tipo
+    const fallbacks = {
+        premium: 'money25',
+        medium: 'money25',
+        basic: 'money15',
+        simple: 'money10'
+    };
+    
+    return fallbacks[currentScratchType] || 'money15';
+}
+
+// Função para criar interface da raspadinha
+function createScratchInterface() {
+    const scratchArea = document.getElementById('scratchArea');
+    if (!scratchArea) return;
+    
+    const prizeData = getPrizeData(scratchPrize);
+    
+    // Criar grid de raspadinha
+    scratchArea.innerHTML = `
+        <div class="scratch-grid" id="scratchGrid">
+            <div class="scratch-overlay" id="scratchOverlay"></div>
+            <div class="scratch-content" id="scratchContent">
+                <div class="prize-reveal">
+                    <div class="prize-icon">${prizeData.rarity === 'legendary' ? '👑' : prizeData.rarity === 'epic' ? '💎' : prizeData.rarity === 'rare' ? '⭐' : prizeData.rarity === 'uncommon' ? '🎁' : '🎯'}</div>
+                    <div class="prize-name">${prizeData.name}</div>
+                    <div class="prize-value">${prizeData.value}</div>
+                    <div class="prize-rarity ${prizeData.rarity}">${prizeData.rarity.toUpperCase()}</div>
+                </div>
+            </div>
+        </div>
+        <div class="scratch-instructions">
+            <p>🖱️ Passe o mouse ou dedo sobre a área para raspar e revelar seu prêmio!</p>
+        </div>
+    `;
+    
+    // Adicionar eventos de raspagem
+    setupScratchEvents();
+}
+
+// Função para configurar eventos de raspagem
+function setupScratchEvents() {
+    const scratchOverlay = document.getElementById('scratchOverlay');
+    if (!scratchOverlay) return;
+    
+    // Eventos de mouse
+    scratchOverlay.addEventListener('mousedown', startScratching);
+    scratchOverlay.addEventListener('mousemove', scratch);
+    scratchOverlay.addEventListener('mouseup', stopScratching);
+    scratchOverlay.addEventListener('mouseleave', stopScratching);
+    
+    // Eventos de touch para mobile
+    scratchOverlay.addEventListener('touchstart', startScratching);
+    scratchOverlay.addEventListener('touchmove', scratch);
+    scratchOverlay.addEventListener('touchend', stopScratching);
+}
+
+// Função para iniciar raspagem
+function startScratching(e) {
+    e.preventDefault();
+    isScratching = true;
+    scratch(e);
+}
+
+// Função para raspar
+function scratch(e) {
+    if (!isScratching) return;
+    
+    const scratchOverlay = document.getElementById('scratchOverlay');
+    if (!scratchOverlay) return;
+    
+    const rect = scratchOverlay.getBoundingClientRect();
+    let x, y;
+    
+    if (e.type.includes('touch')) {
+        x = e.touches[0].clientX - rect.left;
+        y = e.touches[0].clientY - rect.top;
+    } else {
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
+    }
+    
+    // Criar efeito de raspagem
+    createScratchEffect(x, y);
+    
+    // Atualizar progresso
+    updateScratchProgress();
+}
+
+// Função para parar raspagem
+function stopScratching() {
+    isScratching = false;
+}
+
+// Função para criar efeito de raspagem
+function createScratchEffect(x, y) {
+    const scratchOverlay = document.getElementById('scratchOverlay');
+    if (!scratchOverlay) return;
+    
+    // Criar círculo de raspagem
+    const scratchCircle = document.createElement('div');
+    scratchCircle.className = 'scratch-circle';
+    scratchCircle.style.left = (x - 15) + 'px';
+    scratchCircle.style.top = (y - 15) + 'px';
+    
+    scratchOverlay.appendChild(scratchCircle);
+    
+    // Remover círculo após animação
+    setTimeout(() => {
+        if (scratchCircle.parentNode) {
+            scratchCircle.parentNode.removeChild(scratchCircle);
+        }
+    }, 300);
+}
+
+// Função para atualizar progresso da raspagem
+function updateScratchProgress() {
+    const scratchOverlay = document.getElementById('scratchOverlay');
+    if (!scratchOverlay) return;
+    
+    // Contar círculos de raspagem
+    const scratchCircles = scratchOverlay.querySelectorAll('.scratch-circle');
+    scratchProgress = scratchCircles.length;
+    
+    // Calcular porcentagem raspada
+    const totalArea = 100; // Área total da raspadinha
+    const scratchedArea = Math.min(scratchProgress * 2, totalArea); // Cada círculo raspa 2% da área
+    const percentage = (scratchedArea / totalArea) * 100;
+    
+    // Atualizar opacidade do overlay
+    scratchOverlay.style.opacity = Math.max(0, 1 - (percentage / 100));
+    
+    // Verificar se raspou o suficiente para revelar o prêmio
+    if (percentage >= 30) {
+        revealScratchPrize();
+    }
+}
+
+// Função para revelar prêmio da raspadinha
+function revealScratchPrize() {
+    const scratchOverlay = document.getElementById('scratchOverlay');
+    if (!scratchOverlay) return;
+    
+    // Remover overlay completamente
+    scratchOverlay.style.opacity = '0';
+    scratchOverlay.style.pointerEvents = 'none';
+    
+    // Mostrar prêmio com animação
+    const scratchContent = document.getElementById('scratchContent');
+    if (scratchContent) {
+        scratchContent.style.opacity = '1';
+        scratchContent.style.transform = 'scale(1)';
+    }
+    
+    // Tocar som de vitória
+    if (caseSounds && caseSounds.win) {
+        caseSounds.win.currentTime = 0;
+        caseSounds.win.play().catch(() => {});
+    }
+    
+    // Mostrar botões de ação após 2 segundos
+    setTimeout(() => {
+        showScratchActions();
+    }, 2000);
+}
+
+// Função para mostrar ações da raspadinha
+function showScratchActions() {
+    const scratchArea = document.getElementById('scratchArea');
+    if (!scratchArea) return;
+    
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'scratch-actions';
+    actionsDiv.innerHTML = `
+        <button class="btn-scratch-action" onclick="sellScratchPrize()">
+            <span>💰</span>
+            <span>Vender</span>
+        </button>
+        <button class="btn-scratch-action" onclick="redeemScratchPrize()">
+            <span>🎁</span>
+            <span>Resgatar</span>
+        </button>
+    `;
+    
+    scratchArea.appendChild(actionsDiv);
+}
+
+// Função para vender prêmio da raspadinha
+function sellScratchPrize() {
+    const prizeData = getPrizeData(scratchPrize);
+    const sellValue = parseFloat(prizeData.value.replace('R$ ', '').replace('.', '').replace(',', '.'));
+    
+    // Adicionar valor ao saldo
+    const currentBalance = parseFloat(localStorage.getItem('userBalance') || '0');
+    const newBalance = currentBalance + sellValue;
+    localStorage.setItem('userBalance', newBalance.toString());
+    updateBalanceDisplay();
+    
+    // Salvar no histórico
+    saveScratchHistory(scratchPrize, 'sold', sellValue);
+    
+    // Fechar modal
+    closeScratchModal();
+    
+    // Mostrar mensagem de sucesso
+    showSuccessModal(`💰 Prêmio vendido por ${prizeData.value}!`);
+}
+
+// Função para resgatar prêmio da raspadinha
+function redeemScratchPrize() {
+    const prizeData = getPrizeData(scratchPrize);
+    
+    // Salvar no histórico
+    saveScratchHistory(scratchPrize, 'redeemed', 0);
+    
+    // Fechar modal
+    closeScratchModal();
+    
+    // Mostrar mensagem de sucesso
+    showSuccessModal(`🎁 Prêmio ${prizeData.name} resgatado com sucesso!`);
+}
+
+// Função para salvar histórico da raspadinha
+function saveScratchHistory(prize, action, value) {
+    const history = JSON.parse(localStorage.getItem('scratchHistory') || '[]');
+    const prizeData = getPrizeData(prize);
+    
+    history.push({
+        prize: prize,
+        name: prizeData.name,
+        value: prizeData.value,
+        action: action,
+        sellValue: value,
+        timestamp: new Date().toISOString()
+    });
+    
+    localStorage.setItem('scratchHistory', JSON.stringify(history));
+}
+
+// Função para fechar modal da raspadinha
+function closeScratchModal() {
+    const modal = document.getElementById('scratchModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
 // ===== SISTEMA DE CAIXAS =====
 function initCaseSystem() {
     // Carregar configurações de probabilidades
