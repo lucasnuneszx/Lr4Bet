@@ -1741,6 +1741,9 @@ function openCaseModal() {
             spinPrice.textContent = `Preço: ${caseInfo.price}`;
         }
         
+        // Atualizar prêmios da roleta baseado no tipo de caixa
+        updateCaseWheelPrizes();
+        
         // Resetar estado da roleta
         resetCaseWheel();
     }
@@ -1752,6 +1755,34 @@ function closeCaseModal() {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
+}
+
+function updateCaseWheelPrizes() {
+    const wheel = document.querySelector('.case-prize-wheel');
+    if (!wheel) return;
+    
+    // Limpar prêmios existentes
+    wheel.innerHTML = '';
+    
+    // Obter prêmios do tipo de caixa atual
+    const currentProbabilities = caseProbabilities[currentCaseType];
+    const prizes = Object.keys(currentProbabilities);
+    
+    // Criar elementos de prêmio para a roleta
+    prizes.forEach(prize => {
+        const prizeData = getPrizeData(prize);
+        const prizeElement = document.createElement('div');
+        prizeElement.className = 'prize-item';
+        prizeElement.setAttribute('data-prize', prize);
+        
+        prizeElement.innerHTML = `
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop&crop=center" alt="${prizeData.name}">
+            <span class="prize-name">${prizeData.name}</span>
+            <span class="prize-value">${prizeData.value}</span>
+        `;
+        
+        wheel.appendChild(prizeElement);
+    });
 }
 
 function resetCaseWheel() {
@@ -1860,10 +1891,10 @@ function determinePrize() {
     
     // Fallback para prêmio menor baseado no tipo
     const fallbacks = {
-        premium: 'money15',
-        medium: 'money10',
-        basic: 'money5',
-        simple: 'money5'
+        premium: 'money25',
+        medium: 'money25',
+        basic: 'money15',
+        simple: 'money10'
     };
     
     return fallbacks[currentCaseType] || 'money15';
