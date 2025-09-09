@@ -1595,29 +1595,90 @@ function getScratchInfo(scratchType) {
             name: 'Raspadinha Premium Lr4',
             price: 'R$ 50,00',
             description: 'Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!',
-            icon: '💎'
+            icon: '💎',
+            prizes: [
+                { name: 'iPhone 15 Pro Max', value: 8000, rarity: 'legendary', probability: 0.5 },
+                { name: 'MacBook Pro M3', value: 12000, rarity: 'legendary', probability: 0.3 },
+                { name: 'AirPods Pro 2', value: 2000, rarity: 'epic', probability: 2.0 },
+                { name: 'Apple Watch Series 9', value: 3000, rarity: 'epic', probability: 1.5 },
+                { name: 'iPad Pro 12.9"', value: 5000, rarity: 'epic', probability: 1.0 },
+                { name: 'JBL Boombox 3', value: 800, rarity: 'rare', probability: 5.0 },
+                { name: 'Samsung Galaxy Buds', value: 400, rarity: 'rare', probability: 8.0 },
+                { name: 'R$ 200,00', value: 200, rarity: 'common', probability: 15.0 },
+                { name: 'R$ 100,00', value: 100, rarity: 'common', probability: 25.0 },
+                { name: 'R$ 50,00', value: 50, rarity: 'common', probability: 41.7 }
+            ]
         },
         medium: {
             name: 'Raspadinha Média Lr4',
             price: 'R$ 20,00',
-            description: 'Chance de ganhar iPhone 13, Xiaomi, AirPods e muito mais!',
-            icon: '🎁'
+            description: 'Chance de ganhar AirPods, Xiaomi, Caixinha JBL e muito mais!',
+            icon: '🎁',
+            prizes: [
+                { name: 'AirPods Pro 2', value: 2000, rarity: 'legendary', probability: 1.0 },
+                { name: 'Xiaomi Redmi Note 13', value: 1200, rarity: 'epic', probability: 2.0 },
+                { name: 'JBL Charge 5', value: 600, rarity: 'epic', probability: 3.0 },
+                { name: 'Samsung Galaxy Buds', value: 400, rarity: 'rare', probability: 8.0 },
+                { name: 'Fone Bluetooth JBL', value: 200, rarity: 'rare', probability: 12.0 },
+                { name: 'Carregador Wireless', value: 100, rarity: 'common', probability: 20.0 },
+                { name: 'R$ 100,00', value: 100, rarity: 'common', probability: 25.0 },
+                { name: 'R$ 50,00', value: 50, rarity: 'common', probability: 29.0 }
+            ]
         },
         basic: {
             name: 'Raspadinha Básica Lr4',
             price: 'R$ 10,00',
-            description: 'Chance de ganhar AirPods, Xiaomi, Caixinha JBL e muito mais!',
-            icon: '🎯'
+            description: 'Chance de ganhar Fone Bluetooth, Carregador, Caixinha JBL e muito mais!',
+            icon: '🎯',
+            prizes: [
+                { name: 'JBL Charge 5', value: 600, rarity: 'epic', probability: 2.0 },
+                { name: 'Fone Bluetooth JBL', value: 200, rarity: 'rare', probability: 8.0 },
+                { name: 'Caixinha JBL Go 3', value: 150, rarity: 'rare', probability: 10.0 },
+                { name: 'Carregador Wireless', value: 100, rarity: 'common', probability: 20.0 },
+                { name: 'Cabo USB-C', value: 50, rarity: 'common', probability: 25.0 },
+                { name: 'R$ 50,00', value: 50, rarity: 'common', probability: 35.0 }
+            ]
         },
         simple: {
             name: 'Raspadinha Simples Lr4',
             price: 'R$ 5,00',
-            description: 'Chance de ganhar Caixinha JBL, Fone Bluetooth, Carregador e muito mais!',
-            icon: '🎪'
+            description: 'Chance de ganhar R$ 50, R$ 20, R$ 10 e muito mais!',
+            icon: '🎪',
+            prizes: [
+                { name: 'R$ 100,00', value: 100, rarity: 'epic', probability: 2.0 },
+                { name: 'R$ 50,00', value: 50, rarity: 'rare', probability: 8.0 },
+                { name: 'R$ 20,00', value: 20, rarity: 'common', probability: 25.0 },
+                { name: 'R$ 10,00', value: 10, rarity: 'common', probability: 35.0 },
+                { name: 'R$ 5,00', value: 5, rarity: 'common', probability: 30.0 }
+            ]
         }
     };
     
     return scratches[scratchType] || scratches.premium;
+}
+
+// Função para selecionar prêmio baseado na probabilidade
+function selectScratchPrize(scratchType) {
+    const scratchInfo = getScratchInfo(scratchType);
+    const prizes = scratchInfo.prizes;
+    
+    // Calcular total de probabilidades
+    const totalProbability = prizes.reduce((sum, prize) => sum + prize.probability, 0);
+    
+    // Gerar número aleatório
+    const random = Math.random() * totalProbability;
+    
+    // Encontrar prêmio baseado na probabilidade
+    let currentProbability = 0;
+    for (const prize of prizes) {
+        currentProbability += prize.probability;
+        if (random <= currentProbability) {
+            return prize;
+        }
+    }
+    
+    // Fallback para o último prêmio
+    return prizes[prizes.length - 1];
 }
 
 // Função para abrir modal de confirmação da raspadinha
@@ -1681,7 +1742,7 @@ function openScratchModal() {
         document.body.style.overflow = 'hidden';
         
         // Determinar prêmio
-        scratchPrize = determineScratchPrize();
+        scratchPrize = selectScratchPrize(currentScratchType);
         
         // Criar interface da raspadinha
         createScratchInterface();
@@ -2420,33 +2481,17 @@ function sellPrize() {
 }
 
 function getPrizeData(prize) {
-    const prizes = {
-        // Prêmios Premium (Alto Valor)
-        iphone15: { name: 'iPhone 15', value: 'R$ 5.999', rarity: 'legendary' },
-        macbook: { name: 'MacBook Pro', value: 'R$ 18.999', rarity: 'legendary' },
-        iphone13: { name: 'iPhone 13', value: 'R$ 4.499', rarity: 'epic' },
-        acer: { name: 'Acer Nitro', value: 'R$ 6.499', rarity: 'epic' },
-        jbl: { name: 'JBL Boombox', value: 'R$ 2.499', rarity: 'rare' },
-        airpods: { name: 'AirPods Pro', value: 'R$ 1.299', rarity: 'rare' },
-        
-        // Prêmios Médio Valor
-        xiaomi: { name: 'Xiaomi Redmi', value: 'R$ 899', rarity: 'uncommon' },
-        speaker: { name: 'Caixinha JBL', value: 'R$ 299', rarity: 'uncommon' },
-        fone: { name: 'Fone Bluetooth', value: 'R$ 199', rarity: 'common' },
-        carregador: { name: 'Carregador Wireless', value: 'R$ 99', rarity: 'common' },
-        
-        // Prêmios em Dinheiro
-        money500: { name: 'R$ 500', value: 'R$ 500', rarity: 'rare' },
-        money200: { name: 'R$ 200', value: 'R$ 200', rarity: 'uncommon' },
-        money100: { name: 'R$ 100', value: 'R$ 100', rarity: 'uncommon' },
-        money50: { name: 'R$ 50', value: 'R$ 50', rarity: 'common' },
-        money25: { name: 'R$ 25', value: 'R$ 25', rarity: 'common' },
-        money15: { name: 'R$ 15', value: 'R$ 15', rarity: 'common' },
-        money10: { name: 'R$ 10', value: 'R$ 10', rarity: 'common' },
-        money5: { name: 'R$ 5', value: 'R$ 5', rarity: 'common' }
-    };
+    // Se o prêmio já é um objeto com as propriedades corretas, retorna ele
+    if (prize && typeof prize === 'object' && prize.name && prize.value && prize.rarity) {
+        return {
+            name: prize.name,
+            value: `R$ ${prize.value.toFixed(2).replace('.', ',')}`,
+            rarity: prize.rarity
+        };
+    }
     
-    return prizes[prize] || prizes.money15;
+    // Fallback para prêmio padrão
+    return { name: 'Prêmio', value: 'R$ 0,00', rarity: 'common' };
 }
 
 function saveCaseHistory(prize) {
@@ -3205,4 +3250,171 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = Br4Website;
 } else if (typeof window !== 'undefined') {
     window.Br4Website = Br4Website;
+}
+
+// Função para inicializar sistema de raspagem
+function initScratchSystem() {
+    const scratchOverlay = document.getElementById('scratchOverlay');
+    const scratchContent = document.getElementById('scratchContent');
+    
+    if (!scratchOverlay || !scratchContent) return;
+    
+    let isScratching = false;
+    let scratchProgress = 0;
+    
+    // Event listeners para raspagem
+    scratchOverlay.addEventListener('mousedown', startScratching);
+    scratchOverlay.addEventListener('mousemove', scratch);
+    scratchOverlay.addEventListener('mouseup', stopScratching);
+    scratchOverlay.addEventListener('mouseleave', stopScratching);
+    
+    // Touch events para mobile
+    scratchOverlay.addEventListener('touchstart', startScratching);
+    scratchOverlay.addEventListener('touchmove', scratch);
+    scratchOverlay.addEventListener('touchend', stopScratching);
+    
+    function startScratching(e) {
+        e.preventDefault();
+        isScratching = true;
+    }
+    
+    function scratch(e) {
+        if (!isScratching) return;
+        
+        e.preventDefault();
+        const rect = scratchOverlay.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        
+        // Criar área raspada
+        const scratchArea = document.createElement('div');
+        scratchArea.style.position = 'absolute';
+        scratchArea.style.left = x + 'px';
+        scratchArea.style.top = y + 'px';
+        scratchArea.style.width = '20px';
+        scratchArea.style.height = '20px';
+        scratchArea.style.background = 'transparent';
+        scratchArea.style.borderRadius = '50%';
+        scratchArea.style.pointerEvents = 'none';
+        
+        scratchOverlay.appendChild(scratchArea);
+        
+        // Calcular progresso
+        scratchProgress += 0.5;
+        if (scratchProgress >= 100) {
+            revealPrize();
+        }
+    }
+    
+    function stopScratching() {
+        isScratching = false;
+    }
+    
+    function revealPrize() {
+        scratchOverlay.style.display = 'none';
+        scratchContent.style.display = 'block';
+        
+        // Adicionar animação de prêmio
+        const prizeReveal = scratchContent.querySelector('.prize-reveal');
+        if (prizeReveal) {
+            prizeReveal.classList.add('prize-won');
+        }
+        
+        // Mostrar botões de ação
+        showScratchActions();
+    }
+    
+    function showScratchActions() {
+        const scratchArea = document.getElementById('scratchArea');
+        if (!scratchArea) return;
+        
+        const actionsHTML = `
+            <div class="scratch-actions">
+                <button class="btn btn-success" onclick="redeemScratchPrize()">
+                    <i class="fas fa-gift"></i> Resgatar Prêmio
+                </button>
+                <button class="btn btn-secondary" onclick="closeScratchModal()">
+                    <i class="fas fa-times"></i> Fechar
+                </button>
+            </div>
+        `;
+        
+        scratchArea.insertAdjacentHTML('beforeend', actionsHTML);
+    }
+}
+
+// EXECUTAR QUANDO A PÁGINA CARREGAR
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 LR4 Script carregado!');
+    
+    // Inicializar sistema
+    initializeSystem();
+});
+
+function initializeSystem() {
+    console.log('🔧 Inicializando sistemas...');
+    
+    // Botão de depósito
+    const btnDeposit = document.getElementById('btnDeposit');
+    if (btnDeposit) {
+        console.log('✅ Botão de depósito encontrado!');
+        btnDeposit.addEventListener('click', function() {
+            console.log('💰 Clique no depósito detectado!');
+            openDepositModal();
+        });
+    } else {
+        console.error('❌ Botão de depósito NÃO encontrado!');
+    }
+    
+    // Botões de raspadinha
+    const scratchButtons = document.querySelectorAll('[onclick*="openScratchConfirmModal"]');
+    console.log('🎯 Botões de raspadinha encontrados:', scratchButtons.length);
+    
+    scratchButtons.forEach((btn, index) => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('🎯 Clique na raspadinha detectado!', index);
+            const onclick = btn.getAttribute('onclick');
+            const match = onclick.match(/openScratchConfirmModal\('(.+?)'\)/);
+            if (match) {
+                const scratchType = match[1];
+                console.log('🎯 Tipo de raspadinha:', scratchType);
+                openScratchConfirmModal(scratchType);
+            }
+        });
+    });
+    
+    // Modal de depósito - fechar
+    const depositModal = document.getElementById('depositModal');
+    if (depositModal) {
+        const closeBtn = depositModal.querySelector('.close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                depositModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+    }
+    
+    // Modal de raspadinha - fechar
+    const scratchModal = document.getElementById('scratchModal');
+    if (scratchModal) {
+        const closeBtn = scratchModal.querySelector('.close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                scratchModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+    }
+    
+    // Fechar modais clicando fora
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    console.log('✅ Sistemas inicializados com sucesso!');
 }
