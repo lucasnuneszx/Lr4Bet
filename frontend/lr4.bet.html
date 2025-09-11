@@ -12,7 +12,9 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lr4.bet">
     <link rel="canonical" href="https://lr4.bet">
-    <link rel="stylesheet" href="lr4-styles.css">
+        <link rel="stylesheet" href="lr4-styles.css?v=4">
+        <link rel="stylesheet" href="payment-styles.css?v=1">
+        <link rel="stylesheet" href="deposit-styles.css?v=1">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -257,8 +259,8 @@
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 15" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="MacBook Pro" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="JBL Boombox" class="prize-preview">
-                                </div>
-                            </div>
+                        </div>
+                        </div>
                         </div>
                         <div class="game-info">
                             <h3>Raspadinha Premium Lr4</h3>
@@ -280,8 +282,8 @@
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 13" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Xiaomi" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="AirPods" class="prize-preview">
-                                </div>
-                            </div>
+                        </div>
+                        </div>
                         </div>
                         <div class="game-info">
                             <h3>Raspadinha Média Lr4</h3>
@@ -303,8 +305,8 @@
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="AirPods" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Xiaomi" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Caixinha JBL" class="prize-preview">
-                                </div>
-                            </div>
+                        </div>
+                        </div>
                         </div>
                         <div class="game-info">
                             <h3>Raspadinha Básica Lr4</h3>
@@ -326,8 +328,8 @@
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 50" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 20" class="prize-preview">
                                     <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 10" class="prize-preview">
-                                </div>
-                            </div>
+                </div>
+                        </div>
                         </div>
                         <div class="game-info">
                             <h3>Raspadinha Simples Lr4</h3>
@@ -1245,87 +1247,104 @@
         </div>
     </div>
 
-    <!-- Modal de Depósito -->
+    <!-- Modal de Depósito PayGate -->
     <div id="depositModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2><i class="fas fa-plus-circle"></i> Fazer Depósito</h2>
+        <div class="modal-content deposit-modal-content">
+            <div class="deposit-header">
+                <div class="deposit-title">
+                    <i class="fas fa-plus-circle"></i>
+                    <h2>Fazer Depósito</h2>
+                </div>
+                <button class="close-deposit" onclick="closeDepositModal()">&times;</button>
+            </div>
             
-            <form id="depositForm" class="auth-form">
-                <div class="form-group">
-                    <label for="depositAmount">Valor do Depósito</label>
-                    <div class="amount-input-group">
-                        <span class="currency-symbol">R$</span>
-                        <input type="number" id="depositAmount" name="amount" required min="10" step="0.01" placeholder="0,00">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="depositMethod">Método de Pagamento</label>
-                    <select id="depositMethod" name="method" required>
-                        <option value="">Selecione o método</option>
-                        <option value="pix">PIX</option>
-                        <option value="credit-card">Cartão de Crédito</option>
-                        <option value="debit-card">Cartão de Débito</option>
-                        <option value="bank-transfer">Transferência Bancária</option>
-                    </select>
-                </div>
-                
-                <!-- Campos de Cartão (aparecem apenas quando cartão é selecionado) -->
-                <div id="cardFields" class="card-fields" style="display: none;">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="cardNumber" class="form-label">Número do Cartão</label>
-                            <input type="text" id="cardNumber" name="cardNumber" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19">
-                        </div>
-                        <div class="form-group">
-                            <label for="cardHolder" class="form-label">Nome no Cartão</label>
-                            <input type="text" id="cardHolder" name="cardHolder" class="form-input" placeholder="Nome como está no cartão">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="cardExpiry" class="form-label">Validade</label>
-                            <input type="text" id="cardExpiry" name="cardExpiry" class="form-input" placeholder="MM/AA" maxlength="5">
-                        </div>
-                        <div class="form-group">
-                            <label for="cardCVV" class="form-label">CVV</label>
-                            <input type="text" id="cardCVV" name="cardCVV" class="form-input" placeholder="123" maxlength="4">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="cardInstallments" class="form-label">Parcelas (apenas crédito)</label>
-                        <select id="cardInstallments" name="cardInstallments" class="form-input">
-                            <option value="1">1x sem juros</option>
-                            <option value="2">2x sem juros</option>
-                            <option value="3">3x sem juros</option>
-                            <option value="4">4x sem juros</option>
-                            <option value="5">5x sem juros</option>
-                            <option value="6">6x sem juros</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="depositEmail">E-mail para Confirmação</label>
-                    <input type="email" id="depositEmail" name="email" required>
-                </div>
-                
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-check"></i>
-                    Confirmar Depósito
-                </button>
-            </form>
+            <div class="deposit-body" id="depositBody">
+                <!-- Conteúdo será inserido dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Dados do Cliente -->
+    <div id="customerDataModal" class="modal">
+        <div class="modal-content customer-data-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-user"></i> Dados para Pagamento</h2>
+                <span class="close" onclick="closeCustomerDataModal()">&times;</span>
+            </div>
             
-            <div class="deposit-info">
-                <h3>Informações Importantes:</h3>
-                <ul>
-                    <li><i class="fas fa-clock"></i> Depósitos são processados em até 24 horas</li>
-                    <li><i class="fas fa-shield-alt"></i> Todas as transações são seguras e criptografadas</li>
-                    <li><i class="fas fa-info-circle"></i> Valor mínimo: R$ 10,00</li>
-                </ul>
+            <div class="modal-body">
+                <div class="customer-form-container">
+                    <p class="form-description">
+                        <i class="fas fa-info-circle"></i>
+                        Preencha seus dados para processar o pagamento com segurança
+                    </p>
+                    
+                    <form id="customerDataForm" class="customer-data-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerName" class="form-label">
+                                    Nome Completo <span class="required">*</span>
+                                </label>
+                                <input type="text" id="customerName" name="name" class="form-input" 
+                                       placeholder="Digite seu nome completo" required minlength="2">
+                                <span class="error-message" id="nameError"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerCPF" class="form-label">
+                                    CPF <span class="required">*</span>
+                                </label>
+                                <input type="text" id="customerCPF" name="cpf" class="form-input" 
+                                       placeholder="000.000.000-00" maxlength="14" required>
+                                <span class="error-message" id="cpfError"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerEmail" class="form-label">
+                                    E-mail <span class="optional">(opcional)</span>
+                                </label>
+                                <input type="email" id="customerEmail" name="email" class="form-input" 
+                                       placeholder="seu@email.com">
+                                <span class="error-message" id="emailError"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerPhone" class="form-label">
+                                    Telefone <span class="optional">(opcional)</span>
+                                </label>
+                                <input type="tel" id="customerPhone" name="phone" class="form-input" 
+                                       placeholder="(11) 99999-9999" maxlength="15">
+                                <span class="error-message" id="phoneError"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-cancel" onclick="closeCustomerDataModal()">
+                                <i class="fas fa-times"></i>
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn-continue" id="continuePaymentBtn">
+                                <i class="fas fa-arrow-right"></i>
+                                Continuar Pagamento
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Pagamento PayGate -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content payment-modal-content">
+            <div class="payment-modal-body" id="paymentModalContent">
+                <!-- Conteúdo será inserido dinamicamente -->
             </div>
         </div>
     </div>
@@ -1705,8 +1724,13 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="lr4-script-simple.js"></script>
+        <!-- Scripts -->
+        <script src="payment-config.js?v=4"></script>
+    <script src="paygate-integration.js?v=18"></script>
+    <script src="customer-data-system.js?v=1"></script>
+    <script src="deposit-system.js?v=5"></script>
+        <script src="lr4-script-simple.js?v=4"></script>
+        <script src="payment-system.js?v=2"></script>
 </body>
 </html>
 

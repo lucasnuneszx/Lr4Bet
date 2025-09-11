@@ -1,6 +1,59 @@
 // ===== LR4 BET - SISTEMA SIMPLES E FUNCIONAL =====
 
 console.log('🚀 LR4 Script iniciando...');
+console.log('🎨 NOVO DESIGN DA RASPADINHA CARREGADO!');
+
+// Teste do novo design
+window.testNewDesign = function() {
+    console.log('🧪 Testando novo design...');
+    const scratchArea = document.getElementById('scratchArea');
+    if (scratchArea) {
+        scratchArea.innerHTML = `
+            <div class="new-scratch-container">
+                <div class="new-scratch-header">
+                    <div class="scratch-title">
+                        <span class="title-icon">🎯</span>
+                        <h2>Raspe para Revelar</h2>
+                        <span class="title-icon">🎯</span>
+                    </div>
+                    <div class="scratch-type-badge">
+                        <span class="badge-text">Teste do Novo Design</span>
+                    </div>
+                </div>
+                <div class="new-scratch-card">
+                    <div class="scratch-surface">
+                        <div class="scratch-pattern-new">
+                            <div class="pattern-grid">
+                                <div class="symbol">🍀</div>
+                                <div class="symbol">♣</div>
+                                <div class="symbol">🎰</div>
+                                <div class="symbol">🍀</div>
+                                <div class="symbol">♣</div>
+                                <div class="symbol">🎰</div>
+                                <div class="symbol">🍀</div>
+                                <div class="symbol">♣</div>
+                                <div class="symbol">🎰</div>
+                            </div>
+                        </div>
+                        <div class="scratch-instructions-new">
+                            <div class="instruction-box">
+                                <div class="instruction-icon">🖱️</div>
+                                <div class="instruction-text">
+                                    <p>Clique e arraste para raspar</p>
+                                    <span>ou</span>
+                                    <p>Toque e deslize</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        console.log('✅ Novo design aplicado!');
+    } else {
+        console.error('❌ Área da raspadinha não encontrada!');
+    }
+};
 
 // Variáveis globais
 let currentScratchType = '';
@@ -9,21 +62,27 @@ let userBalance = 1000.00;
 // ===== SISTEMA DE DEPÓSITO =====
 function openDepositModal() {
     console.log('💰 Abrindo modal de depósito...');
-    const modal = document.getElementById('depositModal');
-    if (modal) {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        console.log('✅ Modal de depósito aberto!');
+    // Usar o novo sistema de depósito
+    if (typeof depositSystem !== 'undefined' && depositSystem.openDepositModal) {
+        depositSystem.openDepositModal();
     } else {
-        console.error('❌ Modal de depósito não encontrado!');
+        console.error('❌ Sistema de depósito não carregado!');
+        // Fallback para o sistema antigo
+        if (typeof openPaymentModal === 'function') {
+            openPaymentModal(50.00, 'Depósito LR4.bet');
+        }
     }
 }
 
 function closeDepositModal() {
-    const modal = document.getElementById('depositModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+    if (typeof depositSystem !== 'undefined' && depositSystem.closeDepositModal) {
+        depositSystem.closeDepositModal();
+    } else {
+        const modal = document.getElementById('depositModal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     }
 }
 
@@ -186,6 +245,7 @@ function openScratchModal() {
         
         // Determinar prêmio
         const prize = selectScratchPrize(currentScratchType);
+        console.log('🎁 Prêmio selecionado:', prize);
         
         // Criar interface da raspadinha
         createScratchInterface(prize);
@@ -205,8 +265,13 @@ function closeScratchModal() {
 }
 
 function createScratchInterface(prize) {
+    console.log('🎨 Criando nova interface da raspadinha...');
     const scratchArea = document.getElementById('scratchArea');
-    if (!scratchArea) return;
+    if (!scratchArea) {
+        console.error('❌ Área da raspadinha não encontrada!');
+        return;
+    }
+    console.log('✅ Área da raspadinha encontrada, aplicando novo design...');
     
     // Definir cores por raridade
     const rarityStyles = {
@@ -247,58 +312,82 @@ function createScratchInterface(prize) {
     const style = rarityStyles[prize.rarity] || rarityStyles.common;
     
     scratchArea.innerHTML = `
-        <div class="scratch-container">
-            <div class="scratch-header">
-                <h3 style="color: #333; margin-bottom: 20px; font-size: 24px;">
-                    ${style.icon} Raspe para revelar seu prêmio! ${style.icon}
-                </h3>
-                <div class="scratch-type-display">
-                    <span style="background: ${style.bg}; color: ${style.color}; padding: 8px 16px; border-radius: 20px; font-weight: bold; border: 2px solid ${style.border};">
-                        ${getScratchInfo(currentScratchType).name}
-                    </span>
+        <div class="new-scratch-container">
+            <div class="new-scratch-header">
+                <div class="scratch-title">
+                    <span class="title-icon">${style.icon}</span>
+                    <h2>Raspe para Revelar</h2>
+                    <span class="title-icon">${style.icon}</span>
+                </div>
+                <div class="scratch-type-badge">
+                    <span class="badge-text">${getScratchInfo(currentScratchType).name}</span>
                 </div>
             </div>
             
-            <div class="scratch-grid-container">
-                <div class="scratch-grid" id="scratchGrid" onclick="startScratching()">
-                    <div class="scratch-overlay" id="scratchOverlay">
-                        <div class="scratch-pattern">
-                            <div class="pattern-row">
-                                <span>🍀</span><span>♣</span><span>🎰</span><span>🍀</span><span>♣</span>
-                            </div>
-                            <div class="pattern-row">
-                                <span>♣</span><span>🎰</span><span>🍀</span><span>♣</span><span>🎰</span>
-                            </div>
-                            <div class="pattern-row">
-                                <span>🎰</span><span>🍀</span><span>♣</span><span>🎰</span><span>🍀</span>
-                            </div>
-                            <div class="pattern-row">
-                                <span>🍀</span><span>♣</span><span>🎰</span><span>🍀</span><span>♣</span>
-                            </div>
-                            <div class="pattern-row">
-                                <span>♣</span><span>🎰</span><span>🍀</span><span>♣</span><span>🎰</span>
-                            </div>
-                        </div>
-                        <div class="scratch-instruction">
-                            <p>🖱️ Clique e arraste para raspar</p>
-                            <p>ou</p>
-                            <p>📱 Toque e deslize</p>
+            <div class="new-scratch-card" id="scratchGrid" onclick="startScratching()">
+                <div class="scratch-surface" id="scratchOverlay">
+                    <div class="scratch-pattern-new">
+                        <div class="pattern-grid">
+                            <div class="symbol">🍀</div>
+                            <div class="symbol">♣</div>
+                            <div class="symbol">🎰</div>
+                            <div class="symbol">🍀</div>
+                            <div class="symbol">♣</div>
+                            <div class="symbol">🎰</div>
+                            <div class="symbol">🍀</div>
+                            <div class="symbol">♣</div>
+                            <div class="symbol">🎰</div>
                         </div>
                     </div>
+                    <div class="scratch-instructions-new">
+                        <div class="instruction-box">
+                            <div class="instruction-icon">🖱️</div>
+                            <div class="instruction-text">
+                                <p>Clique e arraste para raspar</p>
+                                <span>ou</span>
+                                <p>Toque e deslize</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     
                     <div class="prize-content" id="prizeContent" style="display: none;">
-                        <div class="prize-reveal" style="background: ${style.bg}; color: ${style.color}; border: 3px solid ${style.border}; box-shadow: ${style.shadow};">
-                            <div class="prize-particles">
-                                <span class="particle">${style.particle}</span>
-                                <span class="particle">${style.particle}</span>
-                                <span class="particle">${style.particle}</span>
-                                <span class="particle">${style.particle}</span>
-                                <span class="particle">${style.particle}</span>
+                        <div class="new-prize-reveal">
+                            <div class="prize-celebration">
+                                <div class="celebration-particles">
+                                    <span class="particle">✨</span>
+                                    <span class="particle">🎉</span>
+                                    <span class="particle">⭐</span>
+                                    <span class="particle">💎</span>
+                                    <span class="particle">🏆</span>
+                                </div>
                             </div>
-                            <div class="prize-icon-large">${style.icon}</div>
-                            <div class="prize-name">${prize.name}</div>
-                            <div class="prize-value">R$ ${prize.value.toFixed(2).replace('.', ',')}</div>
-                            <div class="prize-rarity prize-rarity-${prize.rarity}">${prize.rarity.toUpperCase()}</div>
+                            
+                            <div class="prize-card">
+                                <div class="prize-header">
+                                    <div class="prize-icon-container">
+                                        <span class="prize-icon">${style.icon}</span>
+                                    </div>
+                                    <div class="prize-rarity-badge ${prize.rarity}">
+                                        ${prize.rarity.toUpperCase()}
+                                    </div>
+                                </div>
+                                
+                                <div class="prize-info">
+                                    <h3 class="prize-title">${prize.name}</h3>
+                                    <div class="prize-value-container">
+                                        <span class="currency-symbol">R$</span>
+                                        <span class="prize-amount">${prize.value.toFixed(2).replace('.', ',')}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="prize-actions">
+                                    <button class="btn-collect" onclick="claimPrize()">
+                                        <span class="btn-icon">🎁</span>
+                                        <span class="btn-text">Coletar Prêmio</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1577,6 +1666,20 @@ function createCaseOpeningAnimation(prize) {
     const winnerIndex = Math.floor(allPrizes.length / 2); // Prêmio no centro
     allPrizes[winnerIndex] = prize; // Garantir que o prêmio correto está no centro
     
+    // Atualizar o HTML com o prêmio correto
+    const wheelItems = document.getElementById('wheelItems');
+    if (wheelItems) {
+        wheelItems.innerHTML = allPrizes.map((item, index) => `
+            <div class="wheel-item ${item.rarity}" data-index="${index}">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=80&h=60&fit=crop&crop=center" alt="${item.name}" class="item-image">
+                <div class="item-info">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-value">R$ ${item.value.toFixed(2).replace('.', ',')}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+    
     // Iniciar roleta após delay
     setTimeout(() => {
         startRouletteAnimation(winnerIndex, prize);
@@ -1853,25 +1956,35 @@ function closeCaseModal() {
 
 
 function selectCasePrize(caseType) {
+    console.log('🎯 Selecionando prêmio para caixa:', caseType);
+    
     // Usar o mesmo sistema de prêmios das raspadinhas
     const scratchInfo = getScratchInfo(caseType);
     if (scratchInfo.prizes) {
         const prizes = scratchInfo.prizes;
         const totalProbability = prizes.reduce((sum, prize) => sum + prize.probability, 0);
+        
+        console.log('📊 Total de probabilidades:', totalProbability);
+        console.log('🎁 Prêmios disponíveis:', prizes.length);
         const random = Math.random() * totalProbability;
+        console.log('🎲 Número aleatório gerado:', random);
         
         let currentProbability = 0;
         for (const prize of prizes) {
             currentProbability += prize.probability;
+            console.log(`🎯 Verificando prêmio: ${prize.name} (prob: ${prize.probability}, acumulado: ${currentProbability})`);
             if (random <= currentProbability) {
+                console.log('🎉 Prêmio selecionado:', prize);
                 return prize;
             }
         }
         
+        console.log('⚠️ Usando prêmio fallback:', prizes[prizes.length - 1]);
         return prizes[prizes.length - 1];
     }
     
-    // Fallback
+    // Fallback se não encontrar informações
+    console.log('❌ Nenhuma informação de prêmio encontrada, usando padrão');
     return { name: 'R$ 10,00', value: 10, rarity: 'common' };
 }
 

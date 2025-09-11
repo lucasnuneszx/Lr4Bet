@@ -1,239 +1,129 @@
-# 🎰 Lr4.bet - Plataforma de Cassino Online
+# 🎰 LR4.bet - Integração PayGate
 
-## 📋 Descrição
+Sistema completo de apostas com integração PayGate para pagamentos PIX.
 
-**Lr4.bet** é uma plataforma completa de cassino online e apostas esportivas, desenvolvida com tecnologias modernas e design profissional. O projeto inclui sistema de autenticação, painel administrativo, sistema de caixas estilo CS:GO, área de afiliados e muito mais.
+## 🚀 Início Rápido
 
-## ✨ Funcionalidades Principais
-
-### 🎮 Sistema de Caixas
-- **Abertura de caixas** estilo CS:GO
-- **Roleta girando** por 6 segundos
-- **Prêmios variados** (iPhone, MacBook, JBL, etc.)
-- **Sistema de probabilidades** configurável
-- **Opções de vender/resgatar** prêmios
-
-### 🔐 Sistema de Autenticação
-- **Login/Registro** com validação CPF
-- **Verificação de email** com código 6 dígitos
-- **Verificação de idade** (mínimo 18 anos)
-- **Sistema de sessões** seguro
-
-### 👑 Painel Administrativo
-- **Dashboard completo** com estatísticas
-- **Controle de probabilidades** das caixas
-- **Gestão de usuários** e transações
-- **Sistema de relatórios** avançado
-
-### 💰 Sistema Financeiro
-- **Depósitos** via PIX e cartão
-- **Gestão de saldo** em tempo real
-- **Histórico de transações** completo
-- **Integração bancária** brasileira
-
-### 🤝 Sistema de Afiliados
-- **100 níveis** de bônus
-- **Links únicos** para cada usuário
-- **Sistema CPA** (Cost Per Acquisition)
-- **Cofres resgatáveis** com valores crescentes
-
-## 🛠️ Tecnologias Utilizadas
-
-### Frontend
-- **HTML5** semântico e responsivo
-- **CSS3** com animações avançadas
-- **JavaScript ES6+** vanilla
-- **FontAwesome** para ícones
-- **Animações CSS** personalizadas
-
-### Backend
-- **Node.js** com Express.js
-- **MySQL2** para banco de dados
-- **JWT** para autenticação
-- **bcryptjs** para criptografia
-- **Nodemailer** para emails
-
-### Recursos
-- **Responsivo** para todos dispositivos
-- **PWA** ready
-- **SEO** otimizado
-- **Performance** otimizada
-- **Acessibilidade** implementada
-
-## 🚀 Instalação
-
-### Pré-requisitos
-- Node.js 16+
-- MySQL 8.0+
-- Git
-
-### Passos
+### Opção 1: Script Automático
 ```bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/lr4.bet.git
-cd lr4.bet
-
-# Instale as dependências
-npm install
-
-# Configure as variáveis de ambiente
-cp .env.example .env
-# Edite o arquivo .env com suas configurações
-
-# Configure o banco de dados
-mysql -u root -p < database/schema.sql
-
-# Execute o projeto
-npm start
+./start.sh
 ```
 
-## 📁 Estrutura do Projeto
+### Opção 2: Manual
+```bash
+# 1. Instalar dependências do backend
+cd backend && npm install && cd ..
 
-```
-lr4.bet/
-├── config/                 # Configurações
-├── database/              # Scripts SQL
-├── public/                # Arquivos públicos
-│   ├── css/              # Estilos
-│   ├── js/               # JavaScript
-│   └── index.html        # Página principal
-├── routes/                # Rotas da API
-├── server.js             # Servidor principal
-├── package.json          # Dependências
-└── README.md             # Este arquivo
+# 2. Iniciar backend (terminal 1)
+cd backend && node server.js
+
+# 3. Iniciar frontend (terminal 2)
+cd frontend && python3 -m http.server 3000
 ```
 
-## 🎯 Funcionalidades em Destaque
+## 📡 Endpoints
 
-### 🎁 Sistema de Caixas
-- **Modal de confirmação** antes da abertura
-- **Roleta 3x3** com prêmios visuais
-- **Animações suaves** e profissionais
-- **Sistema de som** para imersão
-- **Probabilidades configuráveis** via admin
+### Backend (Porta 3001)
+- `POST /api/pix/create` - Criar pagamento PIX
+- `GET /api/pix/status/:id` - Consultar status
+- `POST /api/webhook/paygate` - Webhook PayGate
+- `GET /api/health` - Health check
+- `GET /api/test-connection` - Testar conexão
 
-### 🎨 Design System
-- **Tema escuro** profissional
-- **Gradientes azuis** consistentes
-- **Animações CSS** otimizadas
-- **Responsividade** completa
-- **Acessibilidade** implementada
+### Frontend (Porta 3000)
+- `http://localhost:3000/lr4.bet.html` - Interface principal
 
 ## 🔧 Configuração
 
-### Variáveis de Ambiente
-```env
-# Servidor
-PORT=3000
-NODE_ENV=development
+### PayGate
+- **Chaves:** Configuradas em `server.js`
+- **Ambiente:** Produção (sandbox desabilitado)
+- **Webhook:** `http://seu-dominio.com/api/webhook/paygate`
 
-# Banco de Dados
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=sua_senha
-DB_NAME=lr4bet
+### CORS
+- **Backend:** Configurado para aceitar requisições do frontend
+- **Frontend:** Chama backend em `localhost:3001`
 
-# JWT
-JWT_SECRET=seu_jwt_secret
-JWT_EXPIRES_IN=24h
+## 🎯 Funcionalidades
 
-# Email
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=seu_email@gmail.com
-SMTP_PASS=sua_senha_app
+### ✅ Implementado
+- [x] Backend proxy para PayGate
+- [x] CORS configurado
+- [x] Webhook PayGate
+- [x] QR Code real da PayGate
+- [x] Consulta de status
+- [x] Validação de assinatura webhook
+- [x] Health check
+- [x] Teste de conexão
+
+### 🔄 Fluxo de Pagamento
+1. **Frontend** → **Backend** → **PayGate API**
+2. **PayGate** → **Webhook** → **Backend**
+3. **Backend** → **Frontend** (status atualizado)
+
+## 🛠️ Desenvolvimento
+
+### Estrutura
+```
+├── backend/              # Backend Node.js
+│   ├── server.js         # Servidor Express
+│   └── package.json      # Dependências Node.js
+├── frontend/             # Frontend HTML/CSS/JS
+│   ├── lr4.bet.html     # Interface principal
+│   ├── paygate-integration.js # Integração PayGate
+│   ├── lr4-styles.css   # Estilos principais
+│   ├── lr4-script-simple.js # Script principal
+│   ├── payment-config.js # Configuração pagamentos
+│   ├── deposit-system.js # Sistema de depósito
+│   ├── deposit-styles.css # Estilos depósito
+│   ├── payment-system.js # Sistema de pagamento
+│   └── payment-styles.css # Estilos pagamento
+├── start.sh              # Script de inicialização
+└── README.md             # Este arquivo
 ```
 
-## 📱 Responsividade
+### Dependências
+- **Backend:** Express, CORS, Crypto
+- **Frontend:** Vanilla JavaScript
+- **Servidor:** Python HTTP Server
 
-O projeto é totalmente responsivo e funciona perfeitamente em:
-- 📱 **Mobile** (320px+)
-- 📱 **Tablet** (768px+)
-- 💻 **Desktop** (1024px+)
-- 🖥️ **Large Desktop** (1440px+)
+## 🔐 Segurança
 
-## 🎨 Personalização
+### Webhook
+- **Validação:** HMAC-SHA256
+- **Secret:** Configurado em `server.js`
+- **Headers:** `X-Signature`
 
-### Cores Principais
-```css
-:root {
-  --primary-color: #3b82f6;
-  --secondary-color: #1d4ed8;
-  --accent-color: #22c55e;
-  --background-dark: #0f172a;
-  --text-primary: #ffffff;
-  --text-secondary: #e5e7eb;
-}
-```
+### CORS
+- **Origem:** `http://localhost:3000`
+- **Métodos:** GET, POST
+- **Headers:** Content-Type, Authorization
 
-### Animações
-- **Transições suaves** em todos elementos
-- **Hover effects** interativos
-- **Loading states** para feedback visual
-- **Micro-interações** para UX
+## 📱 Teste
 
-## 🚀 Deploy
+1. **Acesse:** `http://localhost:3000/lr4.bet.html`
+2. **Clique:** "Depositar"
+3. **Digite:** Valor (ex: R$ 10,00)
+4. **Escaneie:** QR Code com app bancário
+5. **Pague:** Sistema detecta automaticamente
 
-### Produção
-```bash
-# Build do projeto
-npm run build
+## 🐛 Troubleshooting
 
-# Start em produção
-NODE_ENV=production npm start
-```
+### Erro "Failed to fetch"
+- ✅ **Resolvido:** Backend proxy implementado
 
-### Docker (Opcional)
-```dockerfile
-FROM node:16-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
-```
+### QR Code inválido
+- ✅ **Resolvido:** Dados corretos da documentação
 
-## 🤝 Contribuição
+### Pagamento não detectado
+- ✅ **Resolvido:** Webhook configurado
 
-1. **Fork** o projeto
-2. **Crie** uma branch para sua feature
-3. **Commit** suas mudanças
-4. **Push** para a branch
-5. **Abra** um Pull Request
+## 📞 Suporte
 
-## 📄 Licença
-
-Este projeto é privado e proprietário. Todos os direitos reservados.
-
-## 👨‍💻 Desenvolvedor
-
-**Desenvolvido por Lucas Nunes**
+- **PayGate:** https://dev.paygate.com.br/doc/
+- **Documentação:** README.md
+- **Logs:** Console do navegador e terminal
 
 ---
 
-## 🎯 Roadmap
-
-### ✅ Concluído
-- [x] Sistema de autenticação
-- [x] Painel administrativo
-- [x] Sistema de caixas
-- [x] Área de afiliados
-- [x] Sistema financeiro
-- [x] Design responsivo
-
-### 🚧 Em Desenvolvimento
-- [ ] Sistema de trade-up
-- [ ] Integração com pagamentos
-- [ ] Sistema de notificações
-- [ ] App mobile
-
-### 📋 Planejado
-- [ ] Sistema de torneios
-- [ ] Chat em tempo real
-- [ ] Sistema de conquistas
-- [ ] Integração com criptomoedas
-
----
-
-**🎰 Lr4.bet - O Futuro dos Cassinos Online!** 🚀
+**🎉 Sistema 100% funcional com PayGate!**
