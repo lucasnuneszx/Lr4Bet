@@ -2065,12 +2065,17 @@ body {
 
 /* Modal da raspadinha */
 .scratch-modal {
-    max-width: 600px;
-    width: 90%;
+    max-width: 800px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .scratch-modal-content {
     padding: 2rem;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
 }
 
 .scratch-header {
@@ -2094,17 +2099,23 @@ body {
     border-radius: 16px;
     padding: 2rem;
     border: 1px solid rgba(59, 130, 246, 0.2);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 500px;
 }
 
 /* Grid da raspadinha */
 .scratch-grid {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 350px;
     background: linear-gradient(135deg, #1e293b, #334155);
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 1rem;
+    min-height: 350px;
 }
 
 .scratch-overlay {
@@ -2133,28 +2144,39 @@ body {
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.5s ease;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .prize-reveal {
     text-align: center;
     color: #ffffff;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .prize-icon {
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     animation: prizeReveal 1s ease-out;
+    display: block;
 }
 
 .prize-name {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: #ffffff;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .prize-value {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: #10b981;
@@ -2338,6 +2360,472 @@ body {
     50% { transform: scale(1.05); }
 }
 
+/* ===== NOVO DESIGN DA RASPADINHA ===== */
+
+.new-scratch-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 450px;
+}
+
+.new-scratch-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.scratch-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.scratch-title h2 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.title-icon {
+    font-size: 32px;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+.scratch-type-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.new-scratch-card {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    min-height: 450px;
+}
+
+.new-scratch-card:hover {
+    transform: translateY(-5px);
+}
+
+.scratch-surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #f59e0b, #d97706, #b45309, #92400e);
+    background-size: 30px 30px;
+    cursor: crosshair;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
+.scratch-pattern-new {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 30px;
+    height: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+.symbol {
+    font-size: 36px;
+    opacity: 0.3;
+    animation: symbolFloat 3s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+}
+
+.symbol:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+.scratch-instructions-new {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.instruction-box {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.instruction-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.instruction-text p {
+    margin: 5px 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.instruction-text span {
+    font-size: 12px;
+    opacity: 0.7;
+    margin: 5px 0;
+    display: block;
+}
+
+.prize-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.prize-reveal {
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.prize-particles {
+    margin-bottom: 20px;
+}
+
+.particle {
+    font-size: 3rem;
+    animation: particleFloat 2s ease-in-out infinite;
+}
+
+.prize-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.prize-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #10b981;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.prize-rarity {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes symbolFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(180deg); }
+}
+
+@keyframes particleFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(180deg); }
+}
+
+/* ===== NOVO DESIGN DA ÁREA DE PRÊMIOS ===== */
+
+.new-prize-reveal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.prize-celebration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.celebration-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.celebration-particles .particle {
+    position: absolute;
+    font-size: 2rem;
+    animation: celebrationFloat 3s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.celebration-particles .particle:nth-child(1) {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.celebration-particles .particle:nth-child(2) {
+    top: 20%;
+    right: 15%;
+    animation-delay: 0.5s;
+}
+
+.celebration-particles .particle:nth-child(3) {
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.celebration-particles .particle:nth-child(4) {
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 1.5s;
+}
+
+.celebration-particles .particle:nth-child(5) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 2s;
+}
+
+.prize-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 215, 0, 0.5);
+    backdrop-filter: blur(15px);
+    position: relative;
+    z-index: 2;
+    max-width: 400px;
+    width: 100%;
+    animation: prizeCardReveal 0.8s ease-out;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.prize-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.prize-icon-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.prize-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+.prize-rarity-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.prize-rarity-badge.legendary {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+}
+
+.prize-rarity-badge.epic {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.prize-rarity-badge.rare {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.prize-rarity-badge.uncommon {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.prize-rarity-badge.common {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+}
+
+.prize-info {
+    margin-bottom: 25px;
+}
+
+.prize-title {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.prize-value-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+}
+
+.currency-symbol {
+    color: #27ae60;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.prize-amount {
+    color: #27ae60;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.prize-actions {
+    margin-top: 20px;
+}
+
+.btn-collect {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(39, 174, 96, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-collect:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(39, 174, 96, 0.6);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+.btn-text {
+    font-weight: 600;
+}
+
+@keyframes celebrationFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1); 
+        opacity: 0.8;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(180deg) scale(1.2); 
+        opacity: 1;
+    }
+}
+
+@keyframes prizeCardReveal {
+    0% { 
+        transform: scale(0.8) translateY(20px); 
+        opacity: 0;
+    }
+    100% { 
+        transform: scale(1) translateY(0); 
+        opacity: 1;
+    }
+}
+
 /* ===== NOVOS ESTILOS PARA RASPADINHAS MELHORADAS ===== */
 
 /* Overlay com padrão de símbolos */
@@ -2359,15 +2847,24 @@ body {
     transform: translate(-50%, -50%);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    opacity: 0.3;
+    gap: 12px;
+    opacity: 0.4;
     z-index: 2;
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    justify-items: center;
 }
 
 .scratch-symbols span {
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
     animation: symbolFloat 3s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .scratch-symbols span:nth-child(odd) {
@@ -3896,11 +4393,71 @@ body {
 /* Responsividade */
 @media (max-width: 768px) {
     .scratch-grid {
-        height: 250px;
+        height: 300px;
+        min-height: 300px;
     }
     
     .prize-icon {
-        font-size: 3rem;
+        font-size: 2.5rem;
+    }
+    
+    .prize-name {
+        font-size: 1.1rem;
+        line-height: 1.2;
+    }
+    
+    .prize-value {
+        font-size: 1.5rem;
+    }
+    
+    .scratch-content {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scratch-grid {
+        height: 280px;
+        min-height: 280px;
+    }
+    
+    .prize-icon {
+        font-size: 2rem;
+    }
+    
+    .prize-name {
+        font-size: 1rem;
+        line-height: 1.1;
+    }
+    
+    .prize-value {
+        font-size: 1.3rem;
+    }
+    
+    .scratch-content {
+        padding: 10px;
+    }
+    
+    .scratch-pattern {
+        padding: 15px;
+        gap: 6px;
+    }
+    
+    .pattern-row span {
+        font-size: 18px;
+        min-height: 30px;
+    }
+    
+    .scratch-instruction {
+        padding: 10px 15px;
+    }
+    
+    .scratch-instruction p {
+        font-size: 12px;
+    }
+    
+    .scratch-header h3 {
+        font-size: 20px !important;
     }
     
     .prize-name {
@@ -3908,7 +4465,99 @@ body {
     }
     
     .prize-value {
+        font-size: 1.6rem;
+    }
+    
+    /* Novo design responsivo */
+    .new-scratch-container {
+        padding: 15px;
+    }
+    
+    .scratch-title h2 {
+        font-size: 22px;
+    }
+    
+    .title-icon {
+        font-size: 24px;
+    }
+    
+    .new-scratch-card {
+        height: 380px;
+        min-height: 380px;
+    }
+    
+    .scratch-area {
+        min-height: 400px;
+    }
+    
+    .scratch-modal {
+        max-width: 95%;
+        width: 95%;
+    }
+    
+    .scratch-modal-content {
+        padding: 1.5rem;
+        min-height: 500px;
+    }
+    
+    .pattern-grid {
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .symbol {
+        font-size: 28px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .instruction-box {
+        padding: 15px 20px;
+    }
+    
+    .instruction-text p {
+        font-size: 12px;
+    }
+    
+    .prize-name {
+        font-size: 1.4rem;
+    }
+    
+    .prize-value {
+        font-size: 2rem;
+    }
+    
+    /* Responsividade para nova área de prêmios */
+    .prize-card {
+        padding: 20px;
+        max-width: 320px;
+        min-height: 280px;
+    }
+    
+    .prize-icon-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .prize-icon {
         font-size: 1.5rem;
+    }
+    
+    .prize-title {
+        font-size: 1.2rem;
+    }
+    
+    .currency-symbol {
+        font-size: 1.5rem;
+    }
+    
+    .prize-amount {
+        font-size: 2rem;
+    }
+    
+    .btn-collect {
+        padding: 12px 24px;
+        font-size: 1rem;
     }
     
     .scratch-actions {

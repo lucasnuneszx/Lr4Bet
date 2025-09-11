@@ -1,13 +1,19 @@
 {
   "name": "lr4-bet",
   "version": "1.0.0",
-  "description": "LR4 Bet - Cassino Online e Apostas Esportivas",
-  "main": "lr4.bet.html",
+  "description": "LR4.bet - Sistema de apostas com integração PayGate",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "python3 -m http.server 3000",
-    "dev": "python3 -m http.server 3000"
+    "start": "./start.sh",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && python3 -m http.server 3000",
+    "install-deps": "cd backend && npm install"
   },
-  "keywords": ["lr4", "bet", "cassino", "apostas", "esportivas"],
-  "author": "LR4 Team",
-  "license": "MIT"
+  "keywords": ["lr4", "bet", "paygate", "pix", "apostas"],
+  "author": "LR4.bet",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lr4bet/lr4-bet.git"
+  }
 }
