@@ -34,10 +34,14 @@
                 </ul>
                 
                 <div class="auth-buttons">
-                    <div class="user-balance-section" id="userBalanceSection" style="display: flex;">
+                    <div class="user-balance-section" id="userBalanceSection" style="display: none;">
                         <button class="btn btn-deposit" id="btnDeposit">
                             <i class="fas fa-plus-circle"></i>
                             Depósito
+                        </button>
+                        <button class="btn btn-account" id="btnAccount" onclick="openAccountModal()">
+                            <i class="fas fa-user"></i>
+                            Minha Conta
                         </button>
                         <div class="balance-display">
                             <span class="balance-label">Saldo:</span>
@@ -47,9 +51,8 @@
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-account" id="btnAccount" style="display: none;">Minha Conta</button>
-                    <button class="btn btn-login">Entrar</button>
-                    <button class="btn btn-register">Cadastre-se</button>
+                    <button class="btn btn-login" id="btnLogin">Entrar</button>
+                    <button class="btn btn-register" id="btnRegister">Cadastre-se</button>
                 </div>
                 
                 <div class="hamburger" id="hamburger">
@@ -142,100 +145,116 @@
 
         <!-- Games Sections -->
         <div class="games-container">
-            <!-- Seção de Caixas Lr4 -->
+            <!-- Seção de Caixas Lr4 NOVA -->
             <section class="games-section case-games" id="cases">
                 <div class="section-header">
                     <h2>Caixas Lr4 <span class="clover-nav" title="Trevo da Sorte">♣</span></h2>
                     <p>Abra caixas e ganhe prêmios incríveis</p>
                 </div>
-                <div class="games-grid">
+                <div class="cases-grid-new">
                     <!-- Caixa Premium R$ 50 -->
-                    <div class="game-card case-card premium">
+                    <div class="case-card-new premium" data-type="premium" onclick="openCaseConfirmModal('premium')">
+                        <div class="case-header">
+                            <div class="case-icon">💎</div>
+                            <div class="case-tier">PREMIUM</div>
+                        </div>
                         <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">💎</span>
-                                                        <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 15" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="MacBook Pro" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="JBL Boombox" class="prize-preview">
-                            </div>
+                            <div class="case-preview-grid">
+                                <div class="prize-item">iPhone 15</div>
+                                <div class="prize-item">MacBook Pro</div>
+                                <div class="prize-item">AirPods Pro</div>
+                                <div class="prize-item">Apple Watch</div>
                             </div>
                         </div>
-                        <div class="game-info">
-                            <h3>Caixa Premium Lr4</h3>
-                            <p class="case-price">R$ 50,00</p>
-                            <p class="case-description">Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('premium')">
-                                <span class="clover-spin">♣</span>
+                        <div class="case-info">
+                            <h3>Caixa Premium</h3>
+                            <div class="case-price">R$ 50,00</div>
+                            <div class="case-description">Prêmios de até R$ 18.000</div>
+                        </div>
+                        <div class="case-action">
+                            <button class="btn-open-case">
+                                <span class="btn-icon">📦</span>
                                 Abrir Caixa
                             </button>
                         </div>
                     </div>
                     
                     <!-- Caixa Média R$ 20 -->
-                    <div class="game-card case-card medium">
-                        <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">🎁</span>
-                                                        <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 13" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Xiaomi" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="AirPods" class="prize-preview">
+                    <div class="case-card-new medium" data-type="medium" onclick="openCaseConfirmModal('medium')">
+                        <div class="case-header">
+                            <div class="case-icon">🎁</div>
+                            <div class="case-tier">MÉDIA</div>
                         </div>
+                        <div class="case-image">
+                            <div class="case-preview-grid">
+                                <div class="prize-item">iPhone 13</div>
+                                <div class="prize-item">Acer Nitro</div>
+                                <div class="prize-item">JBL Boombox</div>
+                                <div class="prize-item">Xiaomi Redmi</div>
                             </div>
                         </div>
-                        <div class="game-info">
-                            <h3>Caixa Média Lr4</h3>
-                            <p class="case-price">R$ 20,00</p>
-                            <p class="case-description">Chance de ganhar iPhone 13, Xiaomi, AirPods e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('medium')">
-                                <span class="clover-spin">♣</span>
+                        <div class="case-info">
+                            <h3>Caixa Média</h3>
+                            <div class="case-price">R$ 20,00</div>
+                            <div class="case-description">Prêmios de até R$ 6.500</div>
+                        </div>
+                        <div class="case-action">
+                            <button class="btn-open-case">
+                                <span class="btn-icon">📦</span>
                                 Abrir Caixa
                             </button>
                         </div>
                     </div>
                     
                     <!-- Caixa Básica R$ 10 -->
-                    <div class="game-card case-card basic">
+                    <div class="case-card-new basic" data-type="basic" onclick="openCaseConfirmModal('basic')">
+                        <div class="case-header">
+                            <div class="case-icon">🎯</div>
+                            <div class="case-tier">BÁSICA</div>
+                        </div>
                         <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">🎯</span>
-                                                        <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="AirPods" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Xiaomi" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Caixinha JBL" class="prize-preview">
+                            <div class="case-preview-grid">
+                                <div class="prize-item">AirPods Pro</div>
+                                <div class="prize-item">Xiaomi Redmi</div>
+                                <div class="prize-item">JBL Speaker</div>
+                                <div class="prize-item">Fone Bluetooth</div>
                             </div>
                         </div>
+                        <div class="case-info">
+                            <h3>Caixa Básica</h3>
+                            <div class="case-price">R$ 10,00</div>
+                            <div class="case-description">Prêmios de até R$ 1.300</div>
                         </div>
-                        <div class="game-info">
-                            <h3>Caixa Básica Lr4</h3>
-                            <p class="case-price">R$ 10,00</p>
-                            <p class="case-description">Chance de ganhar AirPods, Xiaomi, Caixinha JBL e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('basic')">
-                                <span class="clover-spin">♣</span>
+                        <div class="case-action">
+                            <button class="btn-open-case">
+                                <span class="btn-icon">📦</span>
                                 Abrir Caixa
                             </button>
                         </div>
                     </div>
                     
                     <!-- Caixa Simples R$ 5 -->
-                    <div class="game-card case-card simple">
-                        <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">🎪</span>
-                                                        <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 50" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 20" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 10" class="prize-preview">
+                    <div class="case-card-new simple" data-type="simple" onclick="openCaseConfirmModal('simple')">
+                        <div class="case-header">
+                            <div class="case-icon">🎪</div>
+                            <div class="case-tier">SIMPLES</div>
                         </div>
+                        <div class="case-image">
+                            <div class="case-preview-grid">
+                                <div class="prize-item">JBL Speaker</div>
+                                <div class="prize-item">Fone Bluetooth</div>
+                                <div class="prize-item">Carregador</div>
+                                <div class="prize-item">R$ 50</div>
                             </div>
                         </div>
-                        <div class="game-info">
-                            <h3>Caixa Simples Lr4</h3>
-                            <p class="case-price">R$ 5,00</p>
-                            <p class="case-description">Chance de ganhar Caixinha JBL, Fone Bluetooth, Carregador e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openCaseConfirmModal('simple')">
-                                <span class="clover-spin">♣</span>
+                        <div class="case-info">
+                            <h3>Caixa Simples</h3>
+                            <div class="case-price">R$ 5,00</div>
+                            <div class="case-description">Prêmios de até R$ 300</div>
+                        </div>
+                        <div class="case-action">
+                            <button class="btn-open-case">
+                                <span class="btn-icon">📦</span>
                                 Abrir Caixa
                             </button>
                         </div>
@@ -243,101 +262,117 @@
                 </div>
             </section>
 
-            <!-- Seção de Raspadinhas Lr4 -->
-            <section class="games-section case-games" id="scratch">
+            <!-- Seção de Raspadinhas Lr4 NOVA -->
+            <section class="games-section scratch-games" id="scratch">
                 <div class="section-header">
                     <h2>Raspadinhas Lr4 <span class="clover-nav" title="Trevo da Sorte">♣</span></h2>
                     <p>Raspe e ganhe prêmios incríveis</p>
                 </div>
-                <div class="games-grid">
+                <div class="scratch-grid-new">
                     <!-- Raspadinha Premium R$ 50 -->
-                    <div class="game-card case-card premium">
-                        <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">💎</span>
-                                <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 15" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="MacBook Pro" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="JBL Boombox" class="prize-preview">
+                    <div class="scratch-card-new premium" data-type="premium" onclick="openScratchConfirmModal('premium')">
+                        <div class="scratch-header">
+                            <div class="scratch-icon">💎</div>
+                            <div class="scratch-tier">PREMIUM</div>
                         </div>
+                        <div class="scratch-image">
+                            <div class="scratch-preview">
+                                <div class="scratch-surface">
+                                    <div class="scratch-text">RASPE AQUI</div>
+                                    <div class="scratch-pattern">●●●●●●●●●●</div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="scratch-info">
+                            <h3>Raspadinha Premium</h3>
+                            <div class="scratch-price">R$ 50,00</div>
+                            <div class="scratch-description">Prêmios de até R$ 18.000</div>
                         </div>
-                        <div class="game-info">
-                            <h3>Raspadinha Premium Lr4</h3>
-                            <p class="case-price">R$ 50,00</p>
-                            <p class="case-description">Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openScratchConfirmModal('premium')">
-                                <span class="clover-spin">♣</span>
-                                Raspar
+                        <div class="scratch-action">
+                            <button class="btn-scratch">
+                                <span class="btn-icon">🎫</span>
+                                Comprar Raspadinha
                             </button>
                         </div>
                     </div>
                     
                     <!-- Raspadinha Média R$ 20 -->
-                    <div class="game-card case-card medium">
-                        <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">🎁</span>
-                                <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="iPhone 13" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Xiaomi" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="AirPods" class="prize-preview">
+                    <div class="scratch-card-new medium" data-type="medium" onclick="openScratchConfirmModal('medium')">
+                        <div class="scratch-header">
+                            <div class="scratch-icon">🎁</div>
+                            <div class="scratch-tier">MÉDIA</div>
                         </div>
+                        <div class="scratch-image">
+                            <div class="scratch-preview">
+                                <div class="scratch-surface">
+                                    <div class="scratch-text">RASPE AQUI</div>
+                                    <div class="scratch-pattern">●●●●●●●●●●</div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="scratch-info">
+                            <h3>Raspadinha Média</h3>
+                            <div class="scratch-price">R$ 20,00</div>
+                            <div class="scratch-description">Prêmios de até R$ 6.500</div>
                         </div>
-                        <div class="game-info">
-                            <h3>Raspadinha Média Lr4</h3>
-                            <p class="case-price">R$ 20,00</p>
-                            <p class="case-description">Chance de ganhar iPhone 13, Xiaomi, AirPods e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openScratchConfirmModal('medium')">
-                                <span class="clover-spin">♣</span>
-                                Raspar
+                        <div class="scratch-action">
+                            <button class="btn-scratch">
+                                <span class="btn-icon">🎫</span>
+                                Comprar Raspadinha
                             </button>
                         </div>
                     </div>
                     
                     <!-- Raspadinha Básica R$ 10 -->
-                    <div class="game-card case-card basic">
-                        <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">🎯</span>
-                                <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="AirPods" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Xiaomi" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="Caixinha JBL" class="prize-preview">
+                    <div class="scratch-card-new basic" data-type="basic" onclick="openScratchConfirmModal('basic')">
+                        <div class="scratch-header">
+                            <div class="scratch-icon">🎯</div>
+                            <div class="scratch-tier">BÁSICA</div>
                         </div>
+                        <div class="scratch-image">
+                            <div class="scratch-preview">
+                                <div class="scratch-surface">
+                                    <div class="scratch-text">RASPE AQUI</div>
+                                    <div class="scratch-pattern">●●●●●●●●●●</div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="scratch-info">
+                            <h3>Raspadinha Básica</h3>
+                            <div class="scratch-price">R$ 10,00</div>
+                            <div class="scratch-description">Prêmios de até R$ 1.300</div>
                         </div>
-                        <div class="game-info">
-                            <h3>Raspadinha Básica Lr4</h3>
-                            <p class="case-price">R$ 10,00</p>
-                            <p class="case-description">Chance de ganhar AirPods, Xiaomi, Caixinha JBL e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openScratchConfirmModal('basic')">
-                                <span class="clover-spin">♣</span>
-                                Raspar
+                        <div class="scratch-action">
+                            <button class="btn-scratch">
+                                <span class="btn-icon">🎫</span>
+                                Comprar Raspadinha
                             </button>
                         </div>
                     </div>
-
+                    
                     <!-- Raspadinha Simples R$ 5 -->
-                    <div class="game-card case-card simple">
-                        <div class="case-image">
-                            <div class="case-preview">
-                                <span class="case-icon">🎪</span>
-                                <div class="case-prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 50" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 20" class="prize-preview">
-                                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=280&h=200&fit=crop&crop=center" alt="R$ 10" class="prize-preview">
-                </div>
+                    <div class="scratch-card-new simple" data-type="simple" onclick="openScratchConfirmModal('simple')">
+                        <div class="scratch-header">
+                            <div class="scratch-icon">🎪</div>
+                            <div class="scratch-tier">SIMPLES</div>
                         </div>
+                        <div class="scratch-image">
+                            <div class="scratch-preview">
+                                <div class="scratch-surface">
+                                    <div class="scratch-text">RASPE AQUI</div>
+                                    <div class="scratch-pattern">●●●●●●●●●●</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="game-info">
-                            <h3>Raspadinha Simples Lr4</h3>
-                            <p class="case-price">R$ 5,00</p>
-                            <p class="case-description">Chance de ganhar Caixinha JBL, Fone Bluetooth, Carregador e muito mais!</p>
-                            <button class="btn-play case-spin-btn" onclick="openScratchConfirmModal('simple')">
-                                <span class="clover-spin">♣</span>
-                                Raspar
+                        <div class="scratch-info">
+                            <h3>Raspadinha Simples</h3>
+                            <div class="scratch-price">R$ 5,00</div>
+                            <div class="scratch-description">Prêmios de até R$ 300</div>
+                        </div>
+                        <div class="scratch-action">
+                            <button class="btn-scratch">
+                                <span class="btn-icon">🎫</span>
+                                Comprar Raspadinha
                             </button>
                         </div>
                     </div>
@@ -1247,19 +1282,163 @@
         </div>
     </div>
 
-    <!-- Modal de Depósito PayGate -->
-    <div id="depositModal" class="modal">
-        <div class="modal-content deposit-modal-content">
-            <div class="deposit-header">
-                <div class="deposit-title">
-                    <i class="fas fa-plus-circle"></i>
-                    <h2>Fazer Depósito</h2>
-                </div>
-                <button class="close-deposit" onclick="closeDepositModal()">&times;</button>
+    <!-- Modal de Depósito NOVO -->
+    <div id="depositModal" class="modal-new" style="display: none;">
+        <div class="modal-overlay" onclick="closeDepositModal()"></div>
+        <div class="modal-container">
+            <div class="modal-header-new">
+                <h2>💰 Depósito</h2>
+                <button class="close-btn" onclick="closeDepositModal()">×</button>
             </div>
             
-            <div class="deposit-body" id="depositBody">
-                <!-- Conteúdo será inserido dinamicamente -->
+            <div class="modal-body-new">
+                <div class="deposit-grid">
+                    <div class="deposit-item" data-value="10" onclick="selectDepositAmount(10)">
+                        <div class="deposit-amount">R$ 10</div>
+                        <div class="deposit-label">Básico</div>
+                    </div>
+                    <div class="deposit-item" data-value="25" onclick="selectDepositAmount(25)">
+                        <div class="deposit-amount">R$ 25</div>
+                        <div class="deposit-label">Simples</div>
+                    </div>
+                    <div class="deposit-item" data-value="50" onclick="selectDepositAmount(50)">
+                        <div class="deposit-amount">R$ 50</div>
+                        <div class="deposit-label">Rápido</div>
+                    </div>
+                    <div class="deposit-item" data-value="100" onclick="selectDepositAmount(100)">
+                        <div class="deposit-amount">R$ 100</div>
+                        <div class="deposit-label">Popular</div>
+                    </div>
+                    <div class="deposit-item" data-value="200" onclick="selectDepositAmount(200)">
+                        <div class="deposit-amount">R$ 200</div>
+                        <div class="deposit-label">Recomendado</div>
+                    </div>
+                    <div class="deposit-item" data-value="500" onclick="selectDepositAmount(500)">
+                        <div class="deposit-amount">R$ 500</div>
+                        <div class="deposit-label">Premium</div>
+                    </div>
+                    <div class="deposit-item" data-value="1000" onclick="selectDepositAmount(1000)">
+                        <div class="deposit-amount">R$ 1.000</div>
+                        <div class="deposit-label">VIP</div>
+                    </div>
+                    <div class="deposit-item" data-value="2000" onclick="selectDepositAmount(2000)">
+                        <div class="deposit-amount">R$ 2.000</div>
+                        <div class="deposit-label">Elite</div>
+                    </div>
+                </div>
+                
+                <div class="custom-amount">
+                    <label>Valor personalizado:</label>
+                    <input type="number" id="customAmount" min="1" max="10000" step="0.01" placeholder="Digite o valor">
+                </div>
+                
+                <div id="selectedAmount" class="selected-amount-new" style="display: none;">
+                    <div class="selected-label">Valor selecionado:</div>
+                    <div class="selected-value" id="amountValue">R$ 0,00</div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeDepositModal()">Cancelar</button>
+                    <button class="btn-confirm" id="confirmDepositBtn" onclick="processDeposit()" disabled>Processar Depósito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Abertura de Caixa NOVO -->
+    <div id="caseConfirmModal" class="modal-new" style="display: none;">
+        <div class="modal-overlay" onclick="closeCaseConfirmModal()"></div>
+        <div class="modal-container case-confirm-container">
+            <div class="modal-header-new">
+                <h2>📦 Confirmar Abertura</h2>
+                <button class="close-btn" onclick="closeCaseConfirmModal()">×</button>
+            </div>
+            
+            <div class="modal-body-new">
+                <div class="case-confirm-info">
+                    <div class="case-preview-large">
+                        <div class="case-icon-large" id="confirmCaseIcon">💎</div>
+                        <div class="case-name-large" id="confirmCaseName">Caixa Premium</div>
+                        <div class="case-price-large" id="confirmCasePrice">R$ 50,00</div>
+                    </div>
+                    
+                    <div class="case-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Tipo:</span>
+                            <span class="detail-value" id="confirmCaseType">Premium</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Valor:</span>
+                            <span class="detail-value" id="confirmCaseValue">R$ 50,00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Seu Saldo:</span>
+                            <span class="detail-value" id="confirmUserBalance">R$ 0,00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Saldo Restante:</span>
+                            <span class="detail-value" id="confirmRemainingBalance">R$ 0,00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="case-description-large" id="confirmCaseDescription">
+                        Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!
+                    </div>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeCaseConfirmModal()">Cancelar</button>
+                    <button class="btn-confirm" id="confirmOpenCaseBtn" onclick="confirmOpenCase()">
+                        <span class="btn-icon">📦</span>
+                        Abrir Caixa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Abertura de Caixa com Roleta NOVO -->
+    <div id="caseModal" class="modal-new" style="display: none;">
+        <div class="modal-overlay" onclick="closeCaseModal()"></div>
+        <div class="modal-container case-open-container">
+            <div class="modal-header-new">
+                <h2>🎰 Abrindo Caixa</h2>
+                <button class="close-btn" onclick="closeCaseModal()">×</button>
+            </div>
+            
+            <div class="modal-body-new">
+                <div class="case-opening-animation">
+                    <div class="case-box" id="caseBox">
+                        <div class="case-lid" id="caseLid">
+                            <div class="case-lid-handle"></div>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-content" id="caseContent">
+                                <div class="prize-display" id="prizeDisplay">
+                                    <div class="prize-icon">🎁</div>
+                                    <div class="prize-name" id="prizeName">Abrindo...</div>
+                                    <div class="prize-value" id="prizeValue">R$ 0,00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="opening-text" id="openingText">Abrindo sua caixa...</div>
+                </div>
+                
+                <div class="case-result" id="caseResult" style="display: none;">
+                    <div class="result-header">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-title">Parabéns!</div>
+                    </div>
+                    <div class="result-prize">
+                        <div class="prize-name-large" id="resultPrizeName">iPhone 15 Pro Max</div>
+                        <div class="prize-value-large" id="resultPrizeValue">R$ 8.000,00</div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn-confirm" onclick="closeCaseModal()">Continuar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1634,103 +1813,513 @@
         </div>
     </div>
 
-    <!-- Modal de Confirmação da Raspadinha -->
-    <div id="scratchConfirmModal" class="modal case-confirm-modal">
-        <div class="modal-content case-confirm-content">
-            <div class="modal-header">
-                <h3 id="scratchModalTitle">Raspadinha Premium Lr4 <span class="clover-nav" title="Trevo da Sorte">♣</span></h3>
-                <span class="close" onclick="closeScratchConfirmModal()">&times;</span>
+    <!-- Modal de Confirmação da Raspadinha NOVO -->
+    <div id="scratchConfirmModal" class="modal-new" style="display: none;">
+        <div class="modal-overlay" onclick="closeScratchConfirmModal()"></div>
+        <div class="modal-container scratch-confirm-container">
+            <div class="modal-header-new">
+                <h2>🎫 Confirmar Raspadinha</h2>
+                <button class="close-btn" onclick="closeScratchConfirmModal()">×</button>
             </div>
-            <div class="modal-body">
-                <div class="case-confirm-container">
-                    <div class="case-image-large">
-                        <div class="case-preview-large">
-                            <span class="case-icon-large" id="scratchIconLarge">💎</span>
+            
+            <div class="modal-body-new">
+                <div class="scratch-confirm-info">
+                    <div class="scratch-preview-large">
+                        <div class="scratch-icon-large" id="confirmScratchIcon">💎</div>
+                        <div class="scratch-name-large" id="confirmScratchName">Raspadinha Premium</div>
+                        <div class="scratch-price-large" id="confirmScratchPrice">R$ 50,00</div>
+                    </div>
+                    
+                    <div class="scratch-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Tipo:</span>
+                            <span class="detail-value" id="confirmScratchType">Premium</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Valor:</span>
+                            <span class="detail-value" id="confirmScratchValue">R$ 50,00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Seu Saldo:</span>
+                            <span class="detail-value" id="confirmScratchUserBalance">R$ 0,00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Saldo Restante:</span>
+                            <span class="detail-value" id="confirmScratchRemainingBalance">R$ 0,00</span>
                         </div>
                     </div>
                     
-                    <div class="case-confirm-info">
-                        <h4>Tem certeza de que deseja comprar esta raspadinha?</h4>
-                        <p class="case-warning">
-                            <i class="fas fa-info-circle"></i>
-                            A compra da raspadinha é permanente.
-                        </p>
-                        
-                        <div class="case-details">
-                            <div class="detail-item">
-                                <span class="label">Preço:</span>
-                                <span class="value" id="scratchPriceDisplay">R$ 50,00</span>
+                    <div class="scratch-description-large" id="confirmScratchDescription">
+                        Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!
+                    </div>
                 </div>
-                            <div class="detail-item">
-                                <span class="label">Tipo:</span>
-                                <span class="value" id="scratchTypeDisplay">Premium</span>
+                
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeScratchConfirmModal()">Cancelar</button>
+                    <button class="btn-confirm" id="confirmScratchBtn" onclick="confirmScratchPurchase()">
+                        <span class="btn-icon">🎫</span>
+                        Comprar Raspadinha
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal da Raspadinha NOVO -->
+    <div id="scratchModal" class="modal-new" style="display: none;">
+        <div class="modal-overlay" onclick="closeScratchModal()"></div>
+        <div class="modal-container scratch-open-container">
+            <div class="modal-header-new">
+                <h2>🎫 Raspando...</h2>
+                <button class="close-btn" onclick="closeScratchModal()">×</button>
+            </div>
+            
+            <div class="modal-body-new">
+                <div class="scratch-opening-animation">
+                    <div class="scratch-card" id="scratchCard">
+                        <div class="scratch-surface" id="scratchSurface">
+                            <div class="scratch-text">RASPE AQUI</div>
+                            <div class="scratch-pattern">●●●●●●●●●●</div>
+                        </div>
+                        <div class="scratch-content" id="scratchContent">
+                            <div class="prize-display" id="scratchPrizeDisplay">
+                                <div class="prize-icon">🎁</div>
+                                <div class="prize-name" id="scratchPrizeName">Raspando...</div>
+                                <div class="prize-value" id="scratchPrizeValue">R$ 0,00</div>
                             </div>
-                            <div class="detail-item">
-                                <span class="label">Descrição:</span>
-                                <span class="value" id="scratchDescriptionDisplay">Chance de ganhar iPhone 15, MacBook Pro, AirPods e muito mais!</span>
+                        </div>
+                    </div>
+                    
+                    <div class="scratching-text" id="scratchingText">Raspe para revelar seu prêmio!</div>
+                </div>
+                
+                <div class="scratch-result" id="scratchResult" style="display: none;">
+                    <div class="result-header">
+                        <div class="result-icon">🎉</div>
+                        <div class="result-title">Parabéns!</div>
+                    </div>
+                    <div class="result-prize">
+                        <div class="prize-name-large" id="resultScratchPrizeName">iPhone 15 Pro Max</div>
+                        <div class="prize-value-large" id="resultScratchPrizeValue">R$ 8.000,00</div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn-confirm" onclick="closeScratchModal()">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal auth-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 Entrar na Conta</h2>
+                <span class="close" onclick="closeAuthModal('loginModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Senha:</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+                <p class="auth-switch">
+                    Não tem conta? <a href="#" onclick="switchToRegister()">Cadastre-se</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div id="registerModal" class="modal auth-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📝 Criar Conta</h2>
+                <span class="close" onclick="closeAuthModal('registerModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="admin-credentials">
+                    <h3>⚠️ Cadastro Restrito</h3>
+                    <p>O cadastro está temporariamente desabilitado.</p>
+                    <p>Entre em contato com o administrador para obter acesso.</p>
+                </div>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Nome:</label>
+                        <input type="text" id="registerName" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Senha:</label>
+                        <input type="password" id="registerPassword" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Senha:</label>
+                        <input type="password" id="registerConfirmPassword" disabled>
+                    </div>
+                    <button type="submit" class="btn-primary" disabled>Cadastrar (Desabilitado)</button>
+                </form>
+                <p class="auth-switch">
+                    Já tem conta? <a href="#" onclick="switchToLogin()">Entrar</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Informações do Cliente (Valores Altos) -->
+    <div id="customerInfoModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Informações Adicionais</h2>
+                <span class="close" onclick="closeCustomerInfoModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="customer-info-form">
+                    <p class="info-text">Para depósitos acima de R$ 500,00, precisamos de algumas informações adicionais:</p>
+                    
+                    <div class="form-group">
+                        <label for="customerName">Nome Completo *</label>
+                        <input type="text" id="customerName" required placeholder="Digite seu nome completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerEmail">Email</label>
+                        <input type="email" id="customerEmail" placeholder="Digite seu email (opcional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerCpf">CPF *</label>
+                        <input type="text" id="customerCpf" required placeholder="000.000.000-00" maxlength="14">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerPhone">Telefone</label>
+                        <input type="text" id="customerPhone" placeholder="(11) 99999-9999 (opcional)" maxlength="15">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerAddress">Endereço</label>
+                        <input type="text" id="customerAddress" placeholder="Rua, número, bairro">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerCity">Cidade</label>
+                        <input type="text" id="customerCity" placeholder="Digite sua cidade">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerState">Estado</label>
+                        <select id="customerState">
+                            <option value="">Selecione o estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customerZipCode">CEP</label>
+                        <input type="text" id="customerZipCode" placeholder="00000-000" maxlength="9">
+                    </div>
+                    
+                    <div class="customer-info-actions">
+                        <button class="btn btn-secondary" onclick="closeCustomerInfoModal()">Cancelar</button>
+                        <button class="btn btn-primary" onclick="proceedWithHighValueDeposit()">Continuar Depósito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Pagamento PIX -->
+    <div id="pixPaymentModal" class="modal" style="display: none;">
+        <div class="modal-content pix-modal">
+            <div class="modal-header">
+                <h2>💳 Pagamento PIX</h2>
+                <span class="close" onclick="closePixPaymentModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="pix-payment-container">
+                    <div class="payment-info">
+                        <h3>Valor do Depósito</h3>
+                        <div class="amount-display">
+                            <span class="amount-value" id="pixAmount">R$ 0,00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pix-options">
+                        <div class="pix-option active" id="qrCodeOption">
+                            <div class="option-header">
+                                <i class="fas fa-qrcode"></i>
+                                <span>QR Code</span>
+                            </div>
+                            <div class="option-content">
+                                <div class="qr-code-container">
+                                    <div id="qrCodeDisplay" class="qr-code-placeholder">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <p>Gerando QR Code...</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="case-prizes-preview">
-                            <h5>Prêmios Possíveis:</h5>
-                            <div class="prizes-grid" id="scratchPrizesGrid">
-                                <div class="prize-mini">
-                                    <span class="prize-icon">📱</span>
-                                    <span class="prize-name">iPhone 15</span>
+                        <div class="pix-option" id="pixCodeOption">
+                            <div class="option-header">
+                                <i class="fas fa-copy"></i>
+                                <span>Código PIX</span>
+                            </div>
+                            <div class="option-content">
+                                <div class="pix-code-container">
+                                    <div class="pix-code-input">
+                                        <input type="text" id="pixCode" readonly>
+                                        <button class="btn-copy" onclick="copyPixCode()">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <p class="pix-instructions">
+                                        Copie o código PIX e cole no seu aplicativo bancário
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-status">
+                        <div class="status-info">
+                            <i class="fas fa-clock"></i>
+                            <span>Status: Aguardando pagamento</span>
+                        </div>
+                        <div class="payment-timer">
+                            <span>Tempo restante: <span id="paymentTimer">15:00</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-actions">
+                        <button class="btn btn-secondary" onclick="closePixPaymentModal()">Cancelar</button>
+                        <button class="btn btn-primary" onclick="checkPaymentStatus()">
+                            <i class="fas fa-sync-alt"></i>
+                            Verificar Pagamento
+                        </button>
+                    </div>
                 </div>
-                                <div class="prize-mini">
-                                    <span class="prize-icon">💻</span>
-                                    <span class="prize-name">MacBook Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Minha Conta -->
+    <div id="accountModal" class="modal" style="display: none;">
+        <div class="modal-content account-modal">
+            <div class="modal-header">
+                <h2>👤 Minha Conta</h2>
+                <span class="close" onclick="closeAccountModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="account-container">
+                    <!-- Informações do Usuário -->
+                    <div class="account-info">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <h3 id="accountUserName">Admin Master</h3>
+                            <p id="accountUserEmail">admin@lr4.bet</p>
+                            <div class="account-balance">
+                                <span class="balance-label">Saldo Atual:</span>
+                                <span class="balance-amount" id="accountBalance">R$ 10.000,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Abas de Navegação -->
+                    <div class="account-tabs">
+                        <button class="tab-button active" onclick="switchAccountTab('profile')">
+                            <i class="fas fa-user"></i>
+                            Perfil
+                        </button>
+                        <button class="tab-button" onclick="switchAccountTab('security')">
+                            <i class="fas fa-lock"></i>
+                            Segurança
+                        </button>
+                        <button class="tab-button" onclick="switchAccountTab('transactions')">
+                            <i class="fas fa-history"></i>
+                            Histórico
+                        </button>
+                    </div>
+
+                    <!-- Conteúdo das Abas -->
+                    <div class="account-content">
+                        <!-- Aba Perfil -->
+                        <div id="profileTab" class="tab-content active">
+                            <h4>Informações Pessoais</h4>
+                            <form id="profileForm" class="account-form">
+                                <div class="form-group">
+                                    <label for="profileName">Nome Completo:</label>
+                                    <input type="text" id="profileName" value="Admin Master" required>
                                 </div>
-                                <div class="prize-mini">
-                                    <span class="prize-icon">🎧</span>
-                                    <span class="prize-name">AirPods Pro</span>
+                                
+                                <div class="form-group">
+                                    <label for="profileEmail">Email:</label>
+                                    <input type="email" id="profileEmail" value="admin@lr4.bet" required>
                                 </div>
-                                <div class="prize-mini">
-                                    <span class="prize-icon">💰</span>
-                                    <span class="prize-name">Dinheiro</span>
+                                
+                                <div class="form-group">
+                                    <label for="profilePhone">Telefone:</label>
+                                    <input type="text" id="profilePhone" value="(11) 99999-9999" placeholder="(11) 99999-9999">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="profileCpf">CPF:</label>
+                                    <input type="text" id="profileCpf" value="000.000.000-00" placeholder="000.000.000-00">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="profileBirthDate">Data de Nascimento:</label>
+                                    <input type="date" id="profileBirthDate" value="1990-01-01">
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary" onclick="resetProfileForm()">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Aba Segurança -->
+                        <div id="securityTab" class="tab-content">
+                            <h4>Alterar Senha</h4>
+                            <form id="securityForm" class="account-form">
+                                <div class="form-group">
+                                    <label for="currentPassword">Senha Atual:</label>
+                                    <input type="password" id="currentPassword" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="newPassword">Nova Senha:</label>
+                                    <input type="password" id="newPassword" required minlength="6">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirmar Nova Senha:</label>
+                                    <input type="password" id="confirmPassword" required minlength="6">
+                                </div>
+                                
+                                <div class="password-requirements">
+                                    <h5>Requisitos da Senha:</h5>
+                                    <ul>
+                                        <li>Mínimo 6 caracteres</li>
+                                        <li>Pelo menos 1 letra</li>
+                                        <li>Pelo menos 1 número</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary" onclick="resetSecurityForm()">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Aba Histórico -->
+                        <div id="transactionsTab" class="tab-content">
+                            <h4>Histórico de Transações</h4>
+                            <div class="transactions-filters">
+                                <select id="transactionFilter">
+                                    <option value="all">Todas as Transações</option>
+                                    <option value="deposits">Depósitos</option>
+                                    <option value="withdrawals">Saques</option>
+                                    <option value="games">Jogos</option>
+                                </select>
+                                <button class="btn btn-secondary" onclick="refreshTransactions()">
+                                    <i class="fas fa-sync-alt"></i>
+                                    Atualizar
+                                </button>
+                            </div>
+                            
+                            <div class="transactions-list" id="transactionsList">
+                                <div class="transaction-item">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h5>Depósito PIX</h5>
+                                        <p>17/09/2024 - 15:30</p>
+                                    </div>
+                                    <div class="transaction-amount positive">
+                                        +R$ 100,00
+                                    </div>
+                                </div>
+                                
+                                <div class="transaction-item">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-ticket-alt"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h5>Raspadinha Premium</h5>
+                                        <p>17/09/2024 - 15:25</p>
+                                    </div>
+                                    <div class="transaction-amount negative">
+                                        -R$ 50,00
+                                    </div>
+                                </div>
+                                
+                                <div class="transaction-item">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-gift"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h5>Prêmio Coletado</h5>
+                                        <p>17/09/2024 - 15:20</p>
+                                    </div>
+                                    <div class="transaction-amount positive">
+                                        +R$ 250,00
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="case-confirm-actions">
-                    <button class="btn-play case-open-btn" onclick="confirmScratchPurchase()">
-                        <i class="fas fa-coins"></i>
-                        <span id="scratchConfirmButtonText">Comprar Raspadinha Premium Lr4</span>
-                            </button>
-                    <button class="btn-close" onclick="closeScratchConfirmModal()">
-                        FECHAR
-                            </button>
-                        </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal da Raspadinha -->
-    <div id="scratchModal" class="modal">
-        <div class="modal-content scratch-modal">
-            <span class="close" onclick="closeScratchModal()">&times;</span>
-            <div class="scratch-modal-content">
-                <div class="scratch-header">
-                    <h2>🎯 Raspadinha Lr4</h2>
-                    <p>Raspe para revelar seu prêmio!</p>
-                            </div>
-                <div id="scratchArea" class="scratch-area">
-                    <!-- Interface da raspadinha será criada aqui -->
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Sistema de Notificações -->
+    <div id="notificationContainer" class="notification-container"></div>
 
         <!-- Scripts -->
-        <script src="payment-config.js?v=4"></script>
-    <script src="paygate-integration.js?v=18"></script>
-    <script src="customer-data-system.js?v=1"></script>
-    <script src="deposit-system.js?v=5"></script>
-        <script src="lr4-script-simple.js?v=4"></script>
-        <script src="payment-system.js?v=2"></script>
+        <script src="lr4-unified.js?v=1"></script>
 </body>
 </html>
 
