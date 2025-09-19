@@ -459,6 +459,133 @@ app.get('/api/test-connection', async (req, res) => {
     }
 });
 
+// ===== SISTEMA DE SAQUES =====
+let withdrawals = [];
+let withdrawalConfig = {
+    minAmount: 10.00,
+    maxAmount: 10000.00,
+    processingFee: 2.50
+};
+
+// Endpoint para obter configurações de saque
+app.get('/api/withdrawals/config', (req, res) => {
+    console.log('📋 Consultando configurações de saque...');
+    
+    res.json({
+        success: true,
+        data: withdrawalConfig
+    });
+});
+
+// Endpoint para criar solicitação de saque
+app.post('/api/withdrawals/create', async (req, res) => {
+    const { amount, method, bank, account, agency, cpf, name } = req.body;
+    
+    console.log('💸 Criando solicitação de saque:', {
+        amount, method, bank, account, agency, cpf, name
+    });
+    
+    // Validar dados obrigatórios
+    if (!amount || !method || !bank || !account || !agency || !cpf || !name) {
+        return res.status(400).json({
+            success: false,
+            error: 'Todos os campos são obrigatórios'
+        });
+    }
+    
+    // Validar valor mínimo
+    if (amount < withdrawalConfig.minAmount) {
+        return res.status(400).json({
+            success: false,
+            error: `Valor mínimo para saque é R$ ${withdrawalConfig.minAmount.toFixed(2)}`
+        });
+    }
+    
+    // Validar valor máximo
+    if (amount > withdrawalConfig.maxAmount) {
+        return res.status(400).json({
+            success: false,
+            error: `Valor máximo para saque é R$ ${withdrawalConfig.maxAmount.toFixed(2)}`
+        });
+    }
+    
+    // Criar ID único para o saque
+    const withdrawalId = `wd_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    // Criar objeto do saque
+    const withdrawal = {
+        id: withdrawalId,
+        amount: parseFloat(amount),
+        method: method,
+        bank: bank,
+        account: account,
+        agency: agency,
+        cpf: cpf,
+        name: name,
+        status: 'pending',
+        processingFee: withdrawalConfig.processingFee,
+        netAmount: parseFloat(amount) - withdrawalConfig.processingFee,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    };
+    
+    // Adicionar à lista de saques
+    withdrawals.push(withdrawal);
+    
+    console.log('✅ Saque criado:', withdrawal);
+    
+    // Simular processamento com PayGate (em produção, integrar com API real)
+    setTimeout(() => {
+        // Simular aprovação automática para valores baixos
+        if (amount <= 100) {
+            withdrawal.status = 'completed';
+            withdrawal.updatedAt = new Date().toISOString();
+            console.log('✅ Saque aprovado automaticamente:', withdrawalId);
+        }
+    }, 5000);
+    
+    res.json({
+        success: true,
+        data: withdrawal
+    });
+});
+
+// Endpoint para listar saques
+app.get('/api/withdrawals/list', (req, res) => {
+    console.log('📋 Listando saques...');
+    
+    // Ordenar por data de criação (mais recentes primeiro)
+    const sortedWithdrawals = withdrawals.sort((a, b) => 
+        new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    
+    res.json({
+        success: true,
+        data: sortedWithdrawals
+    });
+});
+
+// Endpoint para consultar status de um saque específico
+app.get('/api/withdrawals/status/:id', (req, res) => {
+    const { id } = req.params;
+    
+    console.log('🔍 Consultando status do saque:', id);
+    
+    const withdrawal = withdrawals.find(w => w.id === id);
+    
+    if (!withdrawal) {
+        return res.status(404).json({
+            success: false,
+            error: 'Saque não encontrado'
+        });
+    }
+    
+    res.json({
+        success: true,
+        data: withdrawal
+    });
+});
+
 // ===== SISTEMA DE CAIXAS =====
 
 // 6. Obter informações das caixas disponíveis
@@ -669,7 +796,12 @@ app.listen(PORT, () => {
     console.log(`   GET  /api/test-connection - Testar conexão`);
     console.log(`   GET  /api/cases/available - Obter caixas disponíveis`);
     console.log(`   POST /api/cases/open - Abrir caixa e obter prêmio`);
+    console.log(`   GET  /api/withdrawals/config - Configurações de saque`);
+    console.log(`   POST /api/withdrawals/create - Criar solicitação de saque`);
+    console.log(`   GET  /api/withdrawals/list - Listar saques`);
+    console.log(`   GET  /api/withdrawals/status/:id - Status do saque`);
     console.log(`🎰 Sistema de caixas ativo!`);
+    console.log(`💸 Sistema de saques ativo!`);
 });
 
 module.exports = app;

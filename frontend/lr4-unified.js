@@ -537,7 +537,7 @@ async function confirmOpenCase() {
     
     try {
         // Fazer requisição para o backend
-        const response = await fetch('/api/cases/open', {
+        const response = await fetch('http://localhost:3001/api/cases/open', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -960,7 +960,7 @@ async function processDeposit() {
     
     try {
         // Criar pagamento PIX real
-        const response = await fetch('/api/pix/create', {
+        const response = await fetch('http://localhost:3001/api/pix/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1134,7 +1134,7 @@ async function processDepositWithCustomerInfo() {
     
     try {
         // Fazer requisição para o backend com informações do cliente
-        const response = await fetch('/api/pix/create', {
+        const response = await fetch('http://localhost:3001/api/pix/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1330,7 +1330,7 @@ async function checkPaymentStatus() {
     }
     
     try {
-        const response = await fetch(`/api/pix/status/${currentPaymentData.orderId}`);
+        const response = await fetch(`http://localhost:3001/api/pix/status/${currentPaymentData.orderId}`);
         const data = await response.json();
         
         if (data.success && data.status === 'paid') {
@@ -1887,7 +1887,254 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Inicializar sistema de saques
+    initWithdrawalSystem();
+    
     console.log('✅ Sistema inicializado com sucesso!');
 });
+
+// ===== SISTEMA DE SAQUE =====
+let withdrawalConfig = {
+    minAmount: 10.00,
+    maxAmount: 10000.00,
+    processingFee: 2.50
+};
+
+// Carregar configurações de saque
+async function loadWithdrawalConfig() {
+    try {
+        const response = await fetch('http://localhost:3001/api/withdrawals/config');
+        const data = await response.json();
+        
+        if (data.success) {
+            withdrawalConfig = data.data;
+            console.log('✅ Configurações de saque carregadas:', withdrawalConfig);
+        }
+    } catch (error) {
+        console.error('❌ Erro ao carregar configurações de saque:', error);
+    }
+}
+
+// Atualizar resumo do saque
+function updateWithdrawalSummary() {
+    const amount = parseFloat(document.getElementById('withdrawalAmount').value) || 0;
+    const fee = withdrawalConfig.processingFee;
+    const total = amount - fee;
+    
+    document.getElementById('summaryAmount').textContent = `R$ ${amount.toFixed(2).replace('.', ',')}`;
+    document.getElementById('summaryFee').textContent = `R$ ${fee.toFixed(2).replace('.', ',')}`;
+    document.getElementById('summaryTotal').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+// Resetar formulário de saque
+function resetWithdrawalForm() {
+    document.getElementById('withdrawalForm').reset();
+    updateWithdrawalSummary();
+}
+
+// Processar solicitação de saque
+async function processWithdrawal(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const withdrawalData = {
+        amount: parseFloat(formData.get('withdrawalAmount')),
+        method: formData.get('withdrawalMethod'),
+        bank: formData.get('withdrawalBank'),
+        account: formData.get('withdrawalAccount'),
+        agency: formData.get('withdrawalAgency'),
+        cpf: formData.get('withdrawalCpf'),
+        name: formData.get('withdrawalName')
+    };
+    
+    console.log('💸 Processando saque:', withdrawalData);
+    
+    // Validar saldo
+    if (withdrawalData.amount > userBalance) {
+        showNotification('❌ Saldo insuficiente para realizar o saque.', 'error');
+        return;
+    }
+    
+    // Validar valor mínimo
+    if (withdrawalData.amount < withdrawalConfig.minAmount) {
+        showNotification(`❌ Valor mínimo para saque é R$ ${withdrawalConfig.minAmount.toFixed(2).replace('.', ',')}.`, 'error');
+        return;
+    }
+    
+    // Validar valor máximo
+    if (withdrawalData.amount > withdrawalConfig.maxAmount) {
+        showNotification(`❌ Valor máximo para saque é R$ ${withdrawalConfig.maxAmount.toFixed(2).replace('.', ',')}.`, 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch('http://localhost:3001/api/withdrawals/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(withdrawalData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showNotification('✅ Saque solicitado com sucesso!', 'success');
+            resetWithdrawalForm();
+            loadWithdrawalsHistory();
+            
+            // Atualizar saldo (simular dedução)
+            userBalance -= withdrawalData.amount;
+            updateBalanceDisplay();
+            
+            // Iniciar verificação de status para valores baixos
+            if (withdrawalData.amount <= 100) {
+                checkWithdrawalStatus(data.data.id);
+            }
+            
+            console.log('✅ Saque criado:', data.data);
+        } else {
+            showNotification(`❌ Erro: ${data.error}`, 'error');
+        }
+        
+    } catch (error) {
+        console.error('❌ Erro ao processar saque:', error);
+        showNotification('❌ Erro ao processar saque. Tente novamente.', 'error');
+    }
+}
+
+// Verificar status do saque
+async function checkWithdrawalStatus(withdrawalId) {
+    try {
+        const response = await fetch(`http://localhost:3001/api/withdrawals/status/${withdrawalId}`);
+        const data = await response.json();
+        
+        if (data.success && data.data.status === 'completed') {
+            showNotification('🎉 Saque processado com sucesso!', 'success');
+            loadWithdrawalsHistory(); // Recarregar histórico
+        } else if (data.success && data.data.status === 'pending') {
+            // Verificar novamente em 3 segundos
+            setTimeout(() => checkWithdrawalStatus(withdrawalId), 3000);
+        }
+    } catch (error) {
+        console.error('❌ Erro ao verificar status do saque:', error);
+    }
+}
+
+// Carregar histórico de saques
+async function loadWithdrawalsHistory() {
+    try {
+        const response = await fetch('http://localhost:3001/api/withdrawals/list');
+        const data = await response.json();
+        
+        if (data.success) {
+            displayWithdrawalsHistory(data.data);
+        }
+    } catch (error) {
+        console.error('❌ Erro ao carregar histórico de saques:', error);
+    }
+}
+
+// Exibir histórico de saques
+function displayWithdrawalsHistory(withdrawals) {
+    const container = document.getElementById('withdrawalsList');
+    
+    if (withdrawals.length === 0) {
+        container.innerHTML = `
+            <div class="no-withdrawals">
+                <i class="fas fa-inbox"></i>
+                <p>Nenhum saque realizado ainda</p>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = withdrawals.map(withdrawal => {
+        const statusClass = withdrawal.status === 'completed' ? 'completed' : 'pending';
+        const statusIcon = withdrawal.status === 'completed' ? 'fa-check-circle' : 'fa-clock';
+        const methodText = withdrawal.method.toUpperCase();
+        const bankName = getBankName(withdrawal.bank);
+        const date = new Date(withdrawal.createdAt).toLocaleString('pt-BR');
+        
+        return `
+            <div class="withdrawal-item">
+                <div class="withdrawal-icon">
+                    <i class="fas ${statusIcon}"></i>
+                </div>
+                <div class="withdrawal-details">
+                    <h6>${methodText} - ${bankName}</h6>
+                    <p>${date}</p>
+                    <span class="withdrawal-status ${statusClass}">${getStatusText(withdrawal.status)}</span>
+                </div>
+                <div class="withdrawal-amount">
+                    R$ ${withdrawal.amount.toFixed(2).replace('.', ',')}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Obter nome do banco
+function getBankName(bankCode) {
+    const banks = {
+        '001': 'Banco do Brasil',
+        '341': 'Itaú',
+        '033': 'Santander',
+        '104': 'Caixa Econômica',
+        '237': 'Bradesco',
+        '260': 'Nu Pagamentos',
+        '336': 'Banco C6',
+        '422': 'Banco Safra'
+    };
+    return banks[bankCode] || 'Banco';
+}
+
+// Obter texto do status
+function getStatusText(status) {
+    const statusTexts = {
+        'pending': 'Processando',
+        'completed': 'Processado',
+        'rejected': 'Rejeitado'
+    };
+    return statusTexts[status] || status;
+}
+
+// Aplicar máscara de CPF
+function applyCpfMask(input) {
+    let value = input.value.replace(/\D/g, '');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    input.value = value;
+}
+
+// Inicializar sistema de saques
+function initWithdrawalSystem() {
+    // Carregar configurações
+    loadWithdrawalConfig();
+    
+    // Event listeners
+    const withdrawalForm = document.getElementById('withdrawalForm');
+    if (withdrawalForm) {
+        withdrawalForm.addEventListener('submit', processWithdrawal);
+    }
+    
+    const amountInput = document.getElementById('withdrawalAmount');
+    if (amountInput) {
+        amountInput.addEventListener('input', updateWithdrawalSummary);
+    }
+    
+    const cpfInput = document.getElementById('withdrawalCpf');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function() {
+            applyCpfMask(this);
+        });
+    }
+    
+    // Carregar histórico
+    loadWithdrawalsHistory();
+    
+    console.log('✅ Sistema de saques inicializado');
+}
 
 console.log('✅ LR4 Sistema Unificado carregado com sucesso!');
