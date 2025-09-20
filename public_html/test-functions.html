@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Funções LR4</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a2e; color: white; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #333; border-radius: 8px; }
+        .test-button { background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
+        .test-button:hover { background: #45a049; }
+        .result { margin-top: 10px; padding: 10px; background: #333; border-radius: 4px; }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Funções LR4.bet</h1>
+    
+    <div class="test-section">
+        <h3>🔐 Sistema de Login</h3>
+        <button class="test-button" onclick="testLogin()">Testar Login</button>
+        <button class="test-button" onclick="testLogout()">Testar Logout</button>
+        <div id="loginResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>💰 Sistema de Saldo</h3>
+        <button class="test-button" onclick="testBalance()">Testar Saldo</button>
+        <div id="balanceResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>🎫 Sistema de Raspadinhas</h3>
+        <button class="test-button" onclick="testScratch()">Testar Raspadinha</button>
+        <div id="scratchResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>📦 Sistema de Caixas</h3>
+        <button class="test-button" onclick="testCases()">Testar Caixas</button>
+        <div id="caseResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>🌐 APIs Backend</h3>
+        <button class="test-button" onclick="testAPIs()">Testar APIs</button>
+        <div id="apiResult" class="result"></div>
+    </div>
+
+    <script src="lr4-script-clean.js"></script>
+    <script>
+        function testLogin() {
+            const result = document.getElementById('loginResult');
+            try {
+                // Simular login
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('userName', 'TestUser');
+                
+                // Verificar se as funções existem
+                if (typeof checkLoginStatus === 'function') {
+                    checkLoginStatus();
+                    result.innerHTML = '<span class="success">✅ Login testado com sucesso!</span>';
+                } else {
+                    result.innerHTML = '<span class="error">❌ Função checkLoginStatus não encontrada</span>';
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ Erro: ${error.message}</span>`;
+            }
+        }
+        
+        function testLogout() {
+            const result = document.getElementById('loginResult');
+            try {
+                if (typeof logout === 'function') {
+                    logout();
+                    result.innerHTML = '<span class="success">✅ Logout testado com sucesso!</span>';
+                } else {
+                    result.innerHTML = '<span class="error">❌ Função logout não encontrada</span>';
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ Erro: ${error.message}</span>`;
+            }
+        }
+        
+        function testBalance() {
+            const result = document.getElementById('balanceResult');
+            try {
+                if (typeof updateBalanceDisplay === 'function') {
+                    updateBalanceDisplay();
+                    result.innerHTML = '<span class="success">✅ Sistema de saldo funcionando!</span>';
+                } else {
+                    result.innerHTML = '<span class="error">❌ Função updateBalanceDisplay não encontrada</span>';
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ Erro: ${error.message}</span>`;
+            }
+        }
+        
+        function testScratch() {
+            const result = document.getElementById('scratchResult');
+            try {
+                if (typeof openScratchConfirmModal === 'function') {
+                    openScratchConfirmModal('premium');
+                    result.innerHTML = '<span class="success">✅ Sistema de raspadinhas funcionando!</span>';
+                } else {
+                    result.innerHTML = '<span class="error">❌ Função openScratchConfirmModal não encontrada</span>';
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ Erro: ${error.message}</span>`;
+            }
+        }
+        
+        function testCases() {
+            const result = document.getElementById('caseResult');
+            try {
+                if (typeof openCaseConfirmModal === 'function') {
+                    openCaseConfirmModal('premium');
+                    result.innerHTML = '<span class="success">✅ Sistema de caixas funcionando!</span>';
+                } else {
+                    result.innerHTML = '<span class="error">❌ Função openCaseConfirmModal não encontrada</span>';
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ Erro: ${error.message}</span>`;
+            }
+        }
+        
+        async function testAPIs() {
+            const result = document.getElementById('apiResult');
+            try {
+                // Testar API de health
+                const healthResponse = await fetch('/api/health');
+                const healthData = await healthResponse.json();
+                
+                // Testar API de caixas
+                const casesResponse = await fetch('/api/cases/available');
+                const casesData = await casesResponse.json();
+                
+                if (healthData.status === 'OK' && casesData.success) {
+                    result.innerHTML = '<span class="success">✅ Todas as APIs funcionando!</span>';
+                } else {
+                    result.innerHTML = '<span class="error">❌ Algumas APIs não estão funcionando</span>';
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ Erro nas APIs: ${error.message}</span>`;
+            }
+        }
+        
+        // Teste automático ao carregar
+        window.addEventListener('load', function() {
+            console.log('🧪 Página de teste carregada');
+            console.log('🔍 Verificando funções disponíveis...');
+            console.log('checkLoginStatus:', typeof checkLoginStatus);
+            console.log('updateBalanceDisplay:', typeof updateBalanceDisplay);
+            console.log('openScratchConfirmModal:', typeof openScratchConfirmModal);
+            console.log('openCaseConfirmModal:', typeof openCaseConfirmModal);
+        });
+    </script>
+</body>
+</html>

@@ -4392,11 +4392,12 @@ body {
 
 /* ===== ESTILOS DOS MODAIS DE AUTENTICAÇÃO ===== */
 .auth-modal .modal-content {
-    max-width: 400px;
+    max-width: 500px;
+    max-height: 95vh;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     border-radius: 15px;
     padding: 0;
-    overflow: hidden;
+    overflow-y: auto;
     box-shadow: 0 20px 40px rgba(0,0,0,0.8);
 }
 
@@ -4414,12 +4415,12 @@ body {
 }
 
 .auth-modal .modal-body {
-    padding: 30px 25px;
+    padding: 40px 35px;
     color: white;
 }
 
 .auth-modal .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .auth-modal .form-group label {
@@ -4431,7 +4432,7 @@ body {
 
 .auth-modal .form-group input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 15px 18px;
     border: 2px solid rgba(255,255,255,0.1);
     border-radius: 8px;
     background: rgba(255,255,255,0.05);
@@ -4453,7 +4454,7 @@ body {
 
 .auth-modal .btn-primary {
     width: 100%;
-    padding: 15px;
+    padding: 18px;
     background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
     color: white;
     border: none;
@@ -4489,8 +4490,39 @@ body {
     text-decoration: underline;
 }
 
+/* Scroll personalizado para modais de autenticação */
+.auth-modal .modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.auth-modal .modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.auth-modal .modal-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.auth-modal .modal-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: scale(1.05);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
+    .auth-modal .modal-content {
+        max-width: 95%;
+        max-height: 98vh;
+        margin: 1% auto;
+    }
+    
+    .auth-modal .modal-body {
+        padding: 30px 20px;
+    }
+    
     .scratch-grid {
         height: 300px;
         min-height: 300px;
@@ -5246,6 +5278,28 @@ body {
     color: #ffa500;
 }
 
+.welcome-message {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.welcome-message h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.welcome-message p {
+    color: white;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
 /* ===== SISTEMA DE DEPÓSITO ===== */
 .deposit-options {
     text-align: center;
@@ -5501,8 +5555,26 @@ body {
 }
 
 /* ===== MODAL MINHA CONTA ===== */
+#accountModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+#accountModal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
 .account-modal {
-    max-width: 800px;
+    max-width: 1200px;
     width: 95%;
     max-height: 90vh;
     overflow-y: auto;
@@ -5555,6 +5627,37 @@ body {
     color: #4CAF50;
     font-weight: bold;
     font-size: 1.1rem;
+}
+
+.account-actions {
+    margin-top: 1rem;
+}
+
+.btn-logout {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+}
+
+.btn-logout:hover {
+    background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.btn-logout:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
 }
 
 .account-tabs {

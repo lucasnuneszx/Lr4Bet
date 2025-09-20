@@ -43,15 +43,21 @@ const ADMIN_CREDENTIALS = {
 };
 
 function checkLoginStatus() {
-    const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
-    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    const isAdminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+    const isUserLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
     
-    console.log('🔍 Status de login:', { isLoggedIn, isAdmin });
+    console.log('🔍 Status de login:', { isAdminLoggedIn, isUserLoggedIn, currentUser });
 
-    if (isLoggedIn && isAdmin) {
-        console.log('✅ Usuário logado como admin');
+    if (isAdminLoggedIn) {
+        console.log('✅ Admin logado');
         hideLoginButtons();
         showAdminInfo();
+        showUserBalance();
+    } else if (isUserLoggedIn && currentUser) {
+        console.log('✅ Usuário logado:', currentUser.name);
+        hideLoginButtons();
+        showUserInfo(currentUser);
         showUserBalance();
     } else {
         console.log('❌ Usuário não logado, mostrando botões de login');
@@ -90,28 +96,48 @@ function showLoginButtons() {
 }
 
 function showAdminInfo() {
-    const userInfo = document.getElementById('userInfo');
-    if (userInfo) {
-        userInfo.innerHTML = `
-            <span class="user-name">👑 ${ADMIN_CREDENTIALS.name}</span>
-            <button class="btn btn-logout" onclick="logout()">Sair</button>
-        `;
-        userInfo.style.display = 'flex';
-    }
+    // Função para mostrar informações do admin (se necessário no futuro)
+    console.log('👑 Admin logado:', ADMIN_CREDENTIALS.name);
+}
+
+function showUserInfo(user) {
+    // Função para mostrar informações do usuário (se necessário no futuro)
+    console.log('👤 Usuário logado:', user.name);
 }
 
 function resetToGuestMode() {
-    const userInfo = document.getElementById('userInfo');
-    if (userInfo) {
-        userInfo.style.display = 'none';
-    }
+    // Função para resetar para modo visitante (se necessário no futuro)
+    console.log('👤 Modo visitante ativado');
 }
 
 function logout() {
+    console.log('🚪 Realizando logout...');
+    
+    // Limpar dados de login
     localStorage.removeItem('adminLoggedIn');
     localStorage.removeItem('isAdmin');
+    localStorage.removeItem('userLoggedIn');
+    localStorage.removeItem('currentUser');
+    
+    // Resetar saldo para 0 (usuário não logado)
+    userBalance = 0;
+    updateBalanceDisplay();
+    
+    // Fechar modal "Minha Conta" se estiver aberto
+    const accountModal = document.getElementById('accountModal');
+    if (accountModal) {
+        accountModal.classList.remove('show');
+        accountModal.style.display = 'none';
+        console.log('✅ Modal Minha Conta fechado');
+    }
+    
+    // Atualizar status de login
     checkLoginStatus();
+    
+    // Mostrar notificação
     showNotification('info', 'Logout Realizado', 'Logout realizado com sucesso!');
+    
+    console.log('✅ Logout concluído - voltando para página principal');
 }
 
 // ===== SISTEMA DE RASPADINHAS NOVO =====
@@ -1378,6 +1404,7 @@ function openAccountModal() {
     
     const modal = document.getElementById('accountModal');
     if (modal) {
+        modal.classList.add('show');
         modal.style.display = 'flex';
         
         // Atualizar informações do usuário
@@ -1393,6 +1420,7 @@ function closeAccountModal() {
     
     const modal = document.getElementById('accountModal');
     if (modal) {
+        modal.classList.remove('show');
         modal.style.display = 'none';
     }
 }
@@ -1430,6 +1458,32 @@ function addAccountEventListeners() {
     
     // Adicionar máscaras aos inputs
     addInputMasksToAccount();
+    
+    // Event listener para fechar modal ao clicar no X
+    const closeBtn = document.querySelector('#accountModal .close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeAccountModal);
+    }
+    
+    // Event listener para fechar modal ao clicar fora dele
+    const modal = document.getElementById('accountModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeAccountModal();
+            }
+        });
+    }
+    
+    // Event listener para fechar modal com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('accountModal');
+            if (modal && modal.classList.contains('show')) {
+                closeAccountModal();
+            }
+        }
+    });
 }
 
 function switchAccountTab(tabName) {
@@ -1818,36 +1872,114 @@ function handleLogin() {
         checkLoginStatus();
         
         showNotification('success', 'Login Realizado', 'Bem-vindo, Admin Master!');
-    } else {
-        showNotification('error', 'Credenciais Inválidas', 'Apenas o Admin Master pode acessar.');
+        return;
     }
+    
+    // Verificar usuários cadastrados
+    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    const user = registeredUsers.find(u => u.email === email && u.password === password);
+    
+    if (user) {
+        console.log('✅ Login de usuário bem-sucedido:', user.name);
+        
+        // Salvar dados de login
+        localStorage.setItem('userLoggedIn', 'true');
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        
+        // Configurar saldo do usuário
+        userBalance = user.balance;
+        updateBalanceDisplay();
+        
+        closeAuthModal('loginModal');
+        checkLoginStatus();
+        
+        showNotification('success', 'Login Realizado', `Bem-vindo, ${user.name}!`);
+        return;
+    }
+    
+    // Credenciais inválidas
+    showNotification('error', 'Credenciais Inválidas', 'Email ou senha incorretos.');
+}
+
+// Função para validar email
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 }
 
 function handleRegister() {
-    showNotification('info', 'Cadastro Desabilitado', 'Entre em contato com o administrador para obter acesso.');
+    console.log('📝 Processando cadastro...');
+    
+    const name = document.getElementById('registerName').value.trim();
+    const email = document.getElementById('registerEmail').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+    
+    // Validações
+    if (!name || !email || !password || !confirmPassword) {
+        showNotification('error', 'Campos Obrigatórios', 'Todos os campos são obrigatórios.');
+        return;
+    }
+    
+    if (password !== confirmPassword) {
+        showNotification('error', 'Senhas Diferentes', 'As senhas não coincidem.');
+        return;
+    }
+    
+    if (password.length < 6) {
+        showNotification('error', 'Senha Fraca', 'A senha deve ter pelo menos 6 caracteres.');
+        return;
+    }
+    
+    if (!isValidEmail(email)) {
+        showNotification('error', 'Email Inválido', 'Digite um email válido.');
+        return;
+    }
+    
+    // Verificar se já existe um usuário com este email
+    const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    if (existingUsers.find(user => user.email === email)) {
+        showNotification('error', 'Email Já Cadastrado', 'Este email já está em uso.');
+        return;
+    }
+    
+    // Criar novo usuário
+    const newUser = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        password: password, // Em produção, usar hash
+        balance: 100.00, // Saldo inicial
+        createdAt: new Date().toISOString()
+    };
+    
+    // Salvar usuário
+    existingUsers.push(newUser);
+    localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
+    
+    // Fechar modal
+    closeAuthModal('registerModal');
+    
+    // Mostrar sucesso
+    showNotification('success', 'Cadastro Realizado', `Bem-vindo, ${name}! Sua conta foi criada com sucesso.`);
+    
+    console.log('✅ Usuário cadastrado:', newUser);
 }
 
 // ===== INICIALIZAÇÃO =====
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 LR4 Sistema Unificado carregado!');
     
-    // Manter dados de login para sessão persistente
-    // Não limpar localStorage para manter login
+    // Limpar dados de login para forçar login manual
+    localStorage.removeItem('adminLoggedIn');
+    localStorage.removeItem('isAdmin');
     
-    // Verificar status de login
+    // Verificar status de login (agora sempre deslogado)
     console.log('🔍 Verificando status de login...');
     checkLoginStatus();
     
-    // Configurar saldo inicial
-    const isAdmin = localStorage.getItem('isAdmin') === 'true';
-    if (isAdmin) {
-        userBalance = ADMIN_CREDENTIALS.balance;
-    } else {
-        const savedBalance = localStorage.getItem('userBalance');
-        if (savedBalance) {
-            userBalance = parseFloat(savedBalance);
-        }
-    }
+    // Configurar saldo inicial (sempre 0 para usuário não logado)
+    userBalance = 0;
     updateBalanceDisplay();
     
     // Event listeners
