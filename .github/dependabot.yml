@@ -17,8 +17,8 @@ updates:
     assignees:
       - "lucasnunes"
     commit-message:
-      prefix: "📦"
-      prefix-development: "🔧"
+      prefix: "deps"
+      prefix-development: "deps-dev"
       include: "scope"
 
   # Enable version updates for GitHub Actions
@@ -35,5 +35,5 @@ updates:
     assignees:
       - "lucasnunes"
     commit-message:
-      prefix: "🤖"
+      prefix: "ci"
       include: "scope"
