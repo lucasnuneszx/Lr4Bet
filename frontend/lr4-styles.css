@@ -2360,7 +2360,7 @@ body {
     50% { transform: scale(1.05); }
 }
 
-/* ===== NOVO DESIGN DA RASPADINHA ===== */
+/* ===== DESIGN DA RASPADINHA ===== */
 
 .new-scratch-container {
     width: 100%;
@@ -2595,7 +2595,7 @@ body {
     50% { transform: translateY(-15px) rotate(180deg); }
 }
 
-/* ===== NOVO DESIGN DA ÁREA DE PRÊMIOS ===== */
+/* ===== ÁREA DE PRÊMIOS ===== */
 
 .new-prize-reveal {
     position: relative;
@@ -2826,7 +2826,7 @@ body {
     }
 }
 
-/* ===== NOVOS ESTILOS PARA RASPADINHAS MELHORADAS ===== */
+/* ===== CARTAS DE RASPADINHA ===== */
 
 /* Overlay com padrão de símbolos */
 .scratch-overlay-pattern {
@@ -4599,7 +4599,7 @@ body {
         font-size: 1.6rem;
     }
     
-    /* Novo design responsivo */
+    /* Responsividade da raspadinha */
     .new-scratch-container {
         padding: 15px;
     }
@@ -4658,7 +4658,7 @@ body {
         font-size: 2rem;
     }
     
-    /* Responsividade para nova área de prêmios */
+    /* Responsividade da área de prêmios */
     .prize-card {
         padding: 20px;
         max-width: 320px;
@@ -7391,7 +7391,7 @@ body {
     }
 }
 
-/* ===== MODAL DE DEPÓSITO NOVO ===== */
+/* ===== MODAL DE DEPÓSITO ===== */
 .modal-new {
     display: none;
     position: fixed;
@@ -8035,7 +8035,7 @@ body {
     }
 }
 
-/* ===== SISTEMA DE CAIXAS NOVO ===== */
+/* ===== SISTEMA DE CAIXAS ===== */
 .cases-grid-new {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -8767,7 +8767,7 @@ body {
     }
 }
 
-/* ===== SISTEMA DE RASPADINHAS NOVO ===== */
+/* ===== SISTEMA DE RASPADINHAS ===== */
 .scratch-games {
     padding: 60px 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -9949,7 +9949,7 @@ input:checked + .slider:before {
     font-size: 1.2rem;
 }
 
-/* ===== CAMPOS DE SELEÇÃO MELHORADOS ===== */
+/* ===== CAMPOS DE SELEÇÃO ===== */
 select, .form-group select {
     appearance: none;
     -webkit-appearance: none;
@@ -10372,7 +10372,7 @@ select option, .form-group select option {
         justify-content: center;
     }
     
-    /* Responsividade para campos melhorados */
+    /* Responsividade dos campos de seleção */
     select, .form-group select, .preference-select {
         min-width: auto;
         width: 100%;

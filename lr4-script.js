@@ -3342,7 +3342,6 @@ function initScratchSystem() {
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-
     initializeSystem();
 });
 
