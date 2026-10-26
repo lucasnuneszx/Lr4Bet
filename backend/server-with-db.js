@@ -1,4 +1,4 @@
-// ===== LR4.BET SERVER COM INTEGRAÇÃO POSTGRESQL =====
+// Servidor LR4.bet com persistência em PostgreSQL
 
 const express = require('express');
 const cors = require('cors');
@@ -13,7 +13,7 @@ const PORT = config.server.port;
 app.use(cors());
 app.use(express.json());
 
-// ===== CONFIGURAÇÕES PAYGATE =====
+// Configurações PayGate
 const PAYGATE_CONFIG = {
     publicKey: config.paygate.publicKey,
     secretKey: config.paygate.secretKey,
@@ -24,7 +24,7 @@ const PAYGATE_CONFIG = {
     fallbackToSimulation: config.paygate.fallbackToSimulation
 };
 
-// ===== SISTEMA DE CAIXAS =====
+// Sistema de caixas
 const cases = {
     premium: {
         name: 'Caixa Premium',
@@ -74,7 +74,7 @@ const cases = {
     }
 };
 
-// ===== ENDPOINTS =====
+// Endpoints
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -151,8 +151,6 @@ app.post('/api/cases/open', async (req, res) => {
 app.post('/api/pix/create', async (req, res) => {
     const { amount, description, customer } = req.body;
     const userId = 1; // Admin user ID
-    
-    console.log('🔄 Criando pagamento PIX:', { amount, description, customer });
     
     const orderId = `lr4_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
@@ -251,7 +249,7 @@ app.get('/api/pix/status/:id', async (req, res) => {
     }
 });
 
-// ===== SISTEMA DE SAQUES =====
+// Sistema de saques
 
 // Configurações de saque
 app.get('/api/withdrawals/config', (req, res) => {
@@ -269,8 +267,6 @@ app.get('/api/withdrawals/config', (req, res) => {
 app.post('/api/withdrawals/create', async (req, res) => {
     const { amount, method, bank, account, agency, cpf, name } = req.body;
     const userId = 1; // Admin user ID
-    
-    console.log('💸 Criando solicitação de saque:', { amount, method, bank, account, agency, cpf, name });
     
     if (!amount || !method || !bank || !account || !agency || !cpf || !name) {
         return res.status(400).json({
@@ -309,7 +305,7 @@ app.post('/api/withdrawals/create', async (req, res) => {
                         SET status = 'completed', updated_at = CURRENT_TIMESTAMP
                         WHERE withdrawal_id = $1
                     `, [withdrawalId]);
-                    console.log('✅ Saque aprovado automaticamente:', withdrawalId);
+                    console.log('Saque aprovado automaticamente:', withdrawalId);
                 } catch (error) {
                     console.error('Erro ao aprovar saque:', error);
                 }
@@ -427,7 +423,7 @@ app.get('/api/withdrawals/status/:id', async (req, res) => {
     }
 });
 
-// ===== FUNÇÕES AUXILIARES =====
+// Funções auxiliares
 
 function selectPrize(prizes) {
     const random = Math.random();
@@ -445,14 +441,14 @@ function selectPrize(prizes) {
     return { key: lastPrize[0], ...lastPrize[1] };
 }
 
-// ===== INICIALIZAÇÃO =====
+// Inicialização
 
 async function startServer() {
     try {
         // Testar conexão com banco
         const dbConnected = await testConnection();
         if (!dbConnected) {
-            console.error('❌ Não foi possível conectar ao banco de dados');
+            console.error('Não foi possível conectar ao banco de dados');
             process.exit(1);
         }
         
@@ -461,25 +457,11 @@ async function startServer() {
         
         // Iniciar servidor
         app.listen(PORT, () => {
-            console.log(`🚀 Servidor LR4.Bet rodando na porta ${PORT}`);
-            console.log(`📡 Endpoints disponíveis:`);
-            console.log(`   GET  /api/health - Health check`);
-            console.log(`   GET  /api/db/test - Testar conexão com banco`);
-            console.log(`   GET  /api/cases/available - Obter caixas disponíveis`);
-            console.log(`   POST /api/cases/open - Abrir caixa e obter prêmio`);
-            console.log(`   POST /api/pix/create - Criar pagamento PIX`);
-            console.log(`   GET  /api/pix/status/:id - Consultar status PIX`);
-            console.log(`   GET  /api/withdrawals/config - Configurações de saque`);
-            console.log(`   POST /api/withdrawals/create - Criar solicitação de saque`);
-            console.log(`   GET  /api/withdrawals/list - Listar saques`);
-            console.log(`   GET  /api/withdrawals/status/:id - Status do saque`);
-            console.log(`🎰 Sistema de caixas ativo!`);
-            console.log(`💸 Sistema de saques ativo!`);
-            console.log(`🗄️  Banco de dados PostgreSQL conectado!`);
+            console.log(`Servidor LR4.Bet rodando na porta ${PORT}`);
         });
         
     } catch (error) {
-        console.error('❌ Erro ao iniciar servidor:', error);
+        console.error('Erro ao iniciar servidor:', error);
         process.exit(1);
     }
 }

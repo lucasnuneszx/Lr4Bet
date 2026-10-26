@@ -1,4 +1,4 @@
-// ===== SERVIDOR BACKEND PARA PAYGATE =====
+// Servidor de desenvolvimento: API PayGate (PIX), caixas, saques e frontend estático
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
@@ -29,18 +29,16 @@ const PAYGATE_CONFIG = {
 // Criar header de autenticação
 const authHeader = 'Basic ' + Buffer.from(`${PAYGATE_CONFIG.publicKey}:${PAYGATE_CONFIG.secretKey}`).toString('base64');
 
-// ===== ROTAS =====
+// Rotas
 
 // Rota principal - servir a página do frontend
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/lr4.bet.html'));
 });
 
-// 1. Criar pagamento PIX (Proxy)
+// Criar pagamento PIX (Proxy)
 app.post('/api/pix/create', async (req, res) => {
     try {
-        console.log('🔄 Criando pagamento PIX:', req.body);
-        
         const { amount, description, customer } = req.body;
         
         // Validar dados obrigatórios apenas para valores >= R$ 500
@@ -153,8 +151,6 @@ app.post('/api/pix/create', async (req, res) => {
             client: clientData
         };
 
-        console.log('📤 Enviando dados para PayGate:', JSON.stringify(paymentData, null, 2));
-
         let result;
         let useSimulation = false;
 
@@ -171,34 +167,31 @@ app.post('/api/pix/create', async (req, res) => {
                     body: JSON.stringify(paymentData)
                 });
 
-                console.log('📥 Resposta PayGate - Status:', response.status);
-
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
-                    console.error('❌ Erro PayGate:', errorData);
+                    console.error('Erro PayGate:', errorData);
                     
                     if (PAYGATE_CONFIG.fallbackToSimulation) {
-                        console.log('🔄 Usando fallback para simulação...');
+                        console.log('Usando fallback para simulação...');
                         useSimulation = true;
                     } else {
                         throw new Error(`PayGate API Error: ${response.status} - ${errorData.message || response.statusText}`);
                     }
                 } else {
                     result = await response.json();
-                    console.log('✅ Pagamento PIX criado via PayGate:', result);
                 }
             } catch (error) {
-                console.error('❌ Erro de conexão PayGate:', error.message);
+                console.error('Erro de conexão PayGate:', error.message);
                 
                 if (PAYGATE_CONFIG.fallbackToSimulation) {
-                    console.log('🔄 Usando fallback para simulação...');
+                    console.log('Usando fallback para simulação...');
                     useSimulation = true;
                 } else {
                     throw error;
                 }
             }
         } else {
-            console.log('🔧 Usando simulação PayGate (modo demonstração)');
+            console.log('Usando simulação PayGate (modo demonstração)');
             useSimulation = true;
         }
 
@@ -244,7 +237,6 @@ app.post('/api/pix/create', async (req, res) => {
                     status_date: new Date().toISOString()
                 }
             };
-            console.log('✅ Pagamento PIX simulado criado:', result);
         }
 
         res.json({
@@ -267,7 +259,7 @@ app.post('/api/pix/create', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('❌ Erro ao criar pagamento PIX:', error);
+        console.error('Erro ao criar pagamento PIX:', error);
         res.status(500).json({
             success: false,
             error: error.message
@@ -275,11 +267,10 @@ app.post('/api/pix/create', async (req, res) => {
     }
 });
 
-// 2. Consultar status do pagamento
+// Consultar status do pagamento
 app.get('/api/pix/status/:paymentId', async (req, res) => {
     try {
         const { paymentId } = req.params;
-        console.log('🔄 Consultando status:', paymentId);
 
         const response = await fetch(`${PAYGATE_CONFIG.baseUrl}v1/transaction/${paymentId}`, {
             method: 'GET',
@@ -295,7 +286,6 @@ app.get('/api/pix/status/:paymentId', async (req, res) => {
         }
 
         const result = await response.json();
-        console.log('✅ Status consultado:', result);
 
         if (result.status && result.data) {
             res.json({
@@ -316,7 +306,7 @@ app.get('/api/pix/status/:paymentId', async (req, res) => {
         }
 
     } catch (error) {
-        console.error('❌ Erro ao consultar status:', error);
+        console.error('Erro ao consultar status:', error);
         res.status(500).json({
             success: false,
             error: error.message
@@ -324,12 +314,10 @@ app.get('/api/pix/status/:paymentId', async (req, res) => {
     }
 });
 
-// 3. Verificação de Status do Pagamento
+// Verificação de Status do Pagamento
 app.get('/api/pix/status/:orderId', async (req, res) => {
     try {
         const { orderId } = req.params;
-        
-        console.log('🔍 Verificando status do pagamento:', orderId);
         
         // Em produção, aqui você faria uma consulta real à API PayGate
         // Para demonstração, vamos simular diferentes status
@@ -356,7 +344,7 @@ app.get('/api/pix/status/:orderId', async (req, res) => {
                     });
                 }
             } catch (error) {
-                console.error('❌ Erro ao consultar status PayGate:', error.message);
+                console.error('Erro ao consultar status PayGate:', error.message);
             }
         }
 
@@ -389,13 +377,11 @@ app.get('/api/pix/status/:orderId', async (req, res) => {
     }
 });
 
-// 4. Webhook PayGate
+// Webhook PayGate
 app.post('/api/webhook/paygate', (req, res) => {
     try {
         const signature = req.headers['x-signature'];
         const payload = JSON.stringify(req.body);
-        
-        console.log('🔔 Webhook recebido:', req.body);
         
         // Validar assinatura (HMAC-SHA256)
         const expectedSignature = crypto
@@ -404,13 +390,13 @@ app.post('/api/webhook/paygate', (req, res) => {
             .digest('hex');
         
         if (signature !== expectedSignature) {
-            console.error('❌ Assinatura inválida');
+            console.error('Assinatura inválida');
             return res.status(401).json({ error: 'Assinatura inválida' });
         }
         
         const { transaction_id, order_id, status, amount } = req.body;
         
-        console.log(`✅ Pagamento ${status}: ${transaction_id} - R$ ${amount}`);
+        console.log(`Pagamento ${status}: ${transaction_id} - R$ ${amount}`);
         
         // Aqui você pode processar o pagamento
         // - Atualizar banco de dados
@@ -420,12 +406,12 @@ app.post('/api/webhook/paygate', (req, res) => {
         res.status(200).json({ received: true });
         
     } catch (error) {
-        console.error('❌ Erro no webhook:', error);
+        console.error('Erro no webhook:', error);
         res.status(500).json({ error: error.message });
     }
 });
 
-// 4. Health check
+// Health check
 app.get('/api/health', (req, res) => {
     res.json({ 
         status: 'OK', 
@@ -434,7 +420,7 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// 5. Testar conexão com PayGate
+// Testar conexão com PayGate
 app.get('/api/test-connection', async (req, res) => {
     try {
         const response = await fetch(`${PAYGATE_CONFIG.baseUrl}v1/gateway/status`, {
@@ -459,7 +445,7 @@ app.get('/api/test-connection', async (req, res) => {
     }
 });
 
-// ===== SISTEMA DE SAQUES =====
+// Sistema de saques
 let withdrawals = [];
 let withdrawalConfig = {
     minAmount: 10.00,
@@ -469,8 +455,6 @@ let withdrawalConfig = {
 
 // Endpoint para obter configurações de saque
 app.get('/api/withdrawals/config', (req, res) => {
-    console.log('📋 Consultando configurações de saque...');
-    
     res.json({
         success: true,
         data: withdrawalConfig
@@ -480,10 +464,6 @@ app.get('/api/withdrawals/config', (req, res) => {
 // Endpoint para criar solicitação de saque
 app.post('/api/withdrawals/create', async (req, res) => {
     const { amount, method, bank, account, agency, cpf, name } = req.body;
-    
-    console.log('💸 Criando solicitação de saque:', {
-        amount, method, bank, account, agency, cpf, name
-    });
     
     // Validar dados obrigatórios
     if (!amount || !method || !bank || !account || !agency || !cpf || !name) {
@@ -532,15 +512,13 @@ app.post('/api/withdrawals/create', async (req, res) => {
     // Adicionar à lista de saques
     withdrawals.push(withdrawal);
     
-    console.log('✅ Saque criado:', withdrawal);
-    
     // Simular processamento com PayGate (em produção, integrar com API real)
     setTimeout(() => {
         // Simular aprovação automática para valores baixos
         if (amount <= 100) {
             withdrawal.status = 'completed';
             withdrawal.updatedAt = new Date().toISOString();
-            console.log('✅ Saque aprovado automaticamente:', withdrawalId);
+            console.log('Saque aprovado automaticamente:', withdrawalId);
         }
     }, 5000);
     
@@ -552,8 +530,6 @@ app.post('/api/withdrawals/create', async (req, res) => {
 
 // Endpoint para listar saques
 app.get('/api/withdrawals/list', (req, res) => {
-    console.log('📋 Listando saques...');
-    
     // Ordenar por data de criação (mais recentes primeiro)
     const sortedWithdrawals = withdrawals.sort((a, b) => 
         new Date(b.createdAt) - new Date(a.createdAt)
@@ -568,8 +544,6 @@ app.get('/api/withdrawals/list', (req, res) => {
 // Endpoint para consultar status de um saque específico
 app.get('/api/withdrawals/status/:id', (req, res) => {
     const { id } = req.params;
-    
-    console.log('🔍 Consultando status do saque:', id);
     
     const withdrawal = withdrawals.find(w => w.id === id);
     
@@ -586,9 +560,9 @@ app.get('/api/withdrawals/status/:id', (req, res) => {
     });
 });
 
-// ===== SISTEMA DE CAIXAS =====
+// Sistema de caixas
 
-// 6. Obter informações das caixas disponíveis
+// Obter informações das caixas disponíveis
 app.get('/api/cases/available', (req, res) => {
     try {
         const availableCases = {
@@ -661,7 +635,7 @@ app.get('/api/cases/available', (req, res) => {
         });
 
     } catch (error) {
-        console.error('❌ Erro ao buscar caixas:', error);
+        console.error('Erro ao buscar caixas:', error);
         res.status(500).json({
             success: false,
             error: error.message
@@ -669,12 +643,10 @@ app.get('/api/cases/available', (req, res) => {
     }
 });
 
-// 7. Comprar e abrir caixa
+// Comprar e abrir caixa
 app.post('/api/cases/open', (req, res) => {
     try {
         const { caseType, userBalance } = req.body;
-
-        console.log('📦 Abrindo caixa:', caseType);
 
         // Validar tipo de caixa
         const validCaseTypes = ['premium', 'medium', 'basic', 'simple'];
@@ -708,8 +680,6 @@ app.post('/api/cases/open', (req, res) => {
         // Selecionar prêmio baseado nas probabilidades
         const prize = selectCasePrize(caseType);
 
-        console.log('🎁 Prêmio selecionado:', prize);
-
         // Gerar ID único para a transação
         const transactionId = 'case_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
@@ -724,7 +694,7 @@ app.post('/api/cases/open', (req, res) => {
         });
 
     } catch (error) {
-        console.error('❌ Erro ao abrir caixa:', error);
+        console.error('Erro ao abrir caixa:', error);
         res.status(500).json({
             success: false,
             error: error.message
@@ -787,21 +757,7 @@ function selectCasePrize(caseType) {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor PayGate Proxy rodando na porta ${PORT}`);
-    console.log(`📡 Endpoints disponíveis:`);
-    console.log(`   POST /api/pix/create - Criar pagamento PIX`);
-    console.log(`   GET  /api/pix/status/:id - Consultar status`);
-    console.log(`   POST /api/webhook/paygate - Webhook PayGate`);
-    console.log(`   GET  /api/health - Health check`);
-    console.log(`   GET  /api/test-connection - Testar conexão`);
-    console.log(`   GET  /api/cases/available - Obter caixas disponíveis`);
-    console.log(`   POST /api/cases/open - Abrir caixa e obter prêmio`);
-    console.log(`   GET  /api/withdrawals/config - Configurações de saque`);
-    console.log(`   POST /api/withdrawals/create - Criar solicitação de saque`);
-    console.log(`   GET  /api/withdrawals/list - Listar saques`);
-    console.log(`   GET  /api/withdrawals/status/:id - Status do saque`);
-    console.log(`🎰 Sistema de caixas ativo!`);
-    console.log(`💸 Sistema de saques ativo!`);
+    console.log(`Servidor PayGate Proxy rodando na porta ${PORT}`);
 });
 
 module.exports = app;

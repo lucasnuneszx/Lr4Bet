@@ -1,8 +1,6 @@
-// ===== LR4 BET - SISTEMA UNIFICADO E FUNCIONAL =====
+// LR4.bet - frontend
 
-console.log('🚀 LR4 Sistema Unificado iniciando...');
-
-// ===== VARIÁVEIS GLOBAIS =====
+// Variáveis globais
 let userBalance = 1000.00;
 let currentScratchType = 'premium';
 let currentCaseType = 'premium';
@@ -11,7 +9,7 @@ let scratchProgress = 0;
 let availableCases = {};
 let currentCasePrize = null;
 
-// ===== SISTEMA DE SALDO =====
+// Sistema de saldo
 function updateBalanceDisplay() {
     const balanceElement = document.getElementById('userBalance');
     if (balanceElement) {
@@ -34,7 +32,7 @@ function hideUserBalance() {
     }
 }
 
-// ===== SISTEMA DE ADMIN MASTER =====
+// Sistema de admin master
 const ADMIN_CREDENTIALS = {
     email: 'admin@lr4.bet',
     password: 'admin123',
@@ -47,23 +45,15 @@ function checkLoginStatus() {
     const isUserLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
     
-    console.log('🔍 Status de login:', { isAdminLoggedIn, isUserLoggedIn, currentUser });
-
     if (isAdminLoggedIn) {
-        console.log('✅ Admin logado');
         hideLoginButtons();
-        showAdminInfo();
         showUserBalance();
     } else if (isUserLoggedIn && currentUser) {
-        console.log('✅ Usuário logado:', currentUser.name);
         hideLoginButtons();
-        showUserInfo(currentUser);
         showUserBalance();
     } else {
-        console.log('❌ Usuário não logado, mostrando botões de login');
         showLoginButtons();
         hideUserBalance();
-        resetToGuestMode();
     }
 }
 
@@ -78,41 +68,20 @@ function showLoginButtons() {
     const loginBtn = document.getElementById('btnLogin');
     const registerBtn = document.getElementById('btnRegister');
     
-    console.log('🔍 Botões de login encontrados:', { loginBtn: !!loginBtn, registerBtn: !!registerBtn });
-    
     if (loginBtn) {
         loginBtn.style.display = 'inline-block';
-        console.log('✅ Botão de login exibido');
     } else {
-        console.error('❌ Botão de login não encontrado!');
+        console.error('Botão de login não encontrado!');
     }
     
     if (registerBtn) {
         registerBtn.style.display = 'inline-block';
-        console.log('✅ Botão de registro exibido');
     } else {
-        console.error('❌ Botão de registro não encontrado!');
+        console.error('Botão de registro não encontrado!');
     }
 }
 
-function showAdminInfo() {
-    // Função para mostrar informações do admin (se necessário no futuro)
-    console.log('👑 Admin logado:', ADMIN_CREDENTIALS.name);
-}
-
-function showUserInfo(user) {
-    // Função para mostrar informações do usuário (se necessário no futuro)
-    console.log('👤 Usuário logado:', user.name);
-}
-
-function resetToGuestMode() {
-    // Função para resetar para modo visitante (se necessário no futuro)
-    console.log('👤 Modo visitante ativado');
-}
-
 function logout() {
-    console.log('🚪 Realizando logout...');
-    
     // Limpar dados de login
     localStorage.removeItem('adminLoggedIn');
     localStorage.removeItem('isAdmin');
@@ -128,7 +97,6 @@ function logout() {
     if (accountModal) {
         accountModal.classList.remove('show');
         accountModal.style.display = 'none';
-        console.log('✅ Modal Minha Conta fechado');
     }
     
     // Atualizar status de login
@@ -137,10 +105,9 @@ function logout() {
     // Mostrar notificação
     showNotification('info', 'Logout Realizado', 'Logout realizado com sucesso!');
     
-    console.log('✅ Logout concluído - voltando para página principal');
 }
 
-// ===== SISTEMA DE RASPADINHAS NOVO =====
+// Sistema de raspadinhas
 let scratchPrize = null;
 
 // Configurações de probabilidades das raspadinhas
@@ -234,8 +201,6 @@ function getScratchPrice(type) {
 }
 
 function openScratchConfirmModal(type) {
-    console.log('🎫 Abrindo modal de confirmação da raspadinha:', type);
-    
     currentScratchType = type;
     
     const modal = document.getElementById('scratchConfirmModal');
@@ -273,8 +238,6 @@ function updateScratchConfirmInfo(type) {
 }
 
 function confirmScratchPurchase() {
-    console.log('✅ Confirmando compra da raspadinha:', currentScratchType);
-    
     const price = getScratchPrice(currentScratchType);
     
     if (userBalance < price) {
@@ -297,8 +260,6 @@ function confirmScratchPurchase() {
 }
 
 function openScratchModal() {
-    console.log('🎫 Abrindo modal da raspadinha');
-    
     const modal = document.getElementById('scratchModal');
     if (modal) {
         modal.style.display = 'block';
@@ -349,8 +310,6 @@ function startScratchAnimation() {
 }
 
 function scratchSurface() {
-    console.log('🎫 Raspando superfície...');
-    
     const scratchSurface = document.getElementById('scratchSurface');
     const scratchContent = document.getElementById('scratchContent');
     const scratchingText = document.getElementById('scratchingText');
@@ -467,7 +426,7 @@ function closeScratchModal() {
     scratchPrize = null;
 }
 
-// ===== SISTEMA DE CAIXAS =====
+// Sistema de caixas
 
 // Funções auxiliares para informações das caixas
 function getCaseInfo(type) {
@@ -512,8 +471,6 @@ function getCasePrice(type) {
     return prices[type] || 10.00;
 }
 function openCaseConfirmModal(type) {
-    console.log('📦 Abrindo modal de confirmação da caixa:', type);
-    
     currentCaseType = type;
     
     const modal = document.getElementById('caseConfirmModal');
@@ -551,8 +508,6 @@ function updateCaseConfirmInfo(type) {
 }
 
 async function confirmOpenCase() {
-    console.log('✅ Confirmando abertura da caixa:', currentCaseType);
-    
     const price = getCasePrice(currentCaseType);
     
     if (userBalance < price) {
@@ -596,8 +551,6 @@ async function confirmOpenCase() {
 }
 
 function openCaseModal(prize) {
-    console.log('🎰 Abrindo modal da caixa');
-    
     const modal = document.getElementById('caseModal');
     if (modal) {
         modal.style.display = 'block';
@@ -780,12 +733,11 @@ function startCaseAnimation(prize) {
 }
 
 function collectCasePrize() {
-    console.log('🎁 Coletando prêmio da caixa...');
     closeCaseModal();
     showNotification('success', 'Prêmio Coletado', 'Prêmio coletado com sucesso! Verifique seu saldo.');
 }
 
-// ===== SISTEMA DE NOTIFICAÇÕES =====
+// Sistema de notificações
 function showNotification(type, title, message, duration = 5000) {
     const container = document.getElementById('notificationContainer');
     if (!container) return;
@@ -841,7 +793,7 @@ function closeNotification(button) {
     }
 }
 
-// ===== SISTEMA DE DEPÓSITO =====
+// Sistema de depósito
 let selectedDepositAmount = 0;
 let customerInfo = null;
 let currentPaymentData = null;
@@ -849,20 +801,16 @@ let paymentTimer = null;
 let paymentStatusCheck = null;
 
 function openDepositModal() {
-    console.log('💰 Abrindo modal de depósito...');
-    
     const modal = document.getElementById('depositModal');
-    console.log('Modal encontrado:', modal);
     
     if (modal) {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
-        console.log('Modal exibido com sucesso');
         
         // Reset do modal
         resetDepositModal();
     } else {
-        console.error('❌ Modal de depósito não encontrado!');
+        console.error('Modal de depósito não encontrado!');
     }
 }
 
@@ -901,8 +849,6 @@ function resetDepositModal() {
 }
 
 function selectDepositAmount(amount) {
-    console.log('💰 Selecionando valor:', amount);
-    
     selectedDepositAmount = amount;
     
     // Remover seleção de todas as opções
@@ -977,12 +923,9 @@ async function processDeposit() {
     
     // Verificar se é um valor alto (500+)
     if (selectedDepositAmount >= 500) {
-        console.log('💰 Valor alto detectado, solicitando informações adicionais:', selectedDepositAmount);
         openCustomerInfoModal();
         return;
     }
-    
-    console.log('💰 Processando depósito real:', selectedDepositAmount);
     
     try {
         // Criar pagamento PIX real
@@ -1021,10 +964,8 @@ async function processDeposit() {
     }
 }
 
-// ===== MODAL DE INFORMAÇÕES DO CLIENTE =====
+// Modal de informações do cliente
 function openCustomerInfoModal() {
-    console.log('📋 Abrindo modal de informações do cliente...');
-    
     const modal = document.getElementById('customerInfoModal');
     if (modal) {
         modal.style.display = 'flex';
@@ -1046,8 +987,6 @@ function openCustomerInfoModal() {
 }
 
 function closeCustomerInfoModal() {
-    console.log('📋 Fechando modal de informações do cliente...');
-    
     const modal = document.getElementById('customerInfoModal');
     if (modal) {
         modal.style.display = 'none';
@@ -1099,8 +1038,6 @@ function addInputMasks() {
 }
 
 function proceedWithHighValueDeposit() {
-    console.log('📋 Processando depósito de alto valor...');
-    
     // Validar apenas campos obrigatórios
     const name = document.getElementById('customerName').value.trim();
     const cpf = document.getElementById('customerCpf').value.replace(/\D/g, '');
@@ -1141,8 +1078,6 @@ function proceedWithHighValueDeposit() {
         zipCode: document.getElementById('customerZipCode').value.replace(/\D/g, '')
     };
     
-    console.log('📋 Informações do cliente coletadas:', customerInfo);
-    
     // Fechar modal de informações
     closeCustomerInfoModal();
     
@@ -1156,8 +1091,6 @@ function isValidEmail(email) {
 }
 
 async function processDepositWithCustomerInfo() {
-    console.log('💰 Processando depósito de alto valor com informações do cliente:', selectedDepositAmount);
-    
     try {
         // Fazer requisição para o backend com informações do cliente
         const response = await fetch('http://localhost:3001/api/pix/create', {
@@ -1201,10 +1134,8 @@ async function processDepositWithCustomerInfo() {
     }
 }
 
-// ===== MODAL DE PAGAMENTO PIX =====
+// Modal de pagamento PIX
 function openPixPaymentModal() {
-    console.log('💳 Abrindo modal de pagamento PIX...');
-    
     const modal = document.getElementById('pixPaymentModal');
     if (modal && currentPaymentData) {
         modal.style.display = 'flex';
@@ -1230,8 +1161,6 @@ function openPixPaymentModal() {
 }
 
 function closePixPaymentModal() {
-    console.log('💳 Fechando modal de pagamento PIX...');
-    
     const modal = document.getElementById('pixPaymentModal');
     if (modal) {
         modal.style.display = 'none';
@@ -1398,10 +1327,8 @@ async function checkPaymentStatus() {
     }
 }
 
-// ===== MODAL MINHA CONTA =====
+// Modal minha conta
 function openAccountModal() {
-    console.log('👤 Abrindo modal Minha Conta...');
-    
     const modal = document.getElementById('accountModal');
     if (modal) {
         modal.classList.add('show');
@@ -1416,8 +1343,6 @@ function openAccountModal() {
 }
 
 function closeAccountModal() {
-    console.log('👤 Fechando modal Minha Conta...');
-    
     const modal = document.getElementById('accountModal');
     if (modal) {
         modal.classList.remove('show');
@@ -1487,8 +1412,6 @@ function addAccountEventListeners() {
 }
 
 function switchAccountTab(tabName) {
-    console.log('🔄 Alternando para aba:', tabName);
-    
     // Remover active de todas as abas
     document.querySelectorAll('.tab-button').forEach(btn => {
         btn.classList.remove('active');
@@ -1508,7 +1431,6 @@ function switchAccountTab(tabName) {
 
 function handleProfileUpdate(e) {
     e.preventDefault();
-    console.log('💾 Atualizando perfil...');
     
     const formData = {
         name: document.getElementById('profileName').value,
@@ -1539,7 +1461,6 @@ function handleProfileUpdate(e) {
 
 function handlePasswordChange(e) {
     e.preventDefault();
-    console.log('🔒 Alterando senha...');
     
     const currentPassword = document.getElementById('currentPassword').value;
     const newPassword = document.getElementById('newPassword').value;
@@ -1639,11 +1560,10 @@ function filterTransactions() {
 }
 
 function refreshTransactions() {
-    console.log('🔄 Atualizando histórico de transações...');
     showNotification('info', 'Histórico Atualizado', 'Lista de transações atualizada.');
 }
 
-// ===== FUNÇÕES AUXILIARES =====
+// Funções auxiliares
 function getScratchTypeName(type) {
     const names = {
         premium: 'Premium',
@@ -1769,7 +1689,7 @@ function createConfettiEffect() {
     }
 }
 
-// ===== MODAIS =====
+// Modais
 function closeScratchConfirmModal() {
     const modal = document.getElementById('scratchConfirmModal');
     if (modal) {
@@ -1802,26 +1722,20 @@ function closeCaseModal() {
     }
 }
 
-// ===== SISTEMA DE LOGIN/CADASTRO =====
+// Sistema de login/cadastro
 function openLoginModal() {
-    console.log('🔐 Abrindo modal de login...');
-    
     const modal = document.getElementById('loginModal');
-    console.log('🔍 Modal encontrado:', !!modal);
     
     if (modal) {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
-        console.log('✅ Modal de login exibido');
     } else {
-        console.error('❌ Modal de login não encontrado!');
+        console.error('Modal de login não encontrado!');
         showNotification('error', 'Erro', 'Modal de login não encontrado!');
     }
 }
 
 function openRegisterModal() {
-    console.log('📝 Abrindo modal de cadastro...');
-    
     const modal = document.getElementById('registerModal');
     if (modal) {
         modal.style.display = 'block';
@@ -1846,8 +1760,6 @@ function closeAuthModal(modalId) {
         document.body.style.overflow = 'auto';
     }
 }
-
-// Funções de switch removidas - apenas admin
 
 function handleLogin() {
     const email = document.getElementById('loginEmail').value;
@@ -1880,8 +1792,6 @@ function handleLogin() {
     const user = registeredUsers.find(u => u.email === email && u.password === password);
     
     if (user) {
-        console.log('✅ Login de usuário bem-sucedido:', user.name);
-        
         // Salvar dados de login
         localStorage.setItem('userLoggedIn', 'true');
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -1908,8 +1818,6 @@ function isValidEmail(email) {
 }
 
 function handleRegister() {
-    console.log('📝 Processando cadastro...');
-    
     const name = document.getElementById('registerName').value.trim();
     const email = document.getElementById('registerEmail').value.trim();
     const password = document.getElementById('registerPassword').value;
@@ -1963,19 +1871,15 @@ function handleRegister() {
     // Mostrar sucesso
     showNotification('success', 'Cadastro Realizado', `Bem-vindo, ${name}! Sua conta foi criada com sucesso.`);
     
-    console.log('✅ Usuário cadastrado:', newUser);
 }
 
-// ===== INICIALIZAÇÃO =====
+// Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 LR4 Sistema Unificado carregado!');
-    
     // Limpar dados de login para forçar login manual
     localStorage.removeItem('adminLoggedIn');
     localStorage.removeItem('isAdmin');
     
-    // Verificar status de login (agora sempre deslogado)
-    console.log('🔍 Verificando status de login...');
+    // Login é sempre manual: o estado de admin não persiste entre recargas
     checkLoginStatus();
     
     // Configurar saldo inicial (sempre 0 para usuário não logado)
@@ -1986,25 +1890,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnDeposit = document.getElementById('btnDeposit');
     if (btnDeposit) {
         btnDeposit.addEventListener('click', openDepositModal);
-        console.log('✅ Event listener do botão de depósito adicionado');
     } else {
-        console.error('❌ Botão de depósito não encontrado!');
+        console.error('Botão de depósito não encontrado!');
     }
     
     const btnLogin = document.getElementById('btnLogin');
     if (btnLogin) {
         btnLogin.addEventListener('click', openLoginModal);
-        console.log('✅ Event listener do botão de login adicionado');
     } else {
-        console.error('❌ Botão de login não encontrado!');
+        console.error('Botão de login não encontrado!');
     }
     
     const btnRegister = document.getElementById('btnRegister');
     if (btnRegister) {
         btnRegister.addEventListener('click', openRegisterModal);
-        console.log('✅ Event listener do botão de registro adicionado');
     } else {
-        console.error('❌ Botão de registro não encontrado!');
+        console.error('Botão de registro não encontrado!');
     }
     
     // Event listeners para formulários
@@ -2022,10 +1923,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializar sistema de saques
     initWithdrawalSystem();
     
-    console.log('✅ Sistema inicializado com sucesso!');
 });
 
-// ===== SISTEMA DE SAQUE =====
+// Sistema de saque
 let withdrawalConfig = {
     minAmount: 10.00,
     maxAmount: 10000.00,
@@ -2040,10 +1940,9 @@ async function loadWithdrawalConfig() {
         
         if (data.success) {
             withdrawalConfig = data.data;
-            console.log('✅ Configurações de saque carregadas:', withdrawalConfig);
         }
     } catch (error) {
-        console.error('❌ Erro ao carregar configurações de saque:', error);
+        console.error('Erro ao carregar configurações de saque:', error);
     }
 }
 
@@ -2078,8 +1977,6 @@ async function processWithdrawal(event) {
         cpf: formData.get('withdrawalCpf'),
         name: formData.get('withdrawalName')
     };
-    
-    console.log('💸 Processando saque:', withdrawalData);
     
     // Validar saldo
     if (withdrawalData.amount > userBalance) {
@@ -2124,13 +2021,12 @@ async function processWithdrawal(event) {
                 checkWithdrawalStatus(data.data.id);
             }
             
-            console.log('✅ Saque criado:', data.data);
         } else {
             showNotification(`❌ Erro: ${data.error}`, 'error');
         }
         
     } catch (error) {
-        console.error('❌ Erro ao processar saque:', error);
+        console.error('Erro ao processar saque:', error);
         showNotification('❌ Erro ao processar saque. Tente novamente.', 'error');
     }
 }
@@ -2149,7 +2045,7 @@ async function checkWithdrawalStatus(withdrawalId) {
             setTimeout(() => checkWithdrawalStatus(withdrawalId), 3000);
         }
     } catch (error) {
-        console.error('❌ Erro ao verificar status do saque:', error);
+        console.error('Erro ao verificar status do saque:', error);
     }
 }
 
@@ -2163,7 +2059,7 @@ async function loadWithdrawalsHistory() {
             displayWithdrawalsHistory(data.data);
         }
     } catch (error) {
-        console.error('❌ Erro ao carregar histórico de saques:', error);
+        console.error('Erro ao carregar histórico de saques:', error);
     }
 }
 
@@ -2266,7 +2162,4 @@ function initWithdrawalSystem() {
     // Carregar histórico
     loadWithdrawalsHistory();
     
-    console.log('✅ Sistema de saques inicializado');
 }
-
-console.log('✅ LR4 Sistema Unificado carregado com sucesso!');

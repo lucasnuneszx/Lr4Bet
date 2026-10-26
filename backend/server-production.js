@@ -24,7 +24,7 @@ const PAYGATE_CONFIG = {
     fallbackToSimulation: process.env.PAYGATE_FALLBACK_TO_SIMULATION === 'true' || config.paygate.fallbackToSimulation
 };
 
-// ===== SISTEMA DE CAIXAS =====
+// Sistema de caixas
 const cases = [
     { type: 'premium', name: 'Caixa Premium', price: 100, icon: '💎' },
     { type: 'medium', name: 'Caixa Média', price: 50, icon: '🎁' },
@@ -55,10 +55,10 @@ const prizes = {
     small_prize: { name: 'Prêmio Pequeno', value: 25, icon: '🎖️' }
 };
 
-// ===== SISTEMA DE PIX =====
+// Sistema de PIX
 let transactions = [];
 
-// ===== SISTEMA DE SAQUES =====
+// Sistema de saques
 let withdrawals = [];
 let withdrawalConfig = {
     minAmount: 10.00,
@@ -77,7 +77,6 @@ app.get('/api/health', (req, res) => {
 
 // Endpoint para obter caixas disponíveis
 app.get('/api/cases/available', (req, res) => {
-    console.log('📦 Consultando caixas disponíveis...');
     res.json({
         success: true,
         data: cases
@@ -87,7 +86,6 @@ app.get('/api/cases/available', (req, res) => {
 // Endpoint para abrir caixa
 app.post('/api/cases/open', (req, res) => {
     const { caseType } = req.body;
-    console.log('🎁 Abrindo caixa:', caseType);
     
     const caseInfo = cases.find(c => c.type === caseType);
     if (!caseInfo) {
@@ -111,8 +109,6 @@ app.post('/api/cases/open', (req, res) => {
         selectedPrize = { key: 'small_prize', ...prizes.small_prize };
     }
     
-    console.log('🎉 Prêmio selecionado:', selectedPrize);
-    
     res.json({
         success: true,
         data: {
@@ -125,7 +121,6 @@ app.post('/api/cases/open', (req, res) => {
 // Endpoint para criar pagamento PIX
 app.post('/api/pix/create', async (req, res) => {
     const { amount, description, customer } = req.body;
-    console.log('🔄 Criando pagamento PIX:', { amount, description, customer });
     
     if (!amount || !customer || !customer.name || !customer.cpf) {
         return res.status(400).json({ 
@@ -167,13 +162,11 @@ app.post('/api/pix/create', async (req, res) => {
         client: clientData
     };
     
-    console.log('📤 Enviando dados para PayGate:', paymentData);
-    
     let result;
     const useSimulation = !PAYGATE_CONFIG.useRealAPI || PAYGATE_CONFIG.fallbackToSimulation;
     
     if (useSimulation) {
-        console.log('🔄 Usando fallback para simulação...');
+        console.log('Usando fallback para simulação...');
         
         const pixCode = `00020126580014br.gov.bcb.pix0136${orderId}520400005303986540${amount.toFixed(2)}5802BR5913LR4.bet Casino6009Sao Paulo62070503***6304${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
         
@@ -227,9 +220,9 @@ app.post('/api/pix/create', async (req, res) => {
                 data: response.data
             };
         } catch (error) {
-            console.error('❌ Erro de conexão PayGate:', error.message);
+            console.error('Erro de conexão PayGate:', error.message);
             if (PAYGATE_CONFIG.fallbackToSimulation) {
-                console.log('🔄 Usando fallback para simulação...');
+                console.log('Usando fallback para simulação...');
                 // Código de simulação aqui (mesmo do bloco acima)
             } else {
                 return res.status(500).json({
@@ -247,14 +240,12 @@ app.post('/api/pix/create', async (req, res) => {
         createdAt: new Date().toISOString()
     });
     
-    console.log('✅ Pagamento PIX criado:', result);
     res.json(result);
 });
 
 // Endpoint para consultar status do PIX
 app.get('/api/pix/status/:id', (req, res) => {
     const { id } = req.params;
-    console.log('🔍 Consultando status PIX:', id);
     
     const transaction = transactions.find(t => t.id === id);
     if (!transaction) {
@@ -272,9 +263,8 @@ app.get('/api/pix/status/:id', (req, res) => {
     });
 });
 
-// ===== SISTEMA DE SAQUES =====
+// Sistema de saques
 app.get('/api/withdrawals/config', (req, res) => {
-    console.log('📋 Consultando configurações de saque...');
     res.json({
         success: true,
         data: withdrawalConfig
@@ -283,7 +273,6 @@ app.get('/api/withdrawals/config', (req, res) => {
 
 app.post('/api/withdrawals/create', async (req, res) => {
     const { amount, method, bank, account, agency, cpf, name } = req.body;
-    console.log('💸 Criando solicitação de saque:', { amount, method, bank, account, agency, cpf, name });
     
     if (!amount || !method || !bank || !account || !agency || !cpf || !name) {
         return res.status(400).json({ success: false, error: 'Todos os campos são obrigatórios' });
@@ -315,14 +304,13 @@ app.post('/api/withdrawals/create', async (req, res) => {
     };
     
     withdrawals.push(withdrawal);
-    console.log('✅ Saque criado:', withdrawal);
     
     // Simular processamento automático para valores baixos
     setTimeout(() => {
         if (amount <= 100) {
             withdrawal.status = 'completed';
             withdrawal.updatedAt = new Date().toISOString();
-            console.log('✅ Saque aprovado automaticamente:', withdrawalId);
+            console.log('Saque aprovado automaticamente:', withdrawalId);
         }
     }, 5000);
     
@@ -330,14 +318,12 @@ app.post('/api/withdrawals/create', async (req, res) => {
 });
 
 app.get('/api/withdrawals/list', (req, res) => {
-    console.log('📋 Listando saques...');
     const sortedWithdrawals = withdrawals.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     res.json({ success: true, data: sortedWithdrawals });
 });
 
 app.get('/api/withdrawals/status/:id', (req, res) => {
     const { id } = req.params;
-    console.log('🔍 Consultando status do saque:', id);
     
     const withdrawal = withdrawals.find(w => w.id === id);
     if (!withdrawal) {
@@ -354,20 +340,8 @@ app.get('*', (req, res) => {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor LR4.Bet rodando na porta ${PORT}`);
-    console.log(`🌍 Ambiente: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`📡 Endpoints disponíveis:`);
-    console.log(`   GET  /api/health - Health check`);
-    console.log(`   GET  /api/cases/available - Obter caixas disponíveis`);
-    console.log(`   POST /api/cases/open - Abrir caixa e obter prêmio`);
-    console.log(`   POST /api/pix/create - Criar pagamento PIX`);
-    console.log(`   GET  /api/pix/status/:id - Consultar status PIX`);
-    console.log(`   GET  /api/withdrawals/config - Configurações de saque`);
-    console.log(`   POST /api/withdrawals/create - Criar solicitação de saque`);
-    console.log(`   GET  /api/withdrawals/list - Listar saques`);
-    console.log(`   GET  /api/withdrawals/status/:id - Status do saque`);
-    console.log(`🎰 Sistema de caixas ativo!`);
-    console.log(`💸 Sistema de saques ativo!`);
+    console.log(`Servidor LR4.Bet rodando na porta ${PORT}`);
+    console.log(`Ambiente: ${process.env.NODE_ENV || 'development'}`);
 });
 
 module.exports = app;

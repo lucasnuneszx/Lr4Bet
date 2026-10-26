@@ -1,4 +1,4 @@
-// ===== BR4.BET.BR - SCRIPT COMPLETO =====
+// Br4.bet.br
 
 class Br4Website {
     constructor() {
@@ -25,7 +25,7 @@ class Br4Website {
         this.initAnimations();
     }
 
-    // ===== CARROSSEL AUTOMÁTICO =====
+    // Carrossel automático
     initCarousel() {
         const prevBtn = document.getElementById('carousel-prev');
         const nextBtn = document.getElementById('carousel-next');
@@ -146,7 +146,7 @@ class Br4Website {
         this.isAutoPlaying = true;
     }
 
-    // ===== CONTROLES TOUCH PARA MOBILE =====
+    // Controles touch para mobile
     initTouchControls() {
         const carousel = document.querySelector('.carousel-container');
         if (!carousel) return;
@@ -185,7 +185,7 @@ class Br4Website {
         });
     }
 
-    // ===== MENU MOBILE =====
+    // Menu mobile
     initMobileMenu() {
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.querySelector('.nav-menu');
@@ -261,7 +261,7 @@ class Br4Website {
         }
     }
 
-    // ===== CARDS DE JOGOS =====
+    // Cards de jogos
     initGameCards() {
         const gameCards = document.querySelectorAll('.game-card');
         const playButtons = document.querySelectorAll('.btn-play');
@@ -334,7 +334,6 @@ class Br4Website {
         this.showGameLoading(gameCard, gameName);
 
         // Aqui você pode adicionar a lógica real para abrir o jogo
-        console.log(`Iniciando jogo: ${gameName} (${provider})`);
     }
 
     showGameLoading(card, gameName) {
@@ -354,7 +353,7 @@ class Br4Website {
         }, 2000);
     }
 
-    // ===== SCROLL SUAVE =====
+    // Scroll suave
     initSmoothScrolling() {
         const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
         
@@ -374,7 +373,7 @@ class Br4Website {
         });
     }
 
-    // ===== LAZY LOADING =====
+    // Lazy loading
     initLazyLoading() {
         const images = document.querySelectorAll('img[data-src]');
         
@@ -400,7 +399,7 @@ class Br4Website {
         }
     }
 
-    // ===== ANIMAÇÕES DE ENTRADA =====
+    // Animações de entrada
     initAnimations() {
         const observerOptions = {
             threshold: 0.1,
@@ -420,7 +419,7 @@ class Br4Website {
         animatedElements.forEach(el => observer.observe(el));
     }
 
-    // ===== OTIMIZAÇÃO DE IMAGENS =====
+    // Otimização de imagens
     optimizeImageLoading() {
         const images = document.querySelectorAll('.carousel-slide img, .game-card img');
         
@@ -448,7 +447,7 @@ class Br4Website {
         });
     }
 
-    // ===== UTILITÁRIOS =====
+    // Utilitários
     debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -474,7 +473,7 @@ class Br4Website {
         };
     }
 
-    // ===== NOTIFICAÇÕES =====
+    // Notificações
     showNotification(message, type = 'info') {
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
@@ -532,7 +531,7 @@ class Br4Website {
         }, 300);
     }
 
-    // ===== PERFORMANCE E OTIMIZAÇÃO =====
+    // Performance e otimização
     optimizePerformance() {
         // Throttle scroll events
         const throttledScroll = this.throttle(() => {
@@ -574,7 +573,7 @@ class Br4Website {
         }
     }
 
-    // ===== INICIALIZAÇÃO =====
+    // Inicialização
     static init() {
         // Aguardar DOM estar pronto
         if (document.readyState === 'loading') {
@@ -587,10 +586,10 @@ class Br4Website {
     }
 }
 
-// ===== INICIALIZAR QUANDO A PÁGINA CARREGAR =====
+// Inicializar quando a página carregar
 Br4Website.init();
 
-// ===== FUNÇÕES GLOBAIS ADICIONAIS =====
+// Funções globais adicionais
 
 // Funções removidas para evitar conflito
 
@@ -630,7 +629,7 @@ function filterByCategory(category) {
     });
 }
 
-// ===== EVENT LISTENERS GLOBAIS =====
+// Event listeners globais
 document.addEventListener('DOMContentLoaded', () => {
     // Botões de login/registro serão configurados pelos modais
 
@@ -712,7 +711,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ===== FUNCIONALIDADES DOS MODAIS =====
+// Funcionalidades dos modais
 
 // Função para verificar estado de autenticação
 function checkAuthStatus() {
@@ -935,7 +934,6 @@ function processDeposit(formData) {
     const email = formData.get('email');
     
     // Simular processamento de depósito
-    console.log('Processando depósito:', { amount, method, email });
     
     // Adicionar valor ao saldo
     const currentBalance = parseFloat(localStorage.getItem('userBalance') || '1000.00');
@@ -989,7 +987,7 @@ function handlePhotoUpload(event) {
     reader.readAsDataURL(file);
 }
 
-// ===== SISTEMA DE AFILIADOS =====
+// Sistema de afiliados
 function initAffiliateSystem() {
     // Gerar níveis de bônus
     generateBonusLevels();
@@ -1391,7 +1389,7 @@ function simulateDepositConfirmation(name) {
     }
 }
 
-// ===== SISTEMA FINANCEIRO =====
+// Sistema financeiro
 function initFinancialSystem() {
     // Event listeners para formulários financeiros
     const bankForm = document.getElementById('bankForm');
@@ -1518,7 +1516,7 @@ function initCPFFormatting() {
     }
 }
 
-// ===== SISTEMA DE PERFIL =====
+// Sistema de perfil
 function initProfileSystem() {
     // Event listener para formulário de perfil
     const profileForm = document.getElementById('profileForm');
@@ -1533,7 +1531,7 @@ function initProfileSystem() {
     initPhoneFormatting();
 }
 
-// ===== SISTEMA DE RASPADINHAS =====
+// Sistema de raspadinhas
 
 // Variáveis globais para raspadinhas
 let currentScratchType = 'premium';
@@ -2015,7 +2013,7 @@ function closeScratchModal() {
     }
 }
 
-// ===== SISTEMA DE CAIXAS =====
+// Sistema de caixas
 function initCaseSystem() {
     // Carregar configurações de probabilidades
     loadCaseProbabilities();
@@ -3094,7 +3092,6 @@ function initAuthModals() {
                 setTimeout(() => closeModal('successModal'), 3000);
             } else {
                 // Login normal (aqui você pode integrar com sua API)
-                console.log('Login normal:', { email, password });
                 
                 // Simular login bem-sucedido
                 localStorage.setItem('isLoggedIn', 'true');
@@ -3245,7 +3242,7 @@ function initAuthModals() {
 }
 }
 
-// ===== EXPORTAR PARA USO EXTERNO =====
+// Exportar para uso externo
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Br4Website;
 } else if (typeof window !== 'undefined') {
@@ -3343,42 +3340,33 @@ function initScratchSystem() {
     }
 }
 
-// EXECUTAR QUANDO A PÁGINA CARREGAR
+// Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 LR4 Script carregado!');
-    
-    // Inicializar sistema
+
     initializeSystem();
 });
 
 function initializeSystem() {
-    console.log('🔧 Inicializando sistemas...');
-    
     // Botão de depósito
     const btnDeposit = document.getElementById('btnDeposit');
     if (btnDeposit) {
-        console.log('✅ Botão de depósito encontrado!');
         btnDeposit.addEventListener('click', function() {
-            console.log('💰 Clique no depósito detectado!');
             openDepositModal();
         });
     } else {
-        console.error('❌ Botão de depósito NÃO encontrado!');
+        console.error('Botão de depósito NÃO encontrado!');
     }
     
     // Botões de raspadinha
     const scratchButtons = document.querySelectorAll('[onclick*="openScratchConfirmModal"]');
-    console.log('🎯 Botões de raspadinha encontrados:', scratchButtons.length);
     
     scratchButtons.forEach((btn, index) => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('🎯 Clique na raspadinha detectado!', index);
             const onclick = btn.getAttribute('onclick');
             const match = onclick.match(/openScratchConfirmModal\('(.+?)'\)/);
             if (match) {
                 const scratchType = match[1];
-                console.log('🎯 Tipo de raspadinha:', scratchType);
                 openScratchConfirmModal(scratchType);
             }
         });
@@ -3416,5 +3404,4 @@ function initializeSystem() {
         }
     });
     
-    console.log('✅ Sistemas inicializados com sucesso!');
 }

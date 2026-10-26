@@ -1,4 +1,4 @@
-// ===== SISTEMA ADMIN MASTER SIMPLIFICADO =====
+// Sistema admin master
 
 class AdminSystem {
     constructor() {

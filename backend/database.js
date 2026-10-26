@@ -1,4 +1,4 @@
-// ===== CONEXÃO COM BANCO DE DADOS POSTGRESQL =====
+// Conexão com o banco PostgreSQL
 
 const { Pool } = require('pg');
 const config = require('./config');
@@ -10,11 +10,11 @@ const pool = new Pool(config.database);
 async function testConnection() {
     try {
         const client = await pool.connect();
-        console.log('✅ Conexão com PostgreSQL estabelecida com sucesso!');
+        console.log('Conexão com PostgreSQL estabelecida com sucesso!');
         client.release();
         return true;
     } catch (error) {
-        console.error('❌ Erro ao conectar com PostgreSQL:', error.message);
+        console.error('Erro ao conectar com PostgreSQL:', error.message);
         return false;
     }
 }
@@ -25,10 +25,9 @@ async function query(text, params) {
     try {
         const res = await pool.query(text, params);
         const duration = Date.now() - start;
-        console.log('📊 Query executada:', { text, duration, rows: res.rowCount });
         return res;
     } catch (error) {
-        console.error('❌ Erro na query:', error.message);
+        console.error('Erro na query:', error.message);
         throw error;
     }
 }
@@ -36,7 +35,7 @@ async function query(text, params) {
 // Inicializar tabelas
 async function initializeTables() {
     try {
-        console.log('🔧 Inicializando tabelas do banco de dados...');
+        console.log('Inicializando tabelas do banco de dados...');
         
         // Tabela de usuários
         await query(`
@@ -124,11 +123,11 @@ async function initializeTables() {
                 balance = EXCLUDED.balance
         `, ['admin@lr4.bet', 'admin123', 'Admin Master', 10000.00]);
         
-        console.log('✅ Tabelas inicializadas com sucesso!');
+        console.log('Tabelas inicializadas com sucesso!');
         return true;
         
     } catch (error) {
-        console.error('❌ Erro ao inicializar tabelas:', error.message);
+        console.error('Erro ao inicializar tabelas:', error.message);
         return false;
     }
 }
@@ -137,9 +136,9 @@ async function initializeTables() {
 async function closePool() {
     try {
         await pool.end();
-        console.log('✅ Pool de conexões PostgreSQL fechado.');
+        console.log('Pool de conexões PostgreSQL fechado.');
     } catch (error) {
-        console.error('❌ Erro ao fechar pool:', error.message);
+        console.error('Erro ao fechar pool:', error.message);
     }
 }
 

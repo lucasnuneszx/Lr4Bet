@@ -1,4 +1,4 @@
-// ===== CONFIGURAÇÕES DO SISTEMA LR4.BET =====
+// Configurações do sistema LR4.bet
 
 module.exports = {
     // Configurações do Banco de Dados PostgreSQL
