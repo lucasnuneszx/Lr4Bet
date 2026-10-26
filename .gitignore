@@ -129,3 +129,5 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+# Gerado pelo deploy.sh
+public_html/
